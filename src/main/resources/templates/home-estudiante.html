@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Estudiante | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header class="topbar">
+    <strong>U-Found</strong>
+    <div class="user-box">
+        <span th:text="${usuario.nombre}">Usuario</span>
+        <a class="secondary-button" th:href="@{/logout}">Cerrar sesion</a>
+    </div>
+</header>
+<main class="shell">
+    <section class="hero">
+        <span class="role-pill">ESTUDIANTE</span>
+        <h1>Bienvenido a U-Found</h1>
+        <p>Registra y consulta objetos perdidos dentro de la Universidad de Lima.</p>
+    </section>
+    <section class="actions-grid">
+        <article class="home-card">
+            <span>01</span>
+            <h2>Registrar objeto perdido</h2>
+            <p>Reporta un objeto extraviado para que pueda ser comparado con futuros hallazgos.</p>
+        </article>
+        <article class="home-card">
+            <span>02</span>
+            <h2>Consultar objetos perdidos</h2>
+            <p>Revisa el estado de tus reportes y posibles resultados asociados.</p>
+        </article>
+    </section>
+    <p class="placeholder">Las funcionalidades de registro y consulta se implementaran en los siguientes EPIC.</p>
+</main>
+</body>
+</html>
+

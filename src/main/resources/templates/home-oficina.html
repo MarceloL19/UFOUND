@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Oficina | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header class="topbar">
+    <strong>U-Found</strong>
+    <div class="user-box">
+        <span th:text="${usuario.nombre}">Usuario</span>
+        <a class="secondary-button" th:href="@{/logout}">Cerrar sesion</a>
+    </div>
+</header>
+<main class="shell">
+    <section class="hero">
+        <span class="role-pill">OFICINA</span>
+        <h1>Panel administrativo</h1>
+        <p>Gestiona la informacion general del sistema y los reportes registrados.</p>
+    </section>
+    <section class="actions-grid">
+        <article class="home-card">
+            <span>01</span>
+            <h2>Gestion general</h2>
+            <p>Administra reportes, validaciones y procesos internos del sistema.</p>
+        </article>
+        <article class="home-card">
+            <span>02</span>
+            <h2>Panel administrativo</h2>
+            <p>Accede a una vista centralizada para el control operativo de U-Found.</p>
+        </article>
+    </section>
+    <p class="placeholder">La gestion operativa detallada se implementara en los siguientes EPIC.</p>
+</main>
+</body>
+</html>
+

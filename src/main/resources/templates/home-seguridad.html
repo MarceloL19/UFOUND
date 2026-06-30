@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Seguridad | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header class="topbar">
+    <strong>U-Found</strong>
+    <div class="user-box">
+        <span th:text="${usuario.nombre}">Usuario</span>
+        <a class="secondary-button" th:href="@{/logout}">Cerrar sesion</a>
+    </div>
+</header>
+<main class="shell">
+    <section class="hero">
+        <span class="role-pill">SEGURIDAD</span>
+        <h1>Panel de seguridad</h1>
+        <p>Registra objetos encontrados y reporta hallazgos dentro del campus.</p>
+    </section>
+    <section class="actions-grid">
+        <article class="home-card">
+            <span>01</span>
+            <h2>Registrar objeto encontrado</h2>
+            <p>Ingresa informacion de objetos hallados para su posterior gestion.</p>
+        </article>
+    </section>
+    <p class="placeholder">El registro de objetos encontrados se implementara en un siguiente EPIC.</p>
+</main>
+</body>
+</html>
+
