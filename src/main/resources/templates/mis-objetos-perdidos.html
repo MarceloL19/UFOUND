@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis objetos perdidos | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('objetos', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title">
+        <div>
+            <h1>Mis objetos perdidos</h1>
+            <p>Reportes registrados por tu cuenta.</p>
+        </div>
+        <a class="primary-link" th:href="@{/objetos-perdidos/registrar}">Nuevo reporte</a>
+    </section>
+    <section class="object-list" th:if="${!#lists.isEmpty(objetos)}">
+        <article class="object-row" th:each="objeto : ${objetos}">
+            <div class="object-thumb">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+            </div>
+            <div>
+                <h2 th:text="${objeto.nombre}">Objeto</h2>
+                <p th:text="${objeto.categoria.etiqueta + ' - ' + objeto.ubicacion.etiqueta}">Categoria</p>
+                <small th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy HH:mm')}">Fecha</small>
+            </div>
+            <strong th:text="${objeto.estado}">REPORTADO</strong>
+        </article>
+    </section>
+    <section class="empty-state" th:if="${#lists.isEmpty(objetos)}">
+        <h2>Aun no tienes reportes</h2>
+        <p>Registra tu primer objeto perdido para iniciar el seguimiento.</p>
+    </section>
+</main>
+</body>
+</html>

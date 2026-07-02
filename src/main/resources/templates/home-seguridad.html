@@ -6,28 +6,35 @@
     <title>Inicio Seguridad | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
-<header class="topbar">
-    <strong>U-Found</strong>
-    <div class="user-box">
-        <span th:text="${usuario.nombre}">Usuario</span>
-        <a class="secondary-button" th:href="@{/logout}">Cerrar sesion</a>
-    </div>
-</header>
-<main class="shell">
-    <section class="hero">
-        <span class="role-pill">SEGURIDAD</span>
-        <h1>Panel de seguridad</h1>
-        <p>Registra objetos encontrados y reporta hallazgos dentro del campus.</p>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('dashboard', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="dashboard-hero">
+        <div>
+            <p>Bienvenido de vuelta,</p>
+            <h1 th:text="${usuario.nombre}">Seguridad</h1>
+            <span>Seguridad</span>
+        </div>
+        <div class="hero-id"><small>CODIGO</small><strong>SEG-045</strong></div>
     </section>
-    <section class="actions-grid">
-        <article class="home-card">
-            <span>01</span>
-            <h2>Registrar objeto encontrado</h2>
-            <p>Ingresa informacion de objetos hallados para su posterior gestion.</p>
-        </article>
+    <section class="stats-grid">
+        <article><span>Registrados</span><strong th:text="${totalHallazgos}">0</strong><small>Por tu usuario</small></article>
+        <article><span>En revision</span><strong>0</strong><small>EPIC posterior</small></article>
+        <article><span>Entregados hoy</span><strong>0</strong><small>EPIC posterior</small></article>
     </section>
-    <p class="placeholder">El registro de objetos encontrados se implementara en un siguiente EPIC.</p>
+    <section class="actions-grid dashboard-actions">
+        <a class="home-card" th:href="@{/objetos-encontrados/registrar}">
+            <span>+</span>
+            <h2>Registrar hallazgo</h2>
+            <p>Registra objetos encontrados dentro del campus.</p>
+        </a>
+        <a class="home-card" th:href="@{/objetos-encontrados}">
+            <span>#</span>
+            <h2>Objetos encontrados</h2>
+            <p>Visualiza los hallazgos registrados en el sistema.</p>
+        </a>
+    </section>
 </main>
 </body>
 </html>

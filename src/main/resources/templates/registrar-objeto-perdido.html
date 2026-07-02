@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar objeto perdido | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('reportar', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title">
+        <div>
+            <h1>Registrar objeto perdido</h1>
+            <p>Completa el formulario para crear un nuevo reporte.</p>
+        </div>
+    </section>
+
+    <div class="alert" th:if="${error}" th:text="${error}"></div>
+
+    <form class="lost-layout" th:action="@{/objetos-perdidos/registrar}" method="post" enctype="multipart/form-data" th:object="${form}">
+        <section class="form-panel">
+            <div class="report-type-card">
+                <p>TIPO DE REPORTE</p>
+                <span>Objeto perdido</span>
+            </div>
+
+            <div class="form-grid">
+                <label>
+                    Titulo del objeto *
+                    <input th:field="*{nombre}" type="text" placeholder="Ej: Mochila azul Nike" required>
+                </label>
+                <label>
+                    Categoria *
+                    <select th:field="*{categoria}" required>
+                        <option value="">Seleccionar...</option>
+                        <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.etiqueta}">Categoria</option>
+                    </select>
+                </label>
+                <label>
+                    Ubicacion *
+                    <select th:field="*{ubicacion}" required>
+                        <option value="">Seleccionar...</option>
+                        <option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion}" th:text="${ubicacion.etiqueta}">Ubicacion</option>
+                    </select>
+                </label>
+                <label>
+                    Fecha y hora
+                    <input type="text" th:value="${#temporals.format(fechaHoraActual, 'dd/MM/yyyy HH:mm')}" readonly>
+                </label>
+                <label class="full">
+                    Descripcion detallada *
+                    <textarea th:field="*{descripcion}" maxlength="700" rows="6" placeholder="Describe color exacto, marca, caracteristicas distintivas, contenido si aplica o cualquier detalle que ayude a identificarlo..." required></textarea>
+                </label>
+            </div>
+        </section>
+
+        <aside class="side-panel">
+            <section class="upload-card">
+                <p>FOTOGRAFIA DEL OBJETO</p>
+                <div class="upload-box">
+                    <span>Subir imagen</span>
+                    <small>PNG, JPG, WEBP</small>
+                    <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp">
+                </div>
+                <small>Una foto clara ayuda a identificar el objeto.</small>
+            </section>
+            <section class="tips-card">
+                <h2>Consejos</h2>
+                <ul>
+                    <li>Se especifico en la descripcion del objeto.</li>
+                    <li>Incluye marcas, colores y caracteristicas unicas.</li>
+                    <li>Agrega una foto clara si la tienes.</li>
+                    <li>Reporta el objeto lo antes posible.</li>
+                </ul>
+            </section>
+            <button class="submit-wide" type="submit">Registrar objeto perdido</button>
+        </aside>
+    </form>
+</main>
+</body>
+</html>

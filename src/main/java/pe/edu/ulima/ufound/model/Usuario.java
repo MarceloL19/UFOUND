@@ -81,5 +81,13 @@ public class Usuario {
     public void setActivo(Boolean activo) {
         this.activo = activo;
     }
+
+    public String getCodigoInstitucional() {
+        if (correo == null || correo.isBlank()) {
+            return "";
+        }
+        int separador = correo.indexOf('@');
+        return separador > 0 ? correo.substring(0, separador).toUpperCase() : correo.toUpperCase();
+    }
 }
 

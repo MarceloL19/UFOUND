@@ -6,33 +6,39 @@
     <title>Inicio Estudiante | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
-<header class="topbar">
-    <strong>U-Found</strong>
-    <div class="user-box">
-        <span th:text="${usuario.nombre}">Usuario</span>
-        <a class="secondary-button" th:href="@{/logout}">Cerrar sesion</a>
-    </div>
-</header>
-<main class="shell">
-    <section class="hero">
-        <span class="role-pill">ESTUDIANTE</span>
-        <h1>Bienvenido a U-Found</h1>
-        <p>Registra y consulta objetos perdidos dentro de la Universidad de Lima.</p>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('dashboard', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <div class="alert" th:if="${accesoDenegado}" th:text="${accesoDenegado}"></div>
+    <section class="dashboard-hero">
+        <div>
+            <p>Bienvenido de vuelta,</p>
+            <h1 th:text="${usuario.nombre}">Estudiante</h1>
+            <span>Estudiante</span>
+        </div>
+        <div class="hero-id">
+            <small>ID UNIVERSITARIO</small>
+            <strong th:text="${usuario.codigoInstitucional}">20235694</strong>
+        </div>
     </section>
-    <section class="actions-grid">
-        <article class="home-card">
-            <span>01</span>
-            <h2>Registrar objeto perdido</h2>
-            <p>Reporta un objeto extraviado para que pueda ser comparado con futuros hallazgos.</p>
-        </article>
-        <article class="home-card">
-            <span>02</span>
-            <h2>Consultar objetos perdidos</h2>
-            <p>Revisa el estado de tus reportes y posibles resultados asociados.</p>
-        </article>
+    <section class="stats-grid">
+        <article><span>Mis reportes</span><strong th:text="${totalReportes}">0</strong><small>Registrados en el sistema</small></article>
+        <article><span>En seguimiento</span><strong>0</strong><small>Proximos EPIC</small></article>
+        <article><span>Coincidencias</span><strong>0</strong><small>Proximos EPIC</small></article>
     </section>
-    <p class="placeholder">Las funcionalidades de registro y consulta se implementaran en los siguientes EPIC.</p>
+    <section class="actions-grid dashboard-actions">
+        <a class="home-card" th:href="@{/objetos-perdidos/registrar}">
+            <span>+</span>
+            <h2>Reportar objeto perdido</h2>
+            <p>Registra informacion detallada del objeto extraviado.</p>
+        </a>
+        <a class="home-card" th:href="@{/objetos-perdidos/mis-reportes}">
+            <span>#</span>
+            <h2>Mis objetos perdidos</h2>
+            <p>Consulta los reportes que registraste.</p>
+        </a>
+    </section>
 </main>
 </body>
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="topbar(usuario)" class="app-topbar">
+    <a class="topbar-brand" th:href="@{/home}">
+        <img class="brand-logo" th:src="@{/img/logo-ufound.png}" alt="U-Found">
+        <strong>U-Found</strong>
+        <small>ULima</small>
+    </a>
+    <div class="topbar-user">
+        <span class="role-badge" th:text="${usuario.rol}">ROL</span>
+        <div>
+            <strong th:text="${usuario.nombre}">Usuario</strong>
+            <small th:text="${usuario.codigoInstitucional}">codigo</small>
+        </div>
+        <a th:href="@{/logout}">Salir</a>
+    </div>
+</header>
+
+<aside th:fragment="sidebar(active, usuario)" class="app-sidebar">
+    <p>MENU PRINCIPAL</p>
+    <nav>
+        <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''">Dashboard</a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/registrar}" th:classappend="${active == 'reportar'} ? ' active' : ''">Reportar objeto</a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/mis-reportes}" th:classappend="${active == 'objetos'} ? ' active' : ''">Mis objetos perdidos</a>
+        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados/registrar}" th:classappend="${active == 'hallazgo'} ? ' active' : ''">Registrar hallazgo</a>
+        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados}" th:classappend="${active == 'encontrados'} ? ' active' : ''">Objetos encontrados</a>
+        <a th:if="${usuario.rol.name() == 'OFICINA'}" href="#">Panel admin</a>
+        <a th:if="${usuario.rol.name() == 'OFICINA'}" href="#">Objetos</a>
+        <a href="#">Buscar</a>
+    </nav>
+</aside>
+</body>
+</html>
