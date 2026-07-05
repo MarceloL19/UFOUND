@@ -28,7 +28,10 @@
                 <p th:text="${objeto.categoria.etiqueta + ' - ' + objeto.ubicacion.etiqueta}">Categoria</p>
                 <small th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy HH:mm')}">Fecha</small>
             </div>
-            <strong th:text="${objeto.estado}">REPORTADO</strong>
+            <div class="row-actions-stack">
+                <strong th:text="${objeto.estado.etiqueta}">Reportado</strong>
+                <a class="row-action" th:href="@{/estados/{tipo}/{id}(tipo='PERDIDO', id=${objeto.idObjeto})}">Ver estado</a>
+            </div>
         </article>
     </section>
     <section class="empty-state" th:if="${#lists.isEmpty(objetos)}">

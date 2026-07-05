@@ -9,3 +9,7 @@ password = VALUES(password),
 rol = VALUES(rol),
 activo = VALUES(activo);
 
+UPDATE objetos_encontrados SET estado = 'REPORTADO' WHERE estado = 'REGISTRADO';
+UPDATE objetos_encontrados SET estado = 'EN_REVISION' WHERE estado = 'EN_CUSTODIA';
+UPDATE objetos_perdidos SET estado = 'REPORTADO' WHERE estado IS NULL;
+

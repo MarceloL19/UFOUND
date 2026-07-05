@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pe.edu.ulima.ufound.model.ObjetoPerdido;
 import pe.edu.ulima.ufound.model.RegistroObjetoPerdidoForm;
+import pe.edu.ulima.ufound.model.TipoObjeto;
 import pe.edu.ulima.ufound.model.Usuario;
 import pe.edu.ulima.ufound.repository.ObjetoPerdidoRepository;
 
@@ -15,10 +16,15 @@ public class ObjetoPerdidoService {
 
     private final ObjetoPerdidoRepository objetoPerdidoRepository;
     private final UploadService uploadService;
+    private final EstadoObjetoService estadoObjetoService;
+    private final CoincidenciaService coincidenciaService;
 
-    public ObjetoPerdidoService(ObjetoPerdidoRepository objetoPerdidoRepository, UploadService uploadService) {
+    public ObjetoPerdidoService(ObjetoPerdidoRepository objetoPerdidoRepository, UploadService uploadService,
+                                EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService) {
         this.objetoPerdidoRepository = objetoPerdidoRepository;
         this.uploadService = uploadService;
+        this.estadoObjetoService = estadoObjetoService;
+        this.coincidenciaService = coincidenciaService;
     }
 
     @Transactional
@@ -33,7 +39,10 @@ public class ObjetoPerdidoService {
         objeto.setImagenUrl(uploadService.guardarImagenObjetoPerdido(imagen));
         objeto.setUsuario(usuario);
 
-        return objetoPerdidoRepository.save(objeto);
+        ObjetoPerdido guardado = objetoPerdidoRepository.save(objeto);
+        estadoObjetoService.registrarEstadoInicial(TipoObjeto.PERDIDO, guardado.getIdObjeto(), guardado.getEstado(), usuario);
+        coincidenciaService.detectarParaObjetoPerdido(guardado);
+        return guardado;
     }
 
     @Transactional(readOnly = true)

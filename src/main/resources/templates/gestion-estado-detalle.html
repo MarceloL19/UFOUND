@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar estado | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('estados', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <a class="back-link" th:href="@{/oficina/estados}">Volver a gestion</a>
+
+    <section class="state-management-grid">
+        <div>
+            <section class="status-header-card compact">
+                <div class="object-thumb status-thumb">
+                    <img th:if="${resumen.imagenUrl != null}" th:src="@{${resumen.imagenUrl}}" th:alt="${resumen.nombre}">
+                    <span th:if="${resumen.imagenUrl == null}">Sin foto</span>
+                </div>
+                <div>
+                    <span class="status-pill" th:text="${resumen.tipoObjeto.etiqueta}">Tipo</span>
+                    <h1 th:text="${resumen.nombre}">Objeto</h1>
+                    <p th:text="${resumen.categoria.etiqueta + ' - ' + resumen.ubicacion.etiqueta}">Detalle</p>
+                </div>
+            </section>
+
+            <section class="timeline-card">
+                <p class="timeline-title">Historial de estados</p>
+                <article class="timeline-item"
+                         th:each="item : ${lineaTiempo}"
+                         th:classappend="${item.actual} ? ' current' : (${item.completado} ? ' done' : ' pending')">
+                    <div class="timeline-dot"></div>
+                    <div>
+                        <h2 th:text="${item.estado.etiqueta}">Reportado</h2>
+                        <p th:text="${item.estado.descripcion}">Descripcion</p>
+                    </div>
+                    <time th:if="${item.historial != null}"
+                          th:text="${#temporals.format(item.historial.fechaCambio, 'dd MMM - HH:mm')}">10 Jun - 12:34</time>
+                    <time th:if="${item.historial == null}">Pendiente</time>
+                </article>
+            </section>
+        </div>
+
+        <aside class="change-status-panel">
+            <div class="success" th:if="${success}" th:text="${success}">Actualizado</div>
+            <div class="alert" th:if="${error}" th:text="${error}">Error</div>
+            <h2>Actualizar estado</h2>
+            <p>Selecciona la nueva fase administrativa del objeto.</p>
+            <form th:action="@{/oficina/estados/{tipo}/{id}(tipo=${resumen.tipoObjeto}, id=${resumen.idObjeto})}" method="post">
+                <label>
+                    Estado actual
+                    <strong th:text="${resumen.estado.etiqueta}">Reportado</strong>
+                </label>
+                <label>
+                    Nuevo estado
+                    <select name="estado" required>
+                        <option th:each="estado : ${estados}"
+                                th:value="${estado}"
+                                th:text="${estado.etiqueta}"
+                                th:selected="${estado == resumen.estado}">Estado</option>
+                    </select>
+                </label>
+                <button class="primary-button" type="submit">Guardar cambio</button>
+            </form>
+        </aside>
+    </section>
+</main>
+</body>
+</html>

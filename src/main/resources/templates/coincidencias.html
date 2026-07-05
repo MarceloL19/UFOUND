@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coincidencias | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('coincidencias', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title">
+        <div>
+            <h1>Coincidencias detectadas</h1>
+            <p>Posibles relaciones entre tus reportes y objetos encontrados.</p>
+        </div>
+        <span class="results-badge" th:text="${#lists.size(coincidencias) + ' resultado(s)'}">0 resultados</span>
+    </section>
+
+    <section class="matches-grid" th:if="${!#lists.isEmpty(coincidencias)}">
+        <article class="match-card" th:each="coincidencia : ${coincidencias}">
+            <div class="object-thumb match-thumb">
+                <img th:if="${coincidencia.objetoEncontrado.imagenUrl != null}" th:src="@{${coincidencia.objetoEncontrado.imagenUrl}}" th:alt="${coincidencia.objetoEncontrado.nombre}">
+                <span th:if="${coincidencia.objetoEncontrado.imagenUrl == null}">Sin foto</span>
+            </div>
+            <div class="match-body">
+                <div class="match-meta">
+                    <span class="level-pill"
+                          th:classappend="${coincidencia.nivelCoincidencia.name().toLowerCase()}"
+                          th:text="${coincidencia.nivelCoincidencia.etiqueta}">Nivel</span>
+                    <small th:text="${#temporals.format(coincidencia.fechaDeteccion, 'dd MMM yyyy')}">Fecha</small>
+                </div>
+                <p><strong>Buscado:</strong> <span th:text="${coincidencia.objetoPerdido.nombre}">Objeto perdido</span></p>
+                <p><strong>Encontrado:</strong> <span th:text="${coincidencia.objetoEncontrado.nombre}">Objeto encontrado</span></p>
+                <div class="similarity-line">
+                    <span th:style="'width:' + ${coincidencia.porcentajeSimilitud} + '%'"></span>
+                </div>
+                <div class="match-actions">
+                    <a class="primary-link" th:href="@{/coincidencias/{id}(id=${coincidencia.idCoincidencia})}">Ver detalle</a>
+                    <strong th:text="${coincidencia.porcentajeSimilitud + '%'}">94%</strong>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="empty-state" th:if="${#lists.isEmpty(coincidencias)}">
+        <h2>Aun no hay coincidencias</h2>
+        <p>Cuando el sistema encuentre objetos similares a tus reportes, apareceran aqui.</p>
+    </section>
+</main>
+</body>
+</html>

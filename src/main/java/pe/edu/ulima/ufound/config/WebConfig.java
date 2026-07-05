@@ -20,7 +20,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(sesionInterceptor)
-                .addPathPatterns("/home/**", "/objetos-perdidos/**", "/objetos-encontrados/**")
+                .addPathPatterns("/home/**", "/objetos-perdidos/**", "/objetos-encontrados/**", "/estados/**", "/oficina/**")
+                .addPathPatterns("/coincidencias/**", "/notificaciones/**")
                 .excludePathPatterns("/", "/login", "/css/**", "/img/**", "/js/**");
     }
 

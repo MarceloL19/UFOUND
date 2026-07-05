@@ -24,8 +24,8 @@
     </section>
     <section class="stats-grid">
         <article><span>Mis reportes</span><strong th:text="${totalReportes}">0</strong><small>Registrados en el sistema</small></article>
-        <article><span>En seguimiento</span><strong>0</strong><small>Proximos EPIC</small></article>
-        <article><span>Coincidencias</span><strong>0</strong><small>Proximos EPIC</small></article>
+        <article><span>Coincidencias</span><strong th:text="${totalCoincidencias}">0</strong><small>Detectadas automaticamente</small></article>
+        <article><span>Notificaciones</span><strong th:text="${totalNotificaciones}">0</strong><small>Sin leer</small></article>
     </section>
     <section class="actions-grid dashboard-actions">
         <a class="home-card" th:href="@{/objetos-perdidos/registrar}">
@@ -37,6 +37,16 @@
             <span>#</span>
             <h2>Mis objetos perdidos</h2>
             <p>Consulta los reportes que registraste.</p>
+        </a>
+        <a class="home-card" th:href="@{/coincidencias}">
+            <span>%</span>
+            <h2>Coincidencias</h2>
+            <p>Revisa posibles objetos encontrados relacionados.</p>
+        </a>
+        <a class="home-card" th:href="@{/notificaciones}">
+            <span>!</span>
+            <h2>Notificaciones</h2>
+            <p>Alertas generadas por coincidencias relevantes.</p>
         </a>
     </section>
 </main>

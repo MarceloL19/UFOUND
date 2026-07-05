@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de estados | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('estados', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title">
+        <div>
+            <h1>Gestion de estados</h1>
+            <p>Actividad reciente de objetos perdidos y encontrados.</p>
+        </div>
+    </section>
+
+    <section class="activity-card" th:if="${!#lists.isEmpty(objetos)}">
+        <div class="activity-title">
+            <p>Actividad reciente</p>
+        </div>
+        <a class="activity-row"
+           th:each="objeto : ${objetos}"
+           th:href="@{/oficina/estados/{tipo}/{id}(tipo=${objeto.tipoObjeto}, id=${objeto.idObjeto})}">
+            <div class="object-thumb activity-thumb">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+            </div>
+            <div>
+                <h2 th:text="${objeto.nombre}">Objeto</h2>
+                <p th:text="${objeto.ubicacion.etiqueta + ' · ' + #temporals.format(objeto.fechaHora, 'dd MMM yyyy')}">Ubicacion</p>
+            </div>
+            <span class="status-pill" th:text="${objeto.tipoObjeto.name() == 'PERDIDO' ? 'Perdido' : 'Encontrado'}">Tipo</span>
+            <strong class="state-chip" th:text="${objeto.estado.etiqueta}">Reportado</strong>
+            <span class="row-chevron">›</span>
+        </a>
+    </section>
+
+    <section class="empty-state" th:if="${#lists.isEmpty(objetos)}">
+        <h2>No hay objetos registrados</h2>
+        <p>Cuando se registren objetos perdidos o encontrados, apareceran aqui para su seguimiento.</p>
+    </section>
+</main>
+</body>
+</html>

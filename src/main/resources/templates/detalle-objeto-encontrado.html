@@ -23,7 +23,7 @@
         <div class="found-info">
             <div class="detail-tags">
                 <span th:text="${objeto.categoria.etiqueta}">Categoria</span>
-                <span class="status-found" th:text="${objeto.estado}">REGISTRADO</span>
+                <span class="status-found" th:text="${objeto.estado.etiqueta}">Reportado</span>
             </div>
             <h1 th:text="${objeto.nombre}">Objeto encontrado</h1>
             <p class="object-code" th:text="${'UF-EN-' + #numbers.formatInteger(objeto.idObjeto, 3)}">UF-EN-001</p>
@@ -52,7 +52,7 @@
 
             <div class="detail-actions">
                 <a class="primary-link" th:href="@{/objetos-encontrados}">Volver al listado</a>
-                <a class="secondary-button" th:href="@{/objetos-encontrados/registrar}">Registrar otro</a>
+                <a class="secondary-button" th:href="@{/estados/{tipo}/{id}(tipo='ENCONTRADO', id=${objeto.idObjeto})}">Ver estado</a>
             </div>
         </div>
     </section>

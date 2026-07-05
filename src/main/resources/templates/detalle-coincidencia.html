@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de coincidencia | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('coincidencias', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <a class="back-link" th:href="@{/coincidencias}">Volver a coincidencias</a>
+
+    <section class="match-detail-card">
+        <div class="match-score">
+            <span class="level-pill"
+                  th:classappend="${coincidencia.nivelCoincidencia.name().toLowerCase()}"
+                  th:text="${coincidencia.nivelCoincidencia.etiqueta}">Nivel alto</span>
+            <strong th:text="${coincidencia.porcentajeSimilitud + '%'}">94%</strong>
+        </div>
+        <div class="similarity-line large">
+            <span th:style="'width:' + ${coincidencia.porcentajeSimilitud} + '%'"></span>
+        </div>
+
+        <div class="match-detail-grid">
+            <article>
+                <h2>Objeto perdido</h2>
+                <div class="found-main-image match-image">
+                    <img th:if="${coincidencia.objetoPerdido.imagenUrl != null}" th:src="@{${coincidencia.objetoPerdido.imagenUrl}}" th:alt="${coincidencia.objetoPerdido.nombre}">
+                    <span th:if="${coincidencia.objetoPerdido.imagenUrl == null}">Sin foto adjunta</span>
+                </div>
+                <dl>
+                    <dt>Nombre</dt><dd th:text="${coincidencia.objetoPerdido.nombre}">Objeto</dd>
+                    <dt>Categoria</dt><dd th:text="${coincidencia.objetoPerdido.categoria.etiqueta}">Categoria</dd>
+                    <dt>Ubicacion</dt><dd th:text="${coincidencia.objetoPerdido.ubicacion.etiqueta}">Ubicacion</dd>
+                    <dt>Descripcion</dt><dd th:text="${coincidencia.objetoPerdido.descripcion}">Descripcion</dd>
+                </dl>
+            </article>
+            <article>
+                <h2>Objeto encontrado</h2>
+                <div class="found-main-image match-image">
+                    <img th:if="${coincidencia.objetoEncontrado.imagenUrl != null}" th:src="@{${coincidencia.objetoEncontrado.imagenUrl}}" th:alt="${coincidencia.objetoEncontrado.nombre}">
+                    <span th:if="${coincidencia.objetoEncontrado.imagenUrl == null}">Sin foto adjunta</span>
+                </div>
+                <dl>
+                    <dt>Nombre</dt><dd th:text="${coincidencia.objetoEncontrado.nombre}">Objeto</dd>
+                    <dt>Categoria</dt><dd th:text="${coincidencia.objetoEncontrado.categoria.etiqueta}">Categoria</dd>
+                    <dt>Ubicacion</dt><dd th:text="${coincidencia.objetoEncontrado.ubicacion.etiqueta}">Ubicacion</dd>
+                    <dt>Descripcion</dt><dd th:text="${coincidencia.objetoEncontrado.descripcion}">Descripcion</dd>
+                </dl>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>

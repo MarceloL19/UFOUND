@@ -46,7 +46,7 @@ public class ObjetoPerdido {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
-    private EstadoObjetoPerdido estado = EstadoObjetoPerdido.REPORTADO;
+    private EstadoObjeto estado = EstadoObjeto.REPORTADO;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -58,7 +58,7 @@ public class ObjetoPerdido {
             fechaHora = LocalDateTime.now();
         }
         if (estado == null) {
-            estado = EstadoObjetoPerdido.REPORTADO;
+            estado = EstadoObjeto.REPORTADO;
         }
     }
 
@@ -118,11 +118,11 @@ public class ObjetoPerdido {
         this.imagenUrl = imagenUrl;
     }
 
-    public EstadoObjetoPerdido getEstado() {
+    public EstadoObjeto getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoObjetoPerdido estado) {
+    public void setEstado(EstadoObjeto estado) {
         this.estado = estado;
     }
 

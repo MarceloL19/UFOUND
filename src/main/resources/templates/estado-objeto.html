@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado del objeto | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('estados', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <a class="back-link" th:href="@{/home}">Volver al inicio</a>
+
+    <section class="status-header-card">
+        <div class="object-thumb status-thumb">
+            <img th:if="${resumen.imagenUrl != null}" th:src="@{${resumen.imagenUrl}}" th:alt="${resumen.nombre}">
+            <span th:if="${resumen.imagenUrl == null}">Sin foto</span>
+        </div>
+        <div>
+            <span class="status-pill" th:text="${resumen.tipoObjeto.etiqueta}">Tipo</span>
+            <h1 th:text="${resumen.nombre}">Objeto</h1>
+            <p th:text="${resumen.categoria.etiqueta + ' - ' + resumen.ubicacion.etiqueta}">Detalle</p>
+        </div>
+        <strong class="current-status" th:text="${resumen.estado.etiqueta}">Reportado</strong>
+    </section>
+
+    <section class="timeline-card">
+        <p class="timeline-title">Estado del objeto</p>
+        <article class="timeline-item"
+                 th:each="item : ${lineaTiempo}"
+                 th:classappend="${item.actual} ? ' current' : (${item.completado} ? ' done' : ' pending')">
+            <div class="timeline-dot"></div>
+            <div>
+                <h2 th:text="${item.estado.etiqueta}">Reportado</h2>
+                <p th:text="${item.estado.descripcion}">Descripcion</p>
+            </div>
+            <time th:if="${item.historial != null}"
+                  th:text="${#temporals.format(item.historial.fechaCambio, 'dd MMM - HH:mm')}">10 Jun - 12:34</time>
+            <time th:if="${item.historial == null}">Pendiente</time>
+        </article>
+    </section>
+</main>
+</body>
+</html>

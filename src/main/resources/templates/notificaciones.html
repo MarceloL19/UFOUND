@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('notificaciones', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title">
+        <div>
+            <h1>Notificaciones</h1>
+            <p><strong th:text="${totalNoLeidas}">0</strong> notificacion(es) sin leer.</p>
+        </div>
+        <form th:if="${totalNoLeidas > 0}" th:action="@{/notificaciones/leer-todas}" method="post">
+            <button class="secondary-button" type="submit">Marcar todas como leidas</button>
+        </form>
+    </section>
+
+    <section class="notifications-panel">
+        <h2>Sin leer</h2>
+        <article class="notification-card unread" th:each="notificacion : ${noLeidas}">
+            <span class="notification-icon">!</span>
+            <div>
+                <h3>Alta coincidencia detectada</h3>
+                <p th:text="${notificacion.mensaje}">Mensaje</p>
+                <a th:if="${notificacion.coincidencia != null}" th:href="@{/coincidencias/{id}(id=${notificacion.coincidencia.idCoincidencia})}">Ver coincidencia</a>
+                <form th:action="@{/notificaciones/{id}/leer(id=${notificacion.idNotificacion})}" method="post">
+                    <button type="submit">Marcar como leida</button>
+                </form>
+            </div>
+            <time th:text="${#temporals.format(notificacion.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</time>
+        </article>
+        <p class="muted-empty" th:if="${#lists.isEmpty(noLeidas)}">No tienes notificaciones pendientes.</p>
+    </section>
+
+    <section class="notifications-panel read-panel">
+        <h2>Leidas</h2>
+        <article class="notification-card read" th:each="notificacion : ${leidas}">
+            <span class="notification-icon">✓</span>
+            <div>
+                <h3>Notificacion revisada</h3>
+                <p th:text="${notificacion.mensaje}">Mensaje</p>
+                <a th:if="${notificacion.coincidencia != null}" th:href="@{/coincidencias/{id}(id=${notificacion.coincidencia.idCoincidencia})}">Ver coincidencia</a>
+            </div>
+            <time th:text="${#temporals.format(notificacion.fechaCreacion, 'dd/MM/yyyy HH:mm')}">Fecha</time>
+        </article>
+        <p class="muted-empty" th:if="${#lists.isEmpty(leidas)}">Aun no hay notificaciones leidas.</p>
+    </section>
+</main>
+</body>
+</html>
