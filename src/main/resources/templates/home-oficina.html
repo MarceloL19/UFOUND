@@ -3,26 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Oficina | U-Found</title>
+    <title>Panel Administrativo | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body class="dashboard-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
 <div th:replace="~{fragments/layout :: sidebar('dashboard', ${usuario})}"></div>
 <main class="dashboard-shell">
-    <section class="section-title">
+    <section class="dashboard-hero office-hero">
         <div>
-            <h1>Panel Administrativo</h1>
-            <p>Estadisticas y actividad del sistema</p>
+            <p>Bienvenido de vuelta,</p>
+            <h1 th:text="${usuario.nombre}">Oficina</h1>
+            <span th:text="${#temporals.format(fechaActual, 'dd MMMM yyyy')}">Fecha</span>
+        </div>
+        <div class="hero-id">
+            <small>ID OFICINA</small>
+            <strong th:text="${usuario.codigoInstitucional}">OFICINA</strong>
+            <span>Oficina</span>
         </div>
     </section>
-    <section class="stats-grid office-stats">
-        <article><span>Objetos perdidos</span><strong>0</strong><small>EPIC 2 en estudiantes</small></article>
-        <article><span>Objetos encontrados</span><strong>0</strong><small>EPIC posterior</small></article>
-        <article><span>Coincidencias</span><strong>0</strong><small>EPIC posterior</small></article>
-        <article><span>Entregados</span><strong>0</strong><small>EPIC posterior</small></article>
+
+    <section class="section-title office-dashboard-title">
+        <div>
+            <h1>Panel Administrativo</h1>
+            <p>Estadisticas y actividad del sistema U-Found.</p>
+        </div>
+        <a class="primary-link" th:href="@{/oficina/estados}">Gestionar estados</a>
+    </section>
+
+    <section class="admin-kpi-grid">
+        <article class="admin-kpi-card" th:each="kpi : ${kpis}" th:classappend="${kpi.tipo}">
+            <span class="kpi-icon"></span>
+            <strong th:text="${kpi.valor}">0</strong>
+            <p th:text="${kpi.titulo}">Indicador</p>
+            <small th:text="${kpi.detalle}">Detalle</small>
+        </article>
+    </section>
+
+    <section class="admin-charts-grid">
+        <article class="admin-chart-card monthly-chart">
+            <div class="chart-header">
+                <h2>Objetos por mes</h2>
+                <div class="chart-legend">
+                    <span class="lost-dot">Perdidos</span>
+                    <span class="found-dot">Encontrados</span>
+                </div>
+            </div>
+            <div class="bar-chart">
+                <div class="bar-group" th:each="mes : ${meses}">
+                    <div class="bars">
+                        <span class="bar lost" th:style="'height:' + ${mes.alturaPerdidos} + 'px'" th:title="${mes.perdidos + ' perdidos'}"></span>
+                        <span class="bar found" th:style="'height:' + ${mes.alturaEncontrados} + 'px'" th:title="${mes.encontrados + ' encontrados'}"></span>
+                    </div>
+                    <small th:text="${mes.mes}">Mes</small>
+                </div>
+            </div>
+        </article>
+
+        <article class="admin-chart-card category-chart">
+            <h2>Por categoria</h2>
+            <div class="donut-chart" th:style="${categoriasPieStyle}"></div>
+            <ul class="category-list">
+                <li th:each="categoria : ${categorias}">
+                    <span th:style="'background:' + ${categoria.color}"></span>
+                    <p th:text="${categoria.categoria}">Categoria</p>
+                    <strong th:text="${categoria.porcentaje + '%'}">0%</strong>
+                </li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="admin-activity-card">
+        <div class="activity-table-header">
+            <h2>Actividad reciente</h2>
+            <a th:href="@{/oficina/estados}">Ver historial completo</a>
+        </div>
+        <table class="activity-table">
+            <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Objeto</th>
+                <th>Estado</th>
+                <th>Responsable</th>
+                <th>Fecha y hora</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${actividad}">
+                <td th:text="${item.codigo}">UF-001</td>
+                <td>
+                    <div class="activity-object-cell">
+                        <span class="activity-mini-thumb">
+                            <img th:if="${item.imagenUrl != null}" th:src="@{${item.imagenUrl}}" th:alt="${item.objeto}">
+                        </span>
+                        <strong th:text="${item.objeto}">Objeto</strong>
+                    </div>
+                </td>
+                <td><span class="admin-state-pill" th:text="${item.estado.etiqueta}">Estado</span></td>
+                <td th:text="${item.responsable}">Responsable</td>
+                <td th:text="${#temporals.format(item.fechaHora, 'dd MMM - HH:mm')}">Fecha</td>
+            </tr>
+            </tbody>
+        </table>
     </section>
 </main>
 </body>
 </html>
-
