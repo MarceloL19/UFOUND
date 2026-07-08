@@ -29,7 +29,7 @@
         <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados}" th:classappend="${active == 'encontrados'} ? ' active' : ''">Objetos encontrados</a>
         <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/oficina/estados}" th:classappend="${active == 'estados'} ? ' active' : ''">Panel admin</a>
         <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/oficina/estados}" th:classappend="${active == 'estados'} ? ' active' : ''">Estados</a>
-        <a href="#">Buscar</a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/buscar}" th:classappend="${active == 'buscar'} ? ' active' : ''">Buscar</a>
     </nav>
 </aside>
 </body>

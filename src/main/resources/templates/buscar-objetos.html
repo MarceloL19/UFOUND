@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar objetos | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('buscar', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="section-title search-heading">
+        <div>
+            <h1>Buscar objetos</h1>
+            <p>Encuentra objetos encontrados registrados por seguridad.</p>
+        </div>
+    </section>
+
+    <form class="search-panel" th:action="@{/buscar}" method="get">
+        <label class="search-main-input">
+            <span>Busqueda</span>
+            <input type="text" name="texto" th:value="${texto}" placeholder="Buscar por nombre o descripcion...">
+        </label>
+        <label>
+            Categoria
+            <select name="categoria">
+                <option value="">Todas</option>
+                <option th:each="categoria : ${categorias}"
+                        th:value="${categoria}"
+                        th:text="${categoria.etiqueta}"
+                        th:selected="${categoria == categoriaSeleccionada}">Categoria</option>
+            </select>
+        </label>
+        <label>
+            Ubicacion
+            <select name="ubicacion">
+                <option value="">Todas</option>
+                <option th:each="ubicacion : ${ubicaciones}"
+                        th:value="${ubicacion}"
+                        th:text="${ubicacion.etiqueta}"
+                        th:selected="${ubicacion == ubicacionSeleccionada}">Ubicacion</option>
+            </select>
+        </label>
+        <label>
+            Desde
+            <input type="date" name="fechaDesde" th:value="${fechaDesde}">
+        </label>
+        <label>
+            Hasta
+            <input type="date" name="fechaHasta" th:value="${fechaHasta}">
+        </label>
+        <button class="primary-button" type="submit">Buscar</button>
+    </form>
+
+    <section class="section-title search-results-title">
+        <div>
+            <h1>Resultados</h1>
+            <p th:text="${#lists.size(resultados) + ' objeto(s) encontrado(s)'}">0 objetos</p>
+        </div>
+    </section>
+
+    <section class="search-card-grid" th:if="${!#lists.isEmpty(resultados)}">
+        <article class="search-object-card" th:each="objeto : ${resultados}">
+            <div class="search-object-image">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+                <strong>Encontrado</strong>
+            </div>
+            <div class="search-object-body">
+                <h2 th:text="${objeto.nombre}">Objeto</h2>
+                <p th:text="${objeto.categoria.etiqueta + ' · ' + objeto.ubicacion.etiqueta}">Categoria</p>
+                <small th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy')}">Fecha</small>
+                <a th:href="@{/buscar/detalle/{tipo}/{id}(tipo=${objeto.tipoObjeto}, id=${objeto.idObjeto})}">Ver detalle</a>
+            </div>
+        </article>
+    </section>
+
+    <section class="empty-state" th:if="${#lists.isEmpty(resultados)}">
+        <h2>No se encontraron resultados</h2>
+        <p>Prueba con otra palabra clave o limpia los filtros.</p>
+    </section>
+
+    <section class="section-title recent-search-title">
+        <div>
+            <h1>Objetos recientes</h1>
+            <p>Ultimos objetos encontrados registrados en la plataforma.</p>
+        </div>
+    </section>
+    <section class="search-card-grid compact">
+        <article class="search-object-card" th:each="objeto : ${recientes}">
+            <div class="search-object-image">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+                <strong>Encontrado</strong>
+            </div>
+            <div class="search-object-body">
+                <h2 th:text="${objeto.nombre}">Objeto</h2>
+                <p th:text="${objeto.categoria.etiqueta + ' · ' + objeto.ubicacion.etiqueta}">Categoria</p>
+                <small th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy')}">Fecha</small>
+            </div>
+        </article>
+    </section>
+</main>
+</body>
+</html>

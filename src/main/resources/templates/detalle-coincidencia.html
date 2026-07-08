@@ -51,6 +51,33 @@
                 </dl>
             </article>
         </div>
+
+        <div class="match-info-banner" th:switch="${coincidencia.objetoEncontrado.estado.name()}">
+            <th:block th:case="'DISPONIBLE_OFICINA'">
+                <strong>Objeto disponible en oficina</strong>
+                <span>Acercate a objetos perdidos para validar y reclamar el objeto.</span>
+            </th:block>
+            <th:block th:case="'EN_REVISION'">
+                <strong>Objeto en revision</strong>
+                <span>Oficina esta evaluando el caso antes de habilitar su entrega.</span>
+            </th:block>
+            <th:block th:case="'COINCIDENCIA_DETECTADA'">
+                <strong>Coincidencia detectada</strong>
+                <span>Revisa la informacion y espera la validacion de oficina.</span>
+            </th:block>
+            <th:block th:case="'ENTREGADO'">
+                <strong>Objeto entregado</strong>
+                <span>Este objeto ya fue validado y entregado por oficina.</span>
+            </th:block>
+            <th:block th:case="'ARCHIVADO'">
+                <strong>Caso archivado</strong>
+                <span>El seguimiento administrativo de este objeto fue cerrado.</span>
+            </th:block>
+            <th:block th:case="*">
+                <strong>Reconoces este objeto?</strong>
+                <span>Acercate a objetos perdidos para validarlo.</span>
+            </th:block>
+        </div>
     </section>
 </main>
 </body>

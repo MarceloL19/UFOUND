@@ -34,37 +34,6 @@ Incluye:
 - listado de objetos encontrados;
 - vista de detalle del objeto encontrado.
 
-## EPIC 4
-
-Gestion del ciclo de vida de los objetos mediante estados e historial.
-
-Incluye:
-
-- enum unificado `EstadoObjeto`;
-- entidad `HistorialEstado`;
-- registro de estado inicial al crear objetos perdidos o encontrados;
-- actualizacion de estado exclusiva para usuarios con rol `OFICINA`;
-- vista de gestion de estados para oficina;
-- vista de seguimiento de estado para estudiantes y seguridad;
-- trazabilidad de cambios con estado anterior, estado nuevo, fecha y usuario responsable.
-
-## EPIC 5
-
-Deteccion de coincidencias y notificaciones automaticas para estudiantes.
-
-Incluye:
-
-- entidad `Coincidencia`;
-- entidad `Notificacion`;
-- enum `NivelCoincidencia`;
-- comparacion automatica entre objetos perdidos y encontrados;
-- calculo de similitud por categoria, ubicacion, nombre y descripcion;
-- generacion de coincidencias desde 40% de similitud;
-- generacion de notificaciones para coincidencias de nivel medio o alto;
-- vista de coincidencias para estudiantes;
-- vista de notificaciones leidas y no leidas;
-- opcion para marcar notificaciones como leidas.
-
 Tecnologias:
 
 - Java 17

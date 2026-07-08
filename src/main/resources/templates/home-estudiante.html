@@ -49,6 +49,28 @@
             <p>Alertas generadas por coincidencias relevantes.</p>
         </a>
     </section>
+
+    <section class="section-title student-recent-title">
+        <div>
+            <h1>Objetos encontrados recientes</h1>
+            <p>Ultimos hallazgos registrados por seguridad.</p>
+        </div>
+        <a class="primary-link" th:href="@{/buscar}">Buscar objetos</a>
+    </section>
+    <section class="search-card-grid compact student-recent-grid" th:if="${!#lists.isEmpty(encontradosRecientes)}">
+        <article class="search-object-card" th:each="objeto : ${encontradosRecientes}">
+            <div class="search-object-image">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+                <strong>Encontrado</strong>
+            </div>
+            <div class="search-object-body">
+                <h2 th:text="${objeto.nombre}">Objeto</h2>
+                <p th:text="${objeto.categoria.etiqueta + ' · ' + objeto.ubicacion.etiqueta}">Categoria</p>
+                <small th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy')}">Fecha</small>
+            </div>
+        </article>
+    </section>
 </main>
 </body>
 </html>

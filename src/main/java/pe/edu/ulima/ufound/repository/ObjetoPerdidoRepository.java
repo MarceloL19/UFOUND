@@ -1,12 +1,13 @@
 package pe.edu.ulima.ufound.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import pe.edu.ulima.ufound.model.ObjetoPerdido;
 import pe.edu.ulima.ufound.model.Usuario;
 
 import java.util.List;
 
-public interface ObjetoPerdidoRepository extends JpaRepository<ObjetoPerdido, Long> {
+public interface ObjetoPerdidoRepository extends JpaRepository<ObjetoPerdido, Long>, JpaSpecificationExecutor<ObjetoPerdido> {
 
     List<ObjetoPerdido> findByUsuarioOrderByFechaHoraDesc(Usuario usuario);
 

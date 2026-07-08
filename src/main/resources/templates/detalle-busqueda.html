@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de objeto | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('buscar', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <a class="back-link" th:href="@{/buscar}">Volver a busqueda</a>
+
+    <section class="found-detail">
+        <div class="found-media">
+            <div class="found-main-image">
+                <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+                <span th:if="${objeto.imagenUrl == null}">Sin foto adjunta</span>
+            </div>
+        </div>
+
+        <div class="found-info">
+            <div class="detail-tags">
+                <span th:text="${objeto.categoria.etiqueta}">Categoria</span>
+                <span class="status-found" th:text="${objeto.tipoObjeto.etiqueta}">Tipo</span>
+            </div>
+            <h1 th:text="${objeto.nombre}">Objeto</h1>
+            <p class="object-code" th:text="${objeto.tipoObjeto.name() == 'PERDIDO' ? 'UF-PE-' + #numbers.formatInteger(objeto.idObjeto, 3) : 'UF-EN-' + #numbers.formatInteger(objeto.idObjeto, 3)}">UF-000</p>
+
+            <div class="detail-metrics">
+                <article>
+                    <small>Ubicacion</small>
+                    <strong th:text="${objeto.ubicacion.etiqueta}">Biblioteca</strong>
+                </article>
+                <article>
+                    <small>Fecha</small>
+                    <strong th:text="${#temporals.format(objeto.fechaHora, 'dd MMM yyyy')}">10 Jun 2025</strong>
+                </article>
+                <article>
+                    <small>Estado</small>
+                    <strong th:text="${objeto.estado.etiqueta}">Reportado</strong>
+                </article>
+                <article>
+                    <small>Hora</small>
+                    <strong th:text="${#temporals.format(objeto.fechaHora, 'HH:mm')}">12:30</strong>
+                </article>
+            </div>
+
+            <h2>Descripcion</h2>
+            <p class="detail-description" th:text="${objeto.descripcion}">Descripcion del objeto.</p>
+
+            <div class="match-info-banner detail-status-banner" th:switch="${objeto.estado.name()}">
+                <th:block th:case="'DISPONIBLE_OFICINA'">
+                    <strong>Objeto disponible en oficina</strong>
+                    <span>Acercate a objetos perdidos para validar y reclamar el objeto.</span>
+                </th:block>
+                <th:block th:case="'EN_REVISION'">
+                    <strong>Objeto en revision</strong>
+                    <span>Oficina esta evaluando el caso antes de habilitar su entrega.</span>
+                </th:block>
+                <th:block th:case="'COINCIDENCIA_DETECTADA'">
+                    <strong>Coincidencia detectada</strong>
+                    <span>Revisa la informacion y espera la validacion de oficina.</span>
+                </th:block>
+                <th:block th:case="'ENTREGADO'">
+                    <strong>Objeto entregado</strong>
+                    <span>Este objeto ya fue validado y entregado por oficina.</span>
+                </th:block>
+                <th:block th:case="'ARCHIVADO'">
+                    <strong>Caso archivado</strong>
+                    <span>El seguimiento administrativo de este objeto fue cerrado.</span>
+                </th:block>
+                <th:block th:case="*">
+                    <strong>Reconoces este objeto?</strong>
+                    <span>Acercate a objetos perdidos para validarlo.</span>
+                </th:block>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
