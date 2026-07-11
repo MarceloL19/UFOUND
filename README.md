@@ -34,6 +34,66 @@ Incluye:
 - listado de objetos encontrados;
 - vista de detalle del objeto encontrado.
 
+## EPIC 4
+
+Gestion del ciclo de vida de los objetos mediante estados e historial.
+
+Incluye:
+
+- enum unificado `EstadoObjeto`;
+- entidad `HistorialEstado`;
+- registro de estado inicial al crear objetos perdidos o encontrados;
+- actualizacion de estado exclusiva para usuarios con rol `OFICINA`;
+- vista de gestion de estados para oficina;
+- vista de seguimiento de estado para estudiantes y seguridad;
+- trazabilidad de cambios con estado anterior, estado nuevo, fecha y usuario responsable.
+
+## EPIC 5
+
+Deteccion de coincidencias y notificaciones automaticas para estudiantes.
+
+Incluye:
+
+- entidad `Coincidencia`;
+- entidad `Notificacion`;
+- enum `NivelCoincidencia`;
+- comparacion automatica entre objetos perdidos y encontrados;
+- calculo de similitud por categoria, ubicacion, nombre y descripcion;
+- generacion de coincidencias desde 40% de similitud;
+- generacion de notificaciones para coincidencias de nivel medio o alto;
+- vista de coincidencias para estudiantes;
+- vista de notificaciones leidas y no leidas;
+- opcion para marcar notificaciones como leidas.
+
+## EPIC 6
+
+Busqueda, filtrado y consulta de objetos encontrados para estudiantes.
+
+Incluye:
+
+- `BusquedaController`;
+- `BusquedaObjetoService`;
+- busqueda por texto, categoria, ubicacion y fecha;
+- resultados mostrados en cards con informacion resumida;
+- vista de detalle del objeto encontrado;
+- seccion de objetos encontrados recientes para estudiantes;
+- acceso restringido al rol `ESTUDIANTE`;
+- consulta dinamica usando datos persistidos en MySQL.
+
+## EPIC 7
+
+Dashboard administrativo para usuarios con rol `OFICINA`.
+
+Incluye:
+
+- `AdminDashboardService`;
+- indicadores KPI de objetos perdidos, objetos encontrados, coincidencias, recuperados y archivados;
+- datos agrupados por mes;
+- distribucion por categoria;
+- actividad reciente del sistema;
+- panel administrativo dinamico basado en informacion de la base de datos;
+- acceso restringido al rol `OFICINA`.
+
 Tecnologias:
 
 - Java 17
