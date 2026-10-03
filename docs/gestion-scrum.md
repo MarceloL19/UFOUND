@@ -81,7 +81,7 @@ Las seis HU del Sprint 2 y sus 12 tareas están en Sprint Backlog con Sprint 2; 
 | Roadmap | Roadmap | Fechas por Sprint y agrupación por Prioridad; entrega final representada por su milestone, sin crear Sprint 4 |
 | Mis tareas | Table | Filtro `assignee:@me -status:Done` |
 
-Workflows activos: alta → Product Backlog; cierre → Done; merge de PR → Done; reapertura → In Progress; auto-add de issues y PR abiertos de UFOUND; auto-add de sub-issues; PR vinculado → In Review. El cierre automático de issues al moverlos a Done está desactivado para exigir validación real antes del cierre. La prueba temporal #58 comprueba las transiciones y permanece fuera de Sprint y de puntos; su borrado definitivo requiere autorización.
+Workflows activos: alta → Product Backlog; cierre → Done; merge de PR → Done; reapertura → In Progress; auto-add de issues y PR abiertos de UFOUND; auto-add de sub-issues; PR vinculado → In Review. El cierre automático de issues al moverlos a Done está desactivado para exigir validación real antes del cierre. La prueba temporal #58 verificó auto-add a Product Backlog, cierre a Done y reapertura a In Progress; quedó cerrada, sin Sprint ni puntos, pendiente de borrado definitivo autorizado.
 
 En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.com/MarceloL19/UFOUND/settings/rules/24406992), con PR obligatorio, una aprobación y sin bypass. El PR #57 sigue abierto. Cada integrante todavía debe completar un ciclo real: tarea In Progress, rama, commit que referencia el issue, PR con Closes #N, revisión con comentario y aprobación de otro integrante, merge y comprobación de cierre/Done.
 
@@ -98,7 +98,7 @@ En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.
 
 | Gráfico guardado | Configuración | Dato disponible |
 |---|---|---|
-| [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4) | Stacked area; Time; Count of items; `is:issue sprint:"Sprint 2"` | 18 ítems abiertos: 6 HU y 12 tareas; cero completados |
+| [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4) | Stacked area; Time; Count of items; `is:issue sprint:"Sprint 2" -label:documentation` | 18 ítems abiertos: 6 HU y 12 tareas; cero completados |
 | [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2) | Stacked bar; Assignees; Group by Status; Sum of Story Points | Sin puntos estimados; cero no demuestra carga nula |
 | [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3) | Column; Sprint; Sum of Story Points; `status:Done` | Las HU históricas no tienen Sprint ni puntos; no acreditan velocidad de R2 |
 
