@@ -7,9 +7,9 @@ Se adapta el laboratorio al proyecto de objetos perdidos y encontrados UFOUND y 
 | Integrante | GitHub | Participación |
 |---|---|---|
 | Marcelo Franco Loayza Taboada | MarceloL19 | Developer |
-| Daniel Joseph Sandoval Chavarria | Por confirmar | Developer |
+| Daniel Joseph Sandoval Chavarria | danielsandtyler | Developer |
 
-El equipo debe designar un Product Owner y un Scrum Master. No se asignan estos roles por inferencia ni se reutilizan los seis integrantes de la documentación antigua. Los demás integrantes, si los hubiera, también deben confirmarse. Agregar a los integrantes como colaboradores y otorgar Write en el Project una vez identificadas sus cuentas.
+El equipo debe designar un Product Owner y un Scrum Master. No se asignan estos roles por inferencia ni se reutilizan los seis integrantes de la documentación antigua. Los demás integrantes, si los hubiera, también deben confirmarse. Daniel está verificado como colaborador existente de UFOUND y ya tiene Write en el Project; Marcelo conserva Admin como propietario.
 
 ## Cronograma y Sprint Goals
 
@@ -54,34 +54,36 @@ Usar Fibonacci 1, 2, 3, 5, 8, 13. Registrar estimaciones individuales, diferenci
 
 Comprobar que la suma de puntos de las HU seleccionadas no supere la capacidad acordada. Estimar las historias para las métricas; las tareas de descomposición no vuelven a sumar esos puntos.
 
-## Configuración pendiente de GitHub Projects
+## Configuración realizada de GitHub Projects
 
-Crear `UFOUND - Gestión Scrum`, vincularlo al repositorio y conceder Write a los integrantes confirmados. Esta sección describe la configuración que debe hacerse; la existencia del documento no significa que el Project esté configurado.
+[UFOUND - Gestion Scrum IS2](https://github.com/users/MarceloL19/projects/1) está vinculado a UFOUND. Marcelo tiene Admin y Daniel (`danielsandtyler`) tiene Write. El Project es privado.
 
 | Campo | Tipo | Valores |
 |---|---|---|
-| Status | Single select | Product Backlog, Sprint Backlog, In Progress, In Review, Done |
-| Sprint | Iteration | Sprint 1, Sprint 2, Sprint 3 y Entrega final según sus fechas; confirmar primero el inicio del Sprint 1 |
-| Story Points | Number | Estimaciones acordadas por el equipo |
-| Prioridad | Single select | Must, Should, Could, Won't, en ese orden |
-| Tipo | Single select | Historia, Tarea, Bug, Spike; seguimiento sin puntos |
+| Status | Single select | Product Backlog, Sprint Backlog, In Progress, In Review, Done, en ese orden |
+| Sprint | Iteration | Sprint 1, Sprint 2 y Sprint 3; entrega final mediante milestone |
+| Story Points | Number | Pendientes de estimación del equipo |
+| Prioridad | Single select | Must have, Should have, Could have, Won't have |
+| Tipo | Single select | Historia, Tarea, Bug, Spike; XL de la plantilla pendiente de eliminación definitiva autorizada |
 
-Crear etiquetas `historia-usuario`, `tarea`, `spike`, `frontend`, `backend`, `release-1` y `release-2`; conservar `bug`. Las etiquetas declaradas en una plantilla deben existir en el repositorio para poder aplicarse.
+Sprint 2 y Sprint 3 usan los periodos acordados. Sprint 1 tiene inicio 29/08 como referencia de tres semanas, pendiente de confirmación; el cierre es 18/09. Los campos vacíos Start date y Target date de la plantilla también quedan pendientes de limpieza autorizada.
 
-Crear milestones Sprint 1, Sprint 2, Sprint 3 y Entrega final con los cierres indicados. Mantener HU-01 a HU-25 fuera de los milestones de R2: su importación histórica no los convierte en trabajo del Sprint 1 actual.
+Las etiquetas de la guía existen: `historia-usuario`, `tarea`, `bug`, `spike`, `frontend`, `backend`. Las 38 HU tienen historia-usuario y las 12 tareas del Sprint 2 tienen tarea.
 
-Importar las HU nuevas y sus tareas, asignar Tipo y Prioridad, y completar Sprint conforme al plan ratificado. Las HU futuras permanecen en Product Backlog; las seleccionadas para el sprint van a Sprint Backlog después de validar estimaciones y capacidad. Vincular cada tarea preparada mediante Add existing sub-issue en su HU padre y comprobar la barra de progreso.
+Se crearon los cuatro milestones con cierre 18/09, 09/10, 30/10 y 13/11/2026. Las 13 HU nuevas están asignadas según el plan; las 12 tareas y los registros de Daily, Review y Retrospectiva tienen milestone Sprint 2. Las 25 HU heredadas quedan fuera de los sprints y métricas de R2.
+
+Las seis HU del Sprint 2 y sus 12 tareas están en Sprint Backlog con Sprint 2; la selección sigue pendiente de validar estimaciones y capacidad. HU-29–32 conservan Product Backlog y Sprint 3. HU-33–35 conservan Product Backlog, Sprint vacío y el milestone Entrega final. Cada una de las seis HU del Sprint 2 tiene dos tareas vinculadas mediante sub-issues. No se asignaron responsables ni puntos ficticios.
 
 | Vista | Tipo | Configuración |
 |---|---|---|
-| Product Backlog | Table | Title, Status, Prioridad, Story Points, Sprint, Assignees, Labels; filtro `-status:Done`; Prioridad ascendente y orden manual por valor dentro de cada prioridad |
-| Sprint Actual | Board | Columnas por Status; filtro `sprint:@current`; mostrar Story Points, Assignees, Prioridad y Sub-issues progress; suma de Story Points por columna |
-| Roadmap | Roadmap | Fechas por Sprint y agrupación por Prioridad; mostrar Sprint 2, Sprint 3 y Entrega final |
+| Product Backlog | Table | Title, Status, Prioridad, Story Points, Sprint, Assignees, Labels y campos de trazabilidad; filtro `-status:Done`; Prioridad ascendente |
+| Sprint Actual | Board | Columnas por Status; filtro `sprint:@current`; Story Points, Assignees, Prioridad y Sub-issues progress; suma de Story Points por columna |
+| Roadmap | Roadmap | Fechas por Sprint y agrupación por Prioridad; entrega final representada por su milestone, sin crear Sprint 4 |
 | Mis tareas | Table | Filtro `assignee:@me -status:Done` |
 
-Activar y verificar los workflows: item añadido → Product Backlog; issue cerrado → Done; PR fusionado → Done; issue reabierto → In Progress. Configurar auto-add de issues y PR abiertos del repositorio. Crear un issue de prueba, comprobar alta y transición al cerrarlo, y eliminarlo al finalizar la verificación.
+Workflows activos: alta → Product Backlog; cierre → Done; merge de PR → Done; reapertura → In Progress; auto-add de issues y PR abiertos de UFOUND; auto-add de sub-issues; PR vinculado → In Review. El cierre automático de issues al moverlos a Done está desactivado para exigir validación real antes del cierre. La prueba temporal #58 comprueba las transiciones y permanece fuera de Sprint y de puntos; su borrado definitivo requiere autorización.
 
-Proteger main: exigir PR y una aprobación. Cada integrante completa al menos un ciclo real: tarea In Progress, rama `feature/<issue>-descripcion`, commit que referencia el issue, PR con `Closes #N`, tarea In Review, comentario y aprobación de otro integrante, merge y verificación de cierre y estado Done. Este PR preparado no sustituye los ciclos individuales de todos los integrantes.
+En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.com/MarceloL19/UFOUND/settings/rules/24406992), con PR obligatorio, una aprobación y sin bypass. El PR #57 sigue abierto. Cada integrante todavía debe completar un ciclo real: tarea In Progress, rama, commit que referencia el issue, PR con Closes #N, revisión con comentario y aprobación de otro integrante, merge y comprobación de cierre/Done.
 
 ## Registros de los eventos
 
@@ -94,21 +96,27 @@ Proteger main: exigir PR y una aprobación. Cada integrante completa al menos un
 
 ## Insights y evidencias
 
-Configurar Burnup filtrado por el Sprint actual; `Carga por integrante` como barras apiladas por Assignees y Status, sumando Story Points; y `Velocidad` por Sprint, sumando Story Points y filtrando Done. Para las métricas de historias, incluir únicamente las HU de R2 y excluir tareas, PR, seguimiento y antecedentes R1. Si se necesita medir tareas, hacerlo en una vista separada y explicitar la unidad.
+| Gráfico guardado | Configuración | Dato disponible |
+|---|---|---|
+| [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4) | Stacked area; Time; Count of items; `is:issue sprint:"Sprint 2"` | 18 ítems abiertos: 6 HU y 12 tareas; cero completados |
+| [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2) | Stacked bar; Assignees; Group by Status; Sum of Story Points | Sin puntos estimados; cero no demuestra carga nula |
+| [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3) | Column; Sprint; Sum of Story Points; `status:Done` | Las HU históricas no tienen Sprint ni puntos; no acreditan velocidad de R2 |
 
-Obtener las tres capturas después de configurar los gráficos y de registrar datos reales. Mientras no haya estimaciones o cierres, conservar el gráfico vacío y explicar esa situación; no rellenarlo con puntos ficticios. Los cierres históricos importados no prueban velocidad del curso.
+Las tres capturas se tomaron con los datos actuales. El historial comienza con la importación del 03/10/2026; no reproduce avance anterior. Burn up cuenta ítems, incluyendo descomposición, y no mide esfuerzo. Para medir velocidad futura, estimar solo las HU; dejar tareas, PR y seguimiento sin puntos para evitar doble conteo.
 
-Agregar al README el resultado real del Sprint Goal, las diferencias de estimación discutidas, enlaces a PR revisados y las capturas de Insights cuando existan. Cerrar el milestone después de la Review y refinar el Sprint 3.
+La respuesta sobre el Sprint Goal y las acciones si no alcanza la capacidad están en README. No se puede pronosticar el cumplimiento sin disponibilidad, estimaciones y cierres reales. El PO debe priorizar Must, revisar Should, dividir historias grandes y devolver el exceso al backlog.
 
 ## Estado verificable de la preparación
 
 | Requisito | Estado |
 |---|---|
-| 38 HU y distribución de entregas | Issues creados; ver [Product Backlog](product-backlog.md) |
-| Tareas de HU del Sprint 2 | Issues creados; vinculación nativa y responsables pendientes |
-| Plantillas, documentación y pruebas recibidas | Preparadas en PR; pendientes de revisión y merge |
-| Project, vistas, campos, workflows, milestones y protección | Pendientes de configurar mediante una vía que permita esas operaciones |
+| 38 HU y distribución de entregas | Issues importados; 25 antecedentes R1, 13 HU nuevas con milestones |
+| Tareas de HU del Sprint 2 | 12 issues con Sprint 2, prioridad, Tipo Tarea y vínculos nativos 2 por HU |
+| Plantillas, documentación y pruebas recibidas | PR #57 abierto; revisión, ejecución de pruebas y merge pendientes |
+| Project, vistas, campos, workflows, milestones y protección | Configurados; limpieza definitiva de elementos vacíos pendiente de autorización |
+| Acceso del equipo | Marcelo Admin; Daniel danielsandtyler Write, verificado contra colaboradores del repositorio |
+| Insights con capturas | Tres gráficos guardados y capturados; datos insuficientes para pronóstico |
 | Roles, estimaciones, Daily, Review y Retro | Participación real del equipo pendiente |
-| Ciclo individual por integrante e Insights con capturas | Pendientes de ejecución y evidencia |
+| Ciclo individual por integrante | Pendiente de trabajo y revisión reales |
 
 La guía no pide implementar todo el Release 2 durante este laboratorio: pide demostrar la gestión y al menos un cambio mínimo por integrante mediante el flujo de PR.
