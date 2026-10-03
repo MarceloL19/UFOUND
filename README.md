@@ -125,3 +125,25 @@ URL:
 ```text
 http://localhost:8080/login
 ```
+
+## Gestión Scrum y laboratorio 4
+
+El trabajo del curso se organiza en tres sprints y una entrega final, usando la línea base del Release 1.
+
+| Entrega | Cierre | Objetivo y alcance |
+|---|---|---|
+| Sprint 1 | 18/09/2026 | Estabilizar la línea base; revisar autenticación, sesión y home por rol. La evidencia de cinco pruebas de AuthService está en docs y conserva su fecha original del 20/09/2026. |
+| Sprint 2 | 09/10/2026 | Ayuda contextual y estadísticas de pérdidas: HU-26, 27, 28, 36, 37 y 38. |
+| Sprint 3 | 30/10/2026 | Registro asistido por imágenes: HU-29 a HU-32. |
+| Entrega final | 13/11/2026 | Coincidencias avanzadas: HU-33 a HU-35; integración, pruebas y documentación. |
+
+Developers registrados: Marcelo Franco Loayza Taboada y Daniel Joseph Sandoval Chavarria. Product Owner, Scrum Master y cuenta de GitHub de Daniel: pendientes de confirmación del equipo.
+
+Capacidad y Story Points del Release 2: pendientes de Planning Poker. Diferencias de estimación y sus motivos: pendientes de registrar después de la sesión. No se declaran ceremonias ni aprobaciones que todavía no ocurrieron.
+
+- [Product Backlog con 38 HU y tareas](docs/product-backlog.md).
+- [Plan del laboratorio, roles, configuración y seguimiento](docs/gestion-scrum.md).
+- [Avance y alcance comprobado del Sprint 1](docs/sprint-1-estabilizacion.md).
+- Configuración del laboratorio: [#39](https://github.com/MarceloL19/UFOUND/issues/39).
+
+Las 25 HU heredadas de R1 se identifican como antecedentes; no cuentan como implementación nueva ni como velocidad de los sprints de R2. Las fechas de cierre de sus issues corresponden a su importación en GitHub.
