@@ -1,0 +1,45 @@
+name: Historia de Usuario
+description: Nueva HU para el Product Backlog de UFOUND
+title: '[HU] '
+labels:
+- historia-usuario
+body:
+- type: input
+  id: rol
+  attributes:
+    label: Como...
+    description: Rol que obtiene el beneficio.
+  validations:
+    required: true
+- type: input
+  id: accion
+  attributes:
+    label: Quiero...
+    description: Funcionalidad concreta de UFOUND.
+  validations:
+    required: true
+- type: input
+  id: beneficio
+  attributes:
+    label: Para...
+    description: Valor para el usuario.
+  validations:
+    required: true
+- type: textarea
+  id: criterios
+  attributes:
+    label: Criterios de aceptación
+    description: Usar Dado / Cuando / Entonces; incluir éxito y errores relevantes.
+    value: '- [ ] Dado ... cuando ... entonces ...
+
+      - [ ] Dado ... cuando ... entonces ...'
+  validations:
+    required: true
+- type: textarea
+  id: planificacion
+  attributes:
+    label: Planificación y dependencias
+    description: Release, entrega prevista, dependencias y prioridad propuesta. Los
+      puntos y responsables se acuerdan con el equipo.
+  validations:
+    required: true

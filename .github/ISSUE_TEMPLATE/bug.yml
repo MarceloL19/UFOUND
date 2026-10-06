@@ -1,0 +1,40 @@
+name: Bug
+description: Reportar un defecto encontrado en UFOUND
+title: '[BUG] '
+labels:
+- bug
+body:
+- type: textarea
+  id: descripcion
+  attributes:
+    label: Descripción
+    description: Explicar el comportamiento observado y el entorno.
+  validations:
+    required: true
+- type: textarea
+  id: pasos
+  attributes:
+    label: Pasos para reproducir
+    description: Incluir datos de prueba y ruta o componente.
+    value: '1.
+
+      2.
+
+      3.'
+  validations:
+    required: true
+- type: textarea
+  id: esperado
+  attributes:
+    label: Comportamiento esperado
+    description: Explicar qué debería ocurrir.
+  validations:
+    required: true
+- type: textarea
+  id: evidencia
+  attributes:
+    label: Resultado observado y evidencia
+    description: Adjuntar evidencia disponible y criterios de corrección; no incluir
+      credenciales personales.
+  validations:
+    required: true

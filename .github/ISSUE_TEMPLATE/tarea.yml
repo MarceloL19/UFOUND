@@ -1,0 +1,30 @@
+name: Tarea técnica
+description: Descomponer una historia de UFOUND
+title: '[Tarea] '
+labels:
+- tarea
+body:
+- type: input
+  id: padre
+  attributes:
+    label: Historia padre
+    description: Número del issue HU; vincular además mediante Add existing sub-issue.
+  validations:
+    required: true
+- type: textarea
+  id: trabajo
+  attributes:
+    label: Trabajo a realizar
+    description: Cambio concreto, componentes y entrega prevista.
+  validations:
+    required: true
+- type: textarea
+  id: criterios
+  attributes:
+    label: Criterios de finalización
+    description: Resultado verificable, pruebas y evidencia esperada.
+    value: '- [ ] Dado ... cuando ... entonces ...
+
+      - [ ] Dado ... cuando ... entonces ...'
+  validations:
+    required: true
