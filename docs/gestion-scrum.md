@@ -6,10 +6,13 @@ Se adapta el laboratorio al proyecto de objetos perdidos y encontrados UFOUND y 
 
 | Integrante | GitHub | Participación |
 |---|---|---|
+| Gabriel Revoredo | Por registrar | Scrum Master |
+| Sergio Chaparro | Por registrar | Product Owner |
 | Marcelo Franco Loayza Taboada | MarceloL19 | Developer |
+| Rodrigo Figueroa | Por registrar | Developer |
 | Daniel Joseph Sandoval Chavarria | danielsandtyler | Developer |
 
-El equipo debe designar un Product Owner y un Scrum Master. No se asignan estos roles por inferencia ni se reutilizan los seis integrantes de la documentación antigua. Los demás integrantes, si los hubiera, también deben confirmarse. Daniel está verificado como colaborador existente de UFOUND y ya tiene Write en el Project; Marcelo conserva Admin como propietario.
+Marcelo confirmó a los cinco integrantes y sus roles para el Sprint 2. Los nombres de usuario de Gabriel, Sergio y Rodrigo quedan por registrar en esta tabla; no se asignan cuentas de GitHub por inferencia. Daniel ya tiene Write en el Project y Marcelo conserva Admin como propietario.
 
 ## Cronograma y Sprint Goals
 
@@ -83,7 +86,7 @@ Las seis HU del Sprint 2 y sus 12 tareas están en Sprint Backlog con Sprint 2; 
 
 Workflows activos: alta → Product Backlog; cierre → Done; merge de PR → Done; reapertura → In Progress; auto-add de issues y PR abiertos de UFOUND; auto-add de sub-issues; PR vinculado → In Review. El cierre automático de issues al moverlos a Done está desactivado para exigir validación real antes del cierre. La prueba temporal #58 verificó auto-add a Product Backlog, cierre a Done y reapertura a In Progress; quedó cerrada, sin Sprint ni puntos, pendiente de borrado definitivo autorizado.
 
-En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.com/MarceloL19/UFOUND/settings/rules/24406992), con PR obligatorio, una aprobación y sin bypass. El PR #57 sigue abierto. Cada integrante todavía debe completar un ciclo real: tarea In Progress, rama, commit que referencia el issue, PR con Closes #N, revisión con comentario y aprobación de otro integrante, merge y comprobación de cierre/Done.
+En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.com/MarceloL19/UFOUND/settings/rules/24406992), con PR obligatorio, una aprobación y sin bypass. El PR #57 fue aprobado por Daniel e integrado en main. Cada integrante todavía debe completar un ciclo real: tarea In Progress, rama, commit que referencia el issue, PR con Closes #N, revisión con comentario y aprobación de otro integrante, merge y comprobación de cierre/Done.
 
 ## Registros de los eventos
 
@@ -112,11 +115,11 @@ La respuesta sobre el Sprint Goal y las acciones si no alcanza la capacidad est�
 |---|---|
 | 38 HU y distribución de entregas | Issues importados; 25 antecedentes R1, 13 HU nuevas con milestones |
 | Tareas de HU del Sprint 2 | 12 issues con Sprint 2, prioridad, Tipo Tarea y vínculos nativos 2 por HU |
-| Plantillas, documentación y pruebas recibidas | PR #57 abierto; revisión, ejecución de pruebas y merge pendientes |
+| Plantillas, documentación y pruebas recibidas | PR #57 aprobado e integrado; la ejecución nueva de pruebas sigue pendiente |
 | Project, vistas, campos, workflows, milestones y protección | Configurados; limpieza definitiva de elementos vacíos pendiente de autorización |
-| Acceso del equipo | Marcelo Admin; Daniel danielsandtyler Write, verificado contra colaboradores del repositorio |
+| Acceso del equipo | Equipo de cinco confirmado por Marcelo; cuentas verificadas en esta tabla para Marcelo y Daniel |
 | Insights con capturas | Tres gráficos guardados y capturados; datos insuficientes para pronóstico |
-| Roles, estimaciones, Daily, Review y Retro | Participación real del equipo pendiente |
+| Roles, estimaciones, Daily, Review y Retro | Roles confirmados; estimaciones en el Project y registros reales de ceremonias pendientes |
 | Ciclo individual por integrante | Pendiente de trabajo y revisión reales |
 
 La guía no pide implementar todo el Release 2 durante este laboratorio: pide demostrar la gestión y al menos un cambio mínimo por integrante mediante el flujo de PR.
