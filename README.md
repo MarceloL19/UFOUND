@@ -133,7 +133,7 @@ El trabajo del curso se organiza en tres sprints y una entrega final, usando la 
 | Sprint 3 | 30/10/2026 | Registro asistido por imágenes: HU-29 a HU-32. |
 | Entrega final | 13/11/2026 | Coincidencias avanzadas: HU-33 a HU-35; integración, pruebas y documentación. |
 
-Developers registrados: Marcelo Franco Loayza Taboada y Daniel Joseph Sandoval Chavarria. Cuenta de Daniel verificada como `danielsandtyler`, colaborador existente del repositorio. Product Owner y Scrum Master: pendientes de designación del equipo.
+Equipo confirmado para el Sprint 2: Gabriel Revoredo (Scrum Master), Sergio Chaparro (Product Owner) y Marcelo Loayza, Rodrigo Figueroa y Daniel Sandoval (Developers). Las cuentas de GitHub confirmadas en la documentación son `MarceloL19` y `danielsandtyler`; las de Gabriel, Sergio y Rodrigo deben registrarse cuando se verifiquen.
 
 Capacidad y Story Points del Release 2: pendientes de Planning Poker. Diferencias de estimación y sus motivos: pendientes de registrar después de la sesión. No se declaran ceremonias ni aprobaciones que todavía no ocurrieron.
 
@@ -153,7 +153,7 @@ Las 25 HU heredadas de R1 se identifican como antecedentes; no cuentan como impl
 
 El Project contiene las 38 HU, 12 tareas del Sprint 2 vinculadas como sub-issues y los registros de seguimiento. Las seis HU previstas para Sprint 2 y sus tareas están en Sprint Backlog; ese alcance sigue sujeto a validar capacidad con Planning Poker. Sprint 3 mantiene HU-29 a HU-32 y la entrega final HU-33 a HU-35. Los hitos cierran el 18/09, 09/10, 30/10 y 13/11/2026. La referencia de inicio del Sprint 1 en el calendario es 29/08; el equipo debe confirmarla.
 
-Daniel Sandoval, colaborador existente del repositorio con la cuenta `danielsandtyler`, tiene Write en el Project. Los roles PO y SM todavía deben acordarse. En `main` está activa la regla de PR obligatorio con una aprobación; el PR #57 permanece abierto para revisión de otro integrante.
+Daniel Sandoval, colaborador existente del repositorio con la cuenta `danielsandtyler`, tiene Write en el Project. Los roles PO y SM ya están acordados por el equipo. En `main` está activa la regla de PR obligatorio con una aprobación; el PR #57 fue aprobado por Daniel e integrado.
 
 **¿Se cumplirá el Sprint Goal según el Burn up?** Todavía no se puede concluir. El gráfico registra 18 ítems abiertos (6 historias y 12 tareas), cero cierres del Sprint 2 y datos importados el 03/10/2026. El salto de esa fecha representa el alta en GitHub, no ejecución histórica. Faltan estimaciones, disponibilidad y evidencia de avance real. El conteo de ítems no equivale a esfuerzo.
 
