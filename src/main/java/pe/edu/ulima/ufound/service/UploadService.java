@@ -1,6 +1,7 @@
 package pe.edu.ulima.ufound.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -14,8 +15,14 @@ import java.util.UUID;
 public class UploadService {
 
     private static final Set<String> EXTENSIONES_PERMITIDAS = Set.of(".png", ".jpg", ".jpeg", ".webp");
-    private final Path carpetaObjetosPerdidos = Path.of("uploads", "objetos-perdidos");
-    private final Path carpetaObjetosEncontrados = Path.of("uploads", "objetos-encontrados");
+    private final Path carpetaObjetosPerdidos;
+    private final Path carpetaObjetosEncontrados;
+
+    public UploadService(@Value("${ufound.upload-dir:uploads}") String uploadDir) {
+        Path carpetaBase = Path.of(uploadDir).toAbsolutePath().normalize();
+        this.carpetaObjetosPerdidos = carpetaBase.resolve("objetos-perdidos");
+        this.carpetaObjetosEncontrados = carpetaBase.resolve("objetos-encontrados");
+    }
 
     public String guardarImagenObjetoPerdido(MultipartFile imagen) {
         return guardarImagen(imagen, carpetaObjetosPerdidos, "/uploads/objetos-perdidos/");
