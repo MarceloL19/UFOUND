@@ -17,7 +17,8 @@
     </div>
 </header>
 
-<aside th:fragment="sidebar(active, usuario)" class="app-sidebar">
+<div th:fragment="sidebar(active, usuario)">
+<aside class="app-sidebar">
     <p>MENU PRINCIPAL</p>
     <nav>
         <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''">Dashboard</a>
@@ -31,5 +32,30 @@
         <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/buscar}" th:classappend="${active == 'buscar'} ? ' active' : ''">Buscar</a>
     </nav>
 </aside>
+    <div class="assistant-widget" th:attr="data-api=@{/ayuda/conversacion},data-auto-open=${active == 'ayuda'}">
+        <section id="assistant-panel" class="assistant-panel" aria-label="Conversación con Ulises" hidden>
+            <header class="assistant-header">
+                <img th:src="@{/img/ulises-asistente.png}" alt="" width="42" height="42">
+                <div><strong>Ulises · Asistente UFOUND</strong><small>Ayuda sobre el uso del sistema</small></div>
+                <button class="assistant-close" type="button" aria-label="Cerrar asistente">×</button>
+            </header>
+            <div class="assistant-messages" role="log" aria-live="polite" aria-label="Mensajes de la conversación"></div>
+            <div class="assistant-topics" aria-label="Temas disponibles para tu rol"></div>
+            <form class="assistant-form">
+                <label for="assistant-question">Tu pregunta</label>
+                <div class="assistant-form-row">
+                    <textarea id="assistant-question" name="pregunta" rows="2" maxlength="300" required
+                              placeholder="Escribe una pregunta sobre UFOUND..."></textarea>
+                    <button type="submit">Enviar</button>
+                </div>
+                <span class="assistant-error" role="alert" hidden></span>
+            </form>
+        </section>
+        <button class="assistant-toggle" type="button" aria-controls="assistant-panel" aria-expanded="false" aria-label="Abrir asistente de ayuda Ulises">
+            <img th:src="@{/img/ulises-asistente.png}" alt="" width="56" height="56">
+        </button>
+    </div>
+    <script th:src="@{/js/ayuda.js}" defer></script>
+</div>
 </body>
 </html>
