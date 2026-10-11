@@ -1990,3 +1990,30 @@ body:has(.assistant-widget) .dashboard-shell { padding-bottom: 110px; }
         display: none;
     }
 }
+
+/* HU-28: ayuda contextual durante el registro de objetos */
+.field-help {
+    text-transform: none;
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.field-help:empty {
+    display: none;
+}
+
+.field-help::before {
+    content: "ℹ ";
+    color: #2563eb;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .field-help {
+        font-size: 0.8rem;
+    }
+}
