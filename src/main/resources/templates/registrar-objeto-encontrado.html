@@ -30,6 +30,10 @@
                 <label>
                     Nombre o descripcion corta *
                     <input th:field="*{nombre}" type="text" placeholder="Ej: Mochila azul Nike" required>
+                    <details class="field-help-disclosure">
+                        <summary>¿Qué debo ingresar?</summary>
+                        <small class="field-help">Indica el nombre del objeto encontrado y su marca o modelo, si se conoce.</small>
+                    </details>
                 </label>
                 <label>
                     Categoria *
@@ -37,6 +41,10 @@
                         <option value="">Seleccionar...</option>
                         <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria.etiqueta}">Categoria</option>
                     </select>
+                    <details class="field-help-disclosure">
+                        <summary>¿Qué debo ingresar?</summary>
+                        <small class="field-help">Selecciona la categoría que describa mejor el objeto encontrado.</small>
+                    </details>
                 </label>
                 <label>
                     Ubicacion del hallazgo *
@@ -44,6 +52,10 @@
                         <option value="">Seleccionar...</option>
                         <option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion}" th:text="${ubicacion.etiqueta}">Ubicacion</option>
                     </select>
+                    <details class="field-help-disclosure">
+                        <summary>¿Qué debo ingresar?</summary>
+                        <small class="field-help">Selecciona el lugar del campus donde se encontró el objeto.</small>
+                    </details>
                 </label>
                 <label>
                     Fecha y hora
@@ -52,6 +64,10 @@
                 <label class="full">
                     Descripcion detallada *
                     <textarea th:field="*{descripcion}" maxlength="700" rows="6" placeholder="Describe color, marca, estado fisico, contenido visible o cualquier detalle que ayude a reconocerlo..." required></textarea>
+                    <details class="field-help-disclosure">
+                        <summary>¿Qué debo ingresar?</summary>
+                        <small class="field-help">Describe color, marca, estado físico y características distintivas. Máximo 700 caracteres.</small>
+                    </details>
                 </label>
             </div>
         </section>
@@ -64,7 +80,7 @@
                     <small>PNG, JPG, WEBP</small>
                     <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp">
                 </div>
-                <small>La foto ayuda a que el propietario reconozca el objeto.</small>
+                <details class="field-help-disclosure"><summary>¿Para qué sirve la fotografía?</summary><small class="field-help">Adjunta una foto clara, evitando mostrar información sensible.</small></details>
             </section>
             <section class="tips-card">
                 <h2>Consejos</h2>

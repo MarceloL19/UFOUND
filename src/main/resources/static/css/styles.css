@@ -2017,3 +2017,28 @@ body:has(.assistant-widget) .dashboard-shell { padding-bottom: 110px; }
         font-size: 0.8rem;
     }
 }
+
+
+/* HU-28: ayuda desplegable */
+.field-help-disclosure {
+    display: block;
+    margin-top: 8px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.field-help-disclosure summary {
+    cursor: pointer;
+    color: #2563eb;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.field-help-disclosure summary:hover {
+    text-decoration: underline;
+}
+
+.field-help-disclosure[open] .field-help {
+    margin-top: 6px;
+}

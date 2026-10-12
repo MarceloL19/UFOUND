@@ -19,7 +19,6 @@ import pe.edu.ulima.ufound.model.UbicacionCampus;
 import pe.edu.ulima.ufound.model.Usuario;
 import pe.edu.ulima.ufound.service.ObjetoPerdidoService;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
-import java.time.ZoneId;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

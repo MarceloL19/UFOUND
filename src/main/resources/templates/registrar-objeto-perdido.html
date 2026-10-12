@@ -34,10 +34,13 @@
                         Título del objeto *
                         <input th:field="*{nombre}" type="text" placeholder="Ej: Mochila azul Nike" maxlength="100"
                             aria-describedby="ayuda-nombre" required />
-                        <small id="ayuda-nombre" class="field-help">
+                        <details class="field-help-disclosure">
+                            <summary>¿Qué debo ingresar?</summary>
+                            <small id="ayuda-nombre" class="field-help">
                             Indica el nombre del objeto e incluye su marca o modelo si lo
                             conoces. Ejemplo: Mochila azul Nike.
                         </small>
+                        </details>
                     </label>
 
 
@@ -50,9 +53,12 @@
                                 Categoría
                             </option>
                         </select>
-                        <small id="ayuda-categoria" class="field-help">
+                        <details class="field-help-disclosure">
+                            <summary>¿Qué debo ingresar?</summary>
+                            <small id="ayuda-categoria" class="field-help">
                             Selecciona la categoría que mejor describa el objeto perdido.
                         </small>
+                        </details>
                     </label>
 
 
@@ -65,9 +71,12 @@
                                 Ubicación
                             </option>
                         </select>
-                        <small id="ayuda-ubicacion" class="field-help">
+                        <details class="field-help-disclosure">
+                            <summary>¿Qué debo ingresar?</summary>
+                            <small id="ayuda-ubicacion" class="field-help">
                             Indica el lugar donde viste o perdiste el objeto.
                         </small>
+                        </details>
                     </label>
 
                     <label>
@@ -81,10 +90,13 @@
                         <textarea th:field="*{descripcion}" maxlength="700" rows="6"
                             placeholder="Describe color exacto, marca, características distintivas..." required
                             aria-describedby="ayuda-descripcion"></textarea>
-                        <small id="ayuda-descripcion" class="field-help">
+                        <details class="field-help-disclosure">
+                            <summary>¿Qué debo ingresar?</summary>
+                            <small id="ayuda-descripcion" class="field-help">
                             Describe el color, la marca, el tamaño y las características
                             distintivas del objeto. Máximo 700 caracteres.
                         </small>
+                        </details>
                     </label>
                 </div>
             </section>
@@ -99,9 +111,12 @@
                         <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp"
                             aria-describedby="ayuda-imagen" />
                     </div>
-                    <small id="ayuda-imagen" class="field-help">
+                    <details class="field-help-disclosure">
+                        <summary>¿Qué debo ingresar?</summary>
+                        <small id="ayuda-imagen" class="field-help">
                         Una foto clara ayuda a identificar el objeto.
                     </small>
+                    </details>
 
                 </section>
                 <section class="tips-card">
