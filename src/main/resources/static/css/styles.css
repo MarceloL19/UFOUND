@@ -1990,3 +1990,55 @@ body:has(.assistant-widget) .dashboard-shell { padding-bottom: 110px; }
         display: none;
     }
 }
+
+/* HU-28: ayuda contextual durante el registro de objetos */
+.field-help {
+    text-transform: none;
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.field-help:empty {
+    display: none;
+}
+
+.field-help::before {
+    content: "ℹ ";
+    color: #2563eb;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .field-help {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* HU-28: ayuda desplegable */
+.field-help-disclosure {
+    display: block;
+    margin-top: 8px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.field-help-disclosure summary {
+    cursor: pointer;
+    color: #2563eb;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.field-help-disclosure summary:hover {
+    text-decoration: underline;
+}
+
+.field-help-disclosure[open] .field-help {
+    margin-top: 6px;
+}
