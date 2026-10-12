@@ -19,8 +19,10 @@ import pe.edu.ulima.ufound.model.UbicacionCampus;
 import pe.edu.ulima.ufound.model.Usuario;
 import pe.edu.ulima.ufound.service.ObjetoPerdidoService;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
+import java.time.ZoneId;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Controller
 @RequestMapping("/objetos-perdidos")
@@ -36,7 +38,8 @@ public class ObjetoPerdidoController {
     public String mostrarFormulario(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         Usuario usuario = obtenerUsuario(session);
         if (!esEstudiante(usuario)) {
-            redirectAttributes.addFlashAttribute("accesoDenegado", "Solo los estudiantes pueden registrar objetos perdidos.");
+            redirectAttributes.addFlashAttribute("accesoDenegado",
+                    "Solo los estudiantes pueden registrar objetos perdidos.");
             return "redirect:/home";
         }
 
@@ -45,18 +48,19 @@ public class ObjetoPerdidoController {
             model.addAttribute("form", new RegistroObjetoPerdidoForm());
         }
         model.addAttribute("usuario", usuario);
-        model.addAttribute("fechaHoraActual", LocalDateTime.now());
+        model.addAttribute("fechaHoraActual", LocalDateTime.now(ZoneId.of("America/Lima")));
         return "registrar-objeto-perdido";
     }
 
     @PostMapping("/registrar")
     public String registrar(@ModelAttribute("form") RegistroObjetoPerdidoForm form,
-                            @RequestParam(name = "imagen", required = false) MultipartFile imagen,
-                            HttpSession session,
-                            RedirectAttributes redirectAttributes) {
+            @RequestParam(name = "imagen", required = false) MultipartFile imagen,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
         Usuario usuario = obtenerUsuario(session);
         if (!esEstudiante(usuario)) {
-            redirectAttributes.addFlashAttribute("accesoDenegado", "Solo los estudiantes pueden registrar objetos perdidos.");
+            redirectAttributes.addFlashAttribute("accesoDenegado",
+                    "Solo los estudiantes pueden registrar objetos perdidos.");
             return "redirect:/home";
         }
 
@@ -85,7 +89,8 @@ public class ObjetoPerdidoController {
     public String listarMisReportes(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         Usuario usuario = obtenerUsuario(session);
         if (!esEstudiante(usuario)) {
-            redirectAttributes.addFlashAttribute("accesoDenegado", "Solo los estudiantes pueden consultar sus objetos perdidos.");
+            redirectAttributes.addFlashAttribute("accesoDenegado",
+                    "Solo los estudiantes pueden consultar sus objetos perdidos.");
             return "redirect:/home";
         }
 
