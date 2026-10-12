@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis de perdidas | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/analisis-perdidas.css}">
+</head>
+<body class="dashboard-page analisis-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('analisis', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <section class="dashboard-hero office-hero">
+        <div>
+            <p>Analisis de reportes</p>
+            <h1>Perdidas por categoria y ubicacion</h1>
+            <span>Solo objetos perdidos. No incluye objetos encontrados.</span>
+        </div>
+    </section>
+
+    <section class="analisis-panel">
+        <form class="analisis-filtros" method="get" th:action="@{/analisis-perdidas}">
+            <label>Periodo
+                <select name="periodo">
+                    <option th:each="ventana : ${ventanas}"
+                            th:value="${ventana.codigo}"
+                            th:text="${ventana.nombre}"
+                            th:selected="${ventana.codigo == analisis.periodo.codigo}">Periodo</option>
+                </select>
+            </label>
+            <label>Desde
+                <input type="date" name="desde" th:value="${analisis.periodo.inicio}">
+            </label>
+            <label>Hasta
+                <input type="date" name="hasta" th:value="${analisis.periodo.fin}">
+            </label>
+            <button type="submit">Actualizar analisis</button>
+        </form>
+        <p class="periodo-activo" th:text="${analisis.periodo.descripcion}">Periodo analizado</p>
+        <p class="periodo-anterior" th:text="${analisis.periodo.descripcionAnterior}">Periodo anterior</p>
+        <p class="periodo-aviso" th:if="${analisis.mensaje != null}" th:text="${analisis.mensaje}">Aviso</p>
+    </section>
+
+    <section class="analisis-kpis">
+        <article>
+            <small>Objetos perdidos</small>
+            <strong th:text="${analisis.totalPeriodo}">0</strong>
+            <span>En el periodo identificado</span>
+        </article>
+        <article>
+            <small>Categoria mas frecuente</small>
+            <strong th:text="${analisis.categoriaLider}">Categoria</strong>
+            <span>Ordenada por cantidad de reportes</span>
+        </article>
+        <article>
+            <small>Ubicacion con mas perdidas</small>
+            <strong th:text="${analisis.ubicacionLider}">Ubicacion</strong>
+            <span>Segun la fecha de cada reporte</span>
+        </article>
+        <article th:if="${analisis.periodo.comparable}">
+            <small>Variacion vs periodo anterior</small>
+            <strong th:text="${analisis.variacionTexto}">0</strong>
+            <span th:text="${analisis.totalPeriodoAnterior} + ' perdidas en el periodo anterior'">0</span>
+        </article>
+    </section>
+
+    <section class="analisis-grid">
+        <article class="analisis-card">
+            <h2>Categorias mas frecuentes</h2>
+            <p>Conteo exclusivo de objetos perdidos, de mayor a menor frecuencia.</p>
+            <ol class="lista-frecuencia">
+                <li th:each="categoria, estado : ${analisis.categorias}">
+                    <div class="fila-titulo">
+                        <span th:text="${estado.count}">1</span>
+                        <strong th:text="${categoria.etiqueta}">Categoria</strong>
+                        <b th:text="${categoria.total}">0</b>
+                    </div>
+                    <div class="pista" aria-hidden="true">
+                        <i th:style="'width:' + ${categoria.ancho} + '%'"></i>
+                    </div>
+                    <small th:text="${categoria.porcentaje} + '% del periodo'">0%</small>
+                </li>
+            </ol>
+        </article>
+
+        <article class="analisis-card">
+            <h2>Tendencia en el periodo</h2>
+            <p th:text="${analisis.periodo.descripcion}">Periodo</p>
+            <p class="vacio" th:if="${analisis.sinDatos}">No hay objetos perdidos en el periodo seleccionado.</p>
+            <div class="tendencia" th:unless="${analisis.sinDatos}">
+                <div class="tendencia-col" th:each="punto : ${analisis.tendencia}">
+                    <strong th:text="${punto.total}">0</strong>
+                    <span class="barra" th:style="'height:' + ${punto.altura} + 'px'" th:title="${punto.total + ' perdidas'}"></span>
+                    <small th:text="${punto.etiqueta}">Fecha</small>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="analisis-card analisis-tabla">
+        <h2>Frecuencia de perdida por ubicacion</h2>
+        <p>Cada fila usa la ubicacion y la fecha registradas en el reporte de objeto perdido.</p>
+        <p class="vacio" th:if="${analisis.ubicaciones.isEmpty()}">No hay perdidas por ubicacion en este periodo.</p>
+        <table th:unless="${analisis.ubicaciones.isEmpty()}">
+            <thead>
+            <tr>
+                <th>Ubicacion</th>
+                <th>Perdidas en el periodo</th>
+                <th th:if="${analisis.periodo.comparable}">Periodo anterior</th>
+                <th th:if="${analisis.periodo.comparable}">Variacion</th>
+                <th>Participacion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ubicacion : ${analisis.ubicaciones}">
+                <td th:text="${ubicacion.etiqueta}">Biblioteca</td>
+                <td>
+                    <div class="celda-barra">
+                        <span th:text="${ubicacion.total}">0</span>
+                        <i th:style="'width:' + ${ubicacion.ancho} + '%'"></i>
+                    </div>
+                </td>
+                <td th:if="${analisis.periodo.comparable}" th:text="${ubicacion.totalAnterior}">0</td>
+                <td th:if="${analisis.periodo.comparable}">
+                    <em th:class="${ubicacion.variacionClase}" th:text="${ubicacion.variacionTexto}">0</em>
+                </td>
+                <td th:text="${ubicacion.porcentaje} + '%'">0%</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>
