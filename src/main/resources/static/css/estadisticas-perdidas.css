@@ -1,0 +1,370 @@
+/*
+ * U-Found | HU-36
+ * Analisis de objetos perdidos.
+ *
+ * Estilos encapsulados con el prefijo hu36-
+ * para evitar conflictos con el dashboard R1.
+ */
+
+.hu36-section {
+    margin: 34px 0;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    background: #f8fafc;
+}
+
+.hu36-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.hu36-eyebrow {
+    display: block;
+    margin-bottom: 8px;
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.hu36-header h2 {
+    margin: 0 0 8px;
+    color: #173b70;
+    font-size: clamp(22px, 2.5vw, 30px);
+    line-height: 1.2;
+}
+
+.hu36-header p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.hu36-source-label,
+.hu36-panel-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #e8eff9;
+    color: #173b70;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.hu36-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.hu36-kpi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.hu36-kpi-label {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.hu36-kpi-card strong {
+    color: #173b70;
+    font-size: clamp(23px, 2.5vw, 34px);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.hu36-kpi-card small {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.hu36-kpi-highlight {
+    background: #173b70;
+    border-color: #173b70;
+}
+
+.hu36-kpi-highlight .hu36-kpi-label,
+.hu36-kpi-highlight strong,
+.hu36-kpi-highlight small {
+    color: #ffffff;
+}
+
+.hu36-kpi-card .hu36-variation {
+    font-size: clamp(18px, 2vw, 27px);
+}
+
+.hu36-chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.hu36-panel {
+    min-width: 0;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+}
+
+.hu36-panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.hu36-panel-heading h3 {
+    margin: 0 0 6px;
+    color: #173b70;
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+.hu36-panel-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.hu36-panel-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+}
+
+.hu36-month-chart {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    min-height: 244px;
+}
+
+.hu36-month-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+}
+
+.hu36-month-plot {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+    width: 100%;
+    height: 205px;
+}
+
+.hu36-month-count {
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.hu36-month-bar {
+    width: min(34px, 85%);
+    min-height: 0;
+    max-height: 175px;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, #407bcc, #173b70);
+    transition: filter 0.2s ease;
+}
+
+.hu36-month-bar:hover {
+    filter: brightness(1.15);
+}
+
+.hu36-month-item small {
+    max-width: 100%;
+    color: #64748b;
+    text-align: center;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.hu36-ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 8px 0 24px;
+}
+
+.hu36-ranking-item {
+    min-width: 0;
+}
+
+.hu36-ranking-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 9px;
+    font-size: 13px;
+}
+
+.hu36-ranking-meta span {
+    color: #334155;
+    overflow-wrap: anywhere;
+}
+
+.hu36-ranking-meta strong {
+    color: #173b70;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.hu36-track {
+    width: 100%;
+    height: 9px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #edf2f7;
+}
+
+.hu36-fill {
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    border-radius: inherit;
+    background: #2f65b3;
+}
+
+.hu36-fill-orange {
+    background: #e79a32;
+}
+
+.hu36-insights-panel {
+    background: #f3f7fd;
+    border-color: #dbe7f6;
+}
+
+.hu36-insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0 0 22px;
+    padding: 0;
+    list-style: none;
+}
+
+.hu36-insights-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.hu36-insight-dot {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: #e79a32;
+}
+
+.hu36-chart-footnote {
+    margin: 16px 0 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.hu36-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 24px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.hu36-empty-icon {
+    margin-bottom: 14px;
+    font-size: 38px;
+}
+
+.hu36-empty h3 {
+    margin: 0 0 10px;
+    color: #173b70;
+    font-size: 21px;
+}
+
+.hu36-empty p {
+    max-width: 520px;
+    margin: 0;
+    color: #64748b;
+    line-height: 1.7;
+}
+
+@media (max-width: 1100px) {
+    .hu36-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    .hu36-chart-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .hu36-section {
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .hu36-kpi-grid {
+        gap: 10px;
+    }
+
+    .hu36-kpi-card,
+    .hu36-panel {
+        padding: 16px;
+    }
+
+    .hu36-month-chart {
+        gap: 4px;
+    }
+
+    .hu36-month-item small {
+        font-size: 10px;
+    }
+
+    .hu36-panel-heading {
+        flex-wrap: wrap;
+    }
+}

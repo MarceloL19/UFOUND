@@ -1,111 +1,445 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Panel Administrativo | U-Found</title>
+
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- HU-36: estilos independientes del análisis estadístico -->
+    <link rel="stylesheet" th:href="@{/css/estadisticas-perdidas.css}">
 </head>
+
 <body class="dashboard-page">
-<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
-<div th:replace="~{fragments/layout :: sidebar('dashboard', ${usuario})}"></div>
-<main class="dashboard-shell">
-    <section class="dashboard-hero office-hero">
-        <div>
-            <p>Bienvenido de vuelta,</p>
-            <h1 th:text="${usuario.nombre}">Oficina</h1>
-            <span th:text="${#temporals.format(fechaActual, 'dd MMMM yyyy')}">Fecha</span>
-        </div>
-        <div class="hero-id">
-            <small>ID OFICINA</small>
-            <strong th:text="${usuario.codigoInstitucional}">OFICINA</strong>
-            <span>Oficina</span>
-        </div>
-    </section>
 
-    <section class="section-title office-dashboard-title">
-        <div>
-            <h1>Panel Administrativo</h1>
-            <p>Estadisticas y actividad del sistema U-Found.</p>
-        </div>
-        <a class="primary-link" th:href="@{/oficina/estados}">Gestionar estados</a>
-    </section>
+    <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+    <div th:replace="~{fragments/layout :: sidebar('dashboard', ${usuario})}"></div>
 
-    <section class="admin-kpi-grid">
-        <article class="admin-kpi-card" th:each="kpi : ${kpis}" th:classappend="${kpi.tipo}">
-            <span class="kpi-icon"></span>
-            <strong th:text="${kpi.valor}">0</strong>
-            <p th:text="${kpi.titulo}">Indicador</p>
-            <small th:text="${kpi.detalle}">Detalle</small>
-        </article>
-    </section>
+    <main class="dashboard-shell">
 
-    <section class="admin-charts-grid">
-        <article class="admin-chart-card monthly-chart">
-            <div class="chart-header">
-                <h2>Objetos por mes</h2>
-                <div class="chart-legend">
-                    <span class="lost-dot">Perdidos</span>
-                    <span class="found-dot">Encontrados</span>
-                </div>
+        <!-- Panel de bienvenida existente -->
+        <section class="dashboard-hero office-hero">
+            <div>
+                <p>Bienvenido de vuelta,</p>
+                <h1 th:text="${usuario.nombre}">Oficina</h1>
+                <span th:text="${#temporals.format(fechaActual, 'dd MMMM yyyy')}">
+                    Fecha
+                </span>
             </div>
-            <div class="bar-chart">
-                <div class="bar-group" th:each="mes : ${meses}">
-                    <div class="bars">
-                        <span class="bar lost" th:style="'height:' + ${mes.alturaPerdidos} + 'px'" th:title="${mes.perdidos + ' perdidos'}"></span>
-                        <span class="bar found" th:style="'height:' + ${mes.alturaEncontrados} + 'px'" th:title="${mes.encontrados + ' encontrados'}"></span>
+
+            <div class="hero-id">
+                <small>ID OFICINA</small>
+                <strong th:text="${usuario.codigoInstitucional}">
+                    OFICINA
+                </strong>
+                <span>Oficina</span>
+            </div>
+        </section>
+
+        <!-- Encabezado administrativo existente -->
+        <section class="section-title office-dashboard-title">
+            <div>
+                <h1>Panel Administrativo</h1>
+                <p>Estadísticas y actividad del sistema U-Found.</p>
+            </div>
+
+            <a class="primary-link" th:href="@{/oficina/estados}">
+                Gestionar estados
+            </a>
+        </section>
+
+        <!-- KPI existentes: no se modifican -->
+        <section class="admin-kpi-grid">
+            <article class="admin-kpi-card" th:each="kpi : ${kpis}" th:classappend="${kpi.tipo}">
+
+                <span class="kpi-icon"></span>
+                <strong th:text="${kpi.valor}">0</strong>
+                <p th:text="${kpi.titulo}">Indicador</p>
+                <small th:text="${kpi.detalle}">Detalle</small>
+            </article>
+        </section>
+
+        <!-- Gráficos originales del dashboard R1 -->
+        <section class="admin-charts-grid">
+
+            <article class="admin-chart-card monthly-chart">
+                <div class="chart-header">
+                    <h2>Objetos por mes</h2>
+
+                    <div class="chart-legend">
+                        <span class="lost-dot">Perdidos</span>
+                        <span class="found-dot">Encontrados</span>
                     </div>
-                    <small th:text="${mes.mes}">Mes</small>
                 </div>
-            </div>
-        </article>
 
-        <article class="admin-chart-card category-chart">
-            <h2>Por categoria</h2>
-            <div class="donut-chart" th:style="${categoriasPieStyle}"></div>
-            <ul class="category-list">
-                <li th:each="categoria : ${categorias}">
-                    <span th:style="'background:' + ${categoria.color}"></span>
-                    <p th:text="${categoria.categoria}">Categoria</p>
-                    <strong th:text="${categoria.porcentaje + '%'}">0%</strong>
-                </li>
-            </ul>
-        </article>
-    </section>
+                <div class="bar-chart">
+                    <div class="bar-group" th:each="mes : ${meses}">
+                        <div class="bars">
+                            <span class="bar lost" th:style="'height:' + ${mes.alturaPerdidos} + 'px'"
+                                th:title="${mes.perdidos + ' perdidos'}">
+                            </span>
 
-    <section class="admin-activity-card">
-        <div class="activity-table-header">
-            <h2>Actividad reciente</h2>
-            <a th:href="@{/oficina/estados}">Ver historial completo</a>
-        </div>
-        <table class="activity-table">
-            <thead>
-            <tr>
-                <th>Codigo</th>
-                <th>Objeto</th>
-                <th>Estado</th>
-                <th>Responsable</th>
-                <th>Fecha y hora</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item : ${actividad}">
-                <td th:text="${item.codigo}">UF-001</td>
-                <td>
-                    <div class="activity-object-cell">
-                        <span class="activity-mini-thumb">
-                            <img th:if="${item.imagenUrl != null}" th:src="@{${item.imagenUrl}}" th:alt="${item.objeto}">
+                            <span class="bar found" th:style="'height:' + ${mes.alturaEncontrados} + 'px'"
+                                th:title="${mes.encontrados + ' encontrados'}">
+                            </span>
+                        </div>
+
+                        <small th:text="${mes.mes}">Mes</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="admin-chart-card category-chart">
+                <h2>Por categoría</h2>
+
+                <div class="donut-chart" th:style="${categoriasPieStyle}">
+                </div>
+
+                <ul class="category-list">
+                    <li th:each="categoria : ${categorias}">
+                        <span th:style="'background:' + ${categoria.color}">
                         </span>
-                        <strong th:text="${item.objeto}">Objeto</strong>
-                    </div>
-                </td>
-                <td><span class="admin-state-pill" th:text="${item.estado.etiqueta}">Estado</span></td>
-                <td th:text="${item.responsable}">Responsable</td>
-                <td th:text="${#temporals.format(item.fechaHora, 'dd MMM - HH:mm')}">Fecha</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</main>
+
+                        <p th:text="${categoria.categoria}">
+                            Categoría
+                        </p>
+
+                        <strong th:text="${categoria.porcentaje + '%'}">
+                            0%
+                        </strong>
+                    </li>
+                </ul>
+            </article>
+        </section>
+
+        <!-- ================================================= -->
+        <!-- HU-36: ANÁLISIS INTELIGENTE DE OBJETOS PERDIDOS   -->
+        <!-- ================================================= -->
+
+        <section id="estadisticas-perdidas" class="hu36-section" aria-labelledby="hu36-title">
+
+            <div class="hu36-header">
+                <div>
+                    <span class="hu36-eyebrow">
+                        ANÁLISIS ESTADÍSTICO DE PÉRDIDAS
+                    </span>
+
+                    <h2 id="hu36-title">
+                        Inteligencia de objetos perdidos
+                    </h2>
+
+                    <p>
+                        Tendencias, ubicaciones y categorías de
+                        los reportes de pérdida del campus.
+                    </p>
+                </div>
+
+                <span class="hu36-source-label">
+                    Solo objetos perdidos
+                </span>
+            </div>
+
+            <!-- CA2: estado vacío, sin gráficos engañosos -->
+            <div class="hu36-empty" th:if="${estadisticas.sinDatos()}" role="status">
+
+                <div class="hu36-empty-icon" aria-hidden="true">
+                    &#128202;
+                </div>
+
+                <h3>No hay reportes para analizar</h3>
+
+                <p>
+                    Todavía no existen registros de objetos perdidos.
+                    Cuando se registre el primer reporte, aquí se
+                    mostrarán los indicadores, gráficos y hallazgos.
+                </p>
+            </div>
+
+            <!-- CA1: toda esta sección usa exclusivamente
+             EstadisticasPerdidasService -->
+            <div th:unless="${estadisticas.sinDatos()}">
+
+                <!-- Indicadores específicos de pérdidas -->
+                <div class="hu36-kpi-grid">
+
+                    <article class="hu36-kpi-card">
+                        <span class="hu36-kpi-label">
+                            Total histórico
+                        </span>
+
+                        <strong th:text="${estadisticas.totalHistorico()}">
+                            0
+                        </strong>
+
+                        <small>
+                            Reportes de objetos perdidos
+                        </small>
+                    </article>
+
+                    <article class="hu36-kpi-card">
+                        <span class="hu36-kpi-label">
+                            Mes actual
+                        </span>
+
+                        <strong th:text="${estadisticas.totalMesActual()}">
+                            0
+                        </strong>
+
+                        <small>
+                            Reportes del mes en curso
+                        </small>
+                    </article>
+
+                    <article class="hu36-kpi-card">
+                        <span class="hu36-kpi-label">
+                            Mes anterior
+                        </span>
+
+                        <strong th:text="${estadisticas.totalMesAnterior()}">
+                            0
+                        </strong>
+
+                        <small>
+                            Total del mes anterior
+                        </small>
+                    </article>
+
+                    <article class="hu36-kpi-card hu36-kpi-highlight">
+                        <span class="hu36-kpi-label">
+                            Variación mensual
+                        </span>
+
+                        <strong class="hu36-variation" th:text="${estadisticas.variacionMensual()}">
+                            Sin cambios
+                        </strong>
+
+                        <small>
+                            Comparación referencial entre meses
+                        </small>
+                    </article>
+                </div>
+
+                <!-- Visualizaciones -->
+                <div class="hu36-chart-grid">
+
+                    <!-- Gráfico mensual -->
+                    <article class="hu36-panel">
+                        <div class="hu36-panel-heading">
+                            <div>
+                                <h3>Evolución de pérdidas</h3>
+                                <p>Últimos seis meses, incluido el actual.</p>
+                            </div>
+
+                            <span class="hu36-panel-tag">
+                                Tendencia
+                            </span>
+                        </div>
+
+                        <div class="hu36-month-chart" aria-label="Gráfico mensual de reportes de objetos perdidos">
+
+                            <div class="hu36-month-item" th:each="mes : ${estadisticas.tendenciaMensual()}">
+
+                                <div class="hu36-month-plot">
+                                    <span class="hu36-month-count" th:text="${mes.total()}">
+                                        0
+                                    </span>
+
+                                    <div class="hu36-month-bar"
+                                        th:style="|height: ${mes.total() * 100 / maximoMensual}%|"
+                                        th:title="|${mes.total()} pérdidas en ${mes.mes()}|">
+                                    </div>
+                                </div>
+
+                                <small th:text="${mes.mes()}">
+                                    Mes
+                                </small>
+                            </div>
+                        </div>
+
+                        <p class="hu36-chart-footnote">
+                            El mes actual aún está en curso. Las barras
+                            representan cantidades de reportes, no
+                            predicciones.
+                        </p>
+                    </article>
+
+                    <!-- Ranking de categorías -->
+                    <article class="hu36-panel">
+                        <div class="hu36-panel-heading">
+                            <div>
+                                <h3>Categorías más frecuentes</h3>
+                                <p>Hasta cinco categorías con más pérdidas.</p>
+                            </div>
+
+                            <span class="hu36-panel-tag">
+                                Top 5
+                            </span>
+                        </div>
+
+                        <div class="hu36-ranking-list">
+                            <div class="hu36-ranking-item" th:each="categoria : ${estadisticas.categorias()}">
+
+                                <div class="hu36-ranking-meta">
+                                    <span th:text="${categoria.nombre()}">
+                                        Categoría
+                                    </span>
+
+                                    <strong th:text="|${categoria.total()} · ${categoria.porcentaje()}%|">
+                                        0 · 0%
+                                    </strong>
+                                </div>
+
+                                <div class="hu36-track">
+                                    <span class="hu36-fill" th:style="|width: ${categoria.porcentaje()}%|">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="hu36-chart-footnote">
+                            Los porcentajes corresponden al total histórico
+                            de objetos perdidos, no solo al Top 5.
+                        </p>
+                    </article>
+
+                    <!-- Ranking de ubicaciones -->
+                    <article class="hu36-panel">
+                        <div class="hu36-panel-heading">
+                            <div>
+                                <h3>Ubicaciones con más reportes</h3>
+                                <p>Zonas del campus ordenadas por frecuencia.</p>
+                            </div>
+
+                            <span class="hu36-panel-tag">
+                                Top 5
+                            </span>
+                        </div>
+
+                        <div class="hu36-ranking-list">
+                            <div class="hu36-ranking-item" th:each="ubicacion : ${estadisticas.ubicaciones()}">
+
+                                <div class="hu36-ranking-meta">
+                                    <span th:text="${ubicacion.nombre()}">
+                                        Ubicación
+                                    </span>
+
+                                    <strong th:text="|${ubicacion.total()} · ${ubicacion.porcentaje()}%|">
+                                        0 · 0%
+                                    </strong>
+                                </div>
+
+                                <div class="hu36-track">
+                                    <span class="hu36-fill hu36-fill-orange"
+                                        th:style="|width: ${ubicacion.porcentaje()}%|">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="hu36-chart-footnote">
+                            Clasificación según la ubicación consignada
+                            en cada reporte de pérdida.
+                        </p>
+                    </article>
+
+                    <!-- Hallazgos interpretativos -->
+                    <article class="hu36-panel hu36-insights-panel">
+                        <div class="hu36-panel-heading">
+                            <div>
+                                <h3>Hallazgos automáticos</h3>
+                                <p>
+                                    Interpretaciones descriptivas
+                                    basadas en datos registrados.
+                                </p>
+                            </div>
+
+                            <span class="hu36-panel-tag">
+                                Análisis
+                            </span>
+                        </div>
+
+                        <ul class="hu36-insights-list">
+                            <li th:each="hallazgo : ${estadisticas.hallazgos()}">
+                                <span class="hu36-insight-dot" aria-hidden="true"></span>
+
+                                <span th:text="${hallazgo}">
+                                    Hallazgo estadístico
+                                </span>
+                            </li>
+                        </ul>
+
+                        <p class="hu36-chart-footnote">
+                            Los hallazgos no implican causalidad
+                            ni constituyen predicciones.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actividad reciente existente -->
+        <section class="admin-activity-card">
+
+            <div class="activity-table-header">
+                <h2>Actividad reciente</h2>
+
+                <a th:href="@{/oficina/estados}">
+                    Ver historial completo
+                </a>
+            </div>
+
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Objeto</th>
+                        <th>Estado</th>
+                        <th>Responsable</th>
+                        <th>Fecha y hora</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="item : ${actividad}">
+                        <td th:text="${item.codigo}">
+                            UF-001
+                        </td>
+
+                        <td>
+                            <div class="activity-object-cell">
+                                <span class="activity-mini-thumb">
+                                    <img th:if="${item.imagenUrl != null}" th:src="@{${item.imagenUrl}}"
+                                        th:alt="${item.objeto}">
+                                </span>
+
+                                <strong th:text="${item.objeto}">
+                                    Objeto
+                                </strong>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="admin-state-pill" th:text="${item.estado.etiqueta}">
+                                Estado
+                            </span>
+                        </td>
+
+                        <td th:text="${item.responsable}">
+                            Responsable
+                        </td>
+
+                        <td th:text="${#temporals.format(item.fechaHora, 'dd MMM - HH:mm')}">
+                            Fecha
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
 </body>
+
 </html>
