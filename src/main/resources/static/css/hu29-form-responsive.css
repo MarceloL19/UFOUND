@@ -1,0 +1,185 @@
+/*
+ * HU-29 - Mejoras visuales y responsive
+ * Exclusivo del formulario de objetos perdidos.
+ */
+
+/* Contención del layout */
+.hu29-page .dashboard-shell {
+    min-width: 0;
+}
+
+.hu29-page .lost-layout {
+    width: 100%;
+    max-width: 980px;
+    grid-template-columns:
+        minmax(0, 1fr) minmax(0, 330px);
+}
+
+/* Evitar que los paneles fuercen un ancho excesivo */
+.hu29-page .form-panel,
+.hu29-page .side-panel,
+.hu29-page .upload-card,
+.hu29-page .upload-box {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Adaptación del selector de archivos */
+.hu29-page .upload-box input[type="file"] {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.hu29-page .upload-box input[type="file"]::file-selector-button {
+    background: #fff4e8;
+    color: #c65300;
+    border: 1px solid #ffd4ad;
+    border-radius: 9px;
+    padding: 9px 12px;
+    margin-right: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Botón de análisis: estilo U-Found */
+.hu29-page .image-analyze-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding: 12px 18px;
+
+    border: 1px solid #ff7800;
+    border-radius: 14px;
+
+    background: #fff4e8;
+    color: #bd5200;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.4;
+
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.08);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Icono decorativo */
+.hu29-page .image-analyze-btn::before {
+    content: "✦";
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Hover */
+.hu29-page .image-analyze-btn:hover:not(:disabled) {
+    background: #ff7900;
+    border-color: #ff7900;
+    color: #ffffff;
+
+    box-shadow: 0 8px 18px rgba(255, 107, 0, 0.20);
+    transform: translateY(-1px);
+}
+
+/* Estado al presionar */
+.hu29-page .image-analyze-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Accesibilidad de teclado */
+.hu29-page .image-analyze-btn:focus-visible {
+    outline: 3px solid rgba(255, 107, 0, 0.40);
+    outline-offset: 3px;
+}
+
+/* Estado procesando */
+.hu29-page .image-analyze-btn:disabled {
+    opacity: 0.65;
+    cursor: wait;
+    transform: none;
+}
+
+/* Mensajes debajo del botón */
+.hu29-page .image-analyze-message {
+    width: 100%;
+    min-width: 0;
+    margin: 10px 0 0;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.hu29-page .image-analyze-message:empty {
+    display: none;
+}
+
+.hu29-page .image-analyze-message.success {
+    color: #16803c;
+}
+
+.hu29-page .image-analyze-message.error {
+    color: #b42318;
+}
+
+.hu29-page .image-analyze-message.processing {
+    color: #53647e;
+}
+
+/* Pantallas medianas: colocar paneles uno debajo del otro */
+@media (max-width: 1200px) {
+    .hu29-page .lost-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hu29-page .side-panel {
+        width: 100%;
+    }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 900px) {
+    .hu29-page .dashboard-shell {
+        margin-left: 0;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hu29-page .dashboard-shell {
+        padding: 16px;
+    }
+
+    .hu29-page .form-panel,
+    .hu29-page .side-panel section {
+        padding: 16px;
+    }
+
+    .hu29-page .form-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hu29-page .image-analyze-btn {
+        min-height: 46px;
+    }
+}
