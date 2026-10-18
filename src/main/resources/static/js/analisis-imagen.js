@@ -7,6 +7,10 @@ const campoImagen = document.querySelector('input[name="imagen"]');
 
 if (botonAnalizar && resultadoAnalisis && campoImagen) {
 
+    function limpiarImagenValid() {
+        campoImagen.value = "";
+
+    }
     function mostrarResultado(mensaje, estado = "") {
         resultadoAnalisis.textContent = mensaje;
         resultadoAnalisis.className =
@@ -57,11 +61,15 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
             const resultado = await respuesta.json();
 
             if (!respuesta.ok) {
+                campoImagen.value = "";
+
                 mostrarResultado(
-                    resultado.mensaje ||
-                    "No se pudo validar la imagen.",
+                    (resultado.mensaje || "No se pudo validar la imagen.") +
+                    " El archivo fue retirado. Puedes continuar " +
+                    "con el registro manual.",
                     "error"
                 );
+
                 return;
             }
 
@@ -74,6 +82,8 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
 
         } catch (error) {
             console.error("Error al validar imagen:", error);
+
+            campoImagen.value = "";
 
             mostrarResultado(
                 "No se pudo completar la validación. " +

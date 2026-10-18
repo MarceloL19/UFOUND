@@ -18,20 +18,27 @@ public class ObjetoPerdidoService {
     private final UploadService uploadService;
     private final EstadoObjetoService estadoObjetoService;
     private final CoincidenciaService coincidenciaService;
+    private final ImagenAnalisisService imagenAnalisisService;
 
     public ObjetoPerdidoService(ObjetoPerdidoRepository objetoPerdidoRepository, UploadService uploadService,
-                                EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService) {
+            EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService,
+            ImagenAnalisisService imagenAnalisisService) {
         this.objetoPerdidoRepository = objetoPerdidoRepository;
         this.uploadService = uploadService;
         this.estadoObjetoService = estadoObjetoService;
         this.coincidenciaService = coincidenciaService;
+        this.imagenAnalisisService = imagenAnalisisService;
     }
 
     @Transactional
     public ObjetoPerdido registrar(RegistroObjetoPerdidoForm form, MultipartFile imagen, Usuario usuario) {
         validar(form);
+        if (imagen != null && !imagen.isEmpty()) {
+            imagenAnalisisService.validarImagen(imagen);
+        }
 
         ObjetoPerdido objeto = new ObjetoPerdido();
+
         objeto.setNombre(form.getNombre().trim());
         objeto.setCategoria(form.getCategoria());
         objeto.setUbicacion(form.getUbicacion());
@@ -40,7 +47,8 @@ public class ObjetoPerdidoService {
         objeto.setUsuario(usuario);
 
         ObjetoPerdido guardado = objetoPerdidoRepository.save(objeto);
-        estadoObjetoService.registrarEstadoInicial(TipoObjeto.PERDIDO, guardado.getIdObjeto(), guardado.getEstado(), usuario);
+        estadoObjetoService.registrarEstadoInicial(TipoObjeto.PERDIDO, guardado.getIdObjeto(), guardado.getEstado(),
+                usuario);
         coincidenciaService.detectarParaObjetoPerdido(guardado);
         return guardado;
     }
@@ -73,4 +81,3 @@ public class ObjetoPerdidoService {
         }
     }
 }
-
