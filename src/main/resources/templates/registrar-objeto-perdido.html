@@ -4,136 +4,264 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Registrar objeto perdido | U-Found</title>
+
+    <!-- Estilos generales de U-Found -->
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/hu29-form-responsive.css}" />
+    <!-- HU-29: Validación preliminar de imágenes -->
+    <script th:src="@{/js/analisis-imagen.js}" defer></script>
 </head>
 
-<body class="dashboard-page">
+<body class="dashboard-page hu29-page">
+
+    <!-- Barra superior -->
     <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+
+    <!-- Menú lateral -->
     <div th:replace="~{fragments/layout :: sidebar('reportar', ${usuario})}"></div>
+
     <main class="dashboard-shell">
+
+        <!-- Encabezado de la página -->
         <section class="section-title">
             <div>
                 <h1>Registrar objeto perdido</h1>
-                <p>Completa el formulario para crear un nuevo reporte.</p>
+                <p>
+                    Completa el formulario para crear un nuevo reporte.
+                </p>
             </div>
         </section>
 
-        <div class="alert" th:if="${error}" th:text="${error}"></div>
+        <!-- Mensajes de validación del servidor -->
+        <div class="alert" th:if="${error}" th:text="${error}">
+        </div>
 
+        <!-- Formulario principal de registro -->
         <form class="lost-layout" th:action="@{/objetos-perdidos/registrar}" method="post" enctype="multipart/form-data"
             th:object="${form}">
+
+            <!-- PANEL IZQUIERDO -->
             <section class="form-panel">
+
+                <!-- Tipo de reporte -->
                 <div class="report-type-card">
                     <p>TIPO DE REPORTE</p>
                     <span>Objeto perdido</span>
                 </div>
 
                 <div class="form-grid">
+
+                    <!-- TÍTULO DEL OBJETO -->
                     <label>
                         Título del objeto *
+
                         <input th:field="*{nombre}" type="text" placeholder="Ej: Mochila azul Nike" maxlength="100"
                             aria-describedby="ayuda-nombre" required />
+
+                        <!-- HU-28: Ayuda contextual -->
                         <details class="field-help-disclosure">
-                            <summary>¿Qué debo ingresar?</summary>
+                            <summary>
+                                ¿Qué debo ingresar?
+                            </summary>
+
                             <small id="ayuda-nombre" class="field-help">
-                            Indica el nombre del objeto e incluye su marca o modelo si lo
-                            conoces. Ejemplo: Mochila azul Nike.
-                        </small>
+                                Indica el nombre del objeto e incluye
+                                su marca o modelo si lo conoces.
+                                Ejemplo: Mochila azul Nike.
+                            </small>
                         </details>
                     </label>
 
-
+                    <!-- CATEGORÍA -->
                     <label>
                         Categoría *
+
                         <select th:field="*{categoria}" required aria-describedby="ayuda-categoria">
-                            <option value="">Seleccionar...</option>
+
+                            <option value="">
+                                Seleccionar...
+                            </option>
+
                             <option th:each="categoria : ${categorias}" th:value="${categoria}"
                                 th:text="${categoria.etiqueta}">
                                 Categoría
                             </option>
                         </select>
+
+                        <!-- HU-28: Ayuda contextual -->
                         <details class="field-help-disclosure">
-                            <summary>¿Qué debo ingresar?</summary>
+                            <summary>
+                                ¿Qué debo ingresar?
+                            </summary>
+
                             <small id="ayuda-categoria" class="field-help">
-                            Selecciona la categoría que mejor describa el objeto perdido.
-                        </small>
+                                Selecciona la categoría que mejor
+                                describa el objeto perdido.
+                            </small>
                         </details>
                     </label>
 
-
+                    <!-- UBICACIÓN -->
                     <label>
                         Ubicación *
+
                         <select th:field="*{ubicacion}" required aria-describedby="ayuda-ubicacion">
-                            <option value="">Seleccionar...</option>
+
+                            <option value="">
+                                Seleccionar...
+                            </option>
+
                             <option th:each="ubicacion : ${ubicaciones}" th:value="${ubicacion}"
                                 th:text="${ubicacion.etiqueta}">
                                 Ubicación
                             </option>
                         </select>
+
+                        <!-- HU-28: Ayuda contextual -->
                         <details class="field-help-disclosure">
-                            <summary>¿Qué debo ingresar?</summary>
+                            <summary>
+                                ¿Qué debo ingresar?
+                            </summary>
+
                             <small id="ayuda-ubicacion" class="field-help">
-                            Indica el lugar donde viste o perdiste el objeto.
-                        </small>
+                                Indica el lugar donde viste
+                                o perdiste el objeto.
+                            </small>
                         </details>
                     </label>
 
+                    <!-- FECHA Y HORA -->
                     <label>
                         Fecha y hora
-                        <input type="text" th:value="${#temporals.format(fechaHoraActual, 'dd/MM/yyyy HH:mm')}"
-                            readonly />
+
+                        <input type="text" th:value="${#temporals.format(
+                                fechaHoraActual,
+                                'dd/MM/yyyy HH:mm'
+                            )}" readonly />
                     </label>
 
+                    <!-- DESCRIPCIÓN DETALLADA -->
                     <label class="full">
                         Descripción detallada *
+
                         <textarea th:field="*{descripcion}" maxlength="700" rows="6"
                             placeholder="Describe color exacto, marca, características distintivas..." required
                             aria-describedby="ayuda-descripcion"></textarea>
+
+                        <!-- HU-28: Ayuda contextual -->
                         <details class="field-help-disclosure">
-                            <summary>¿Qué debo ingresar?</summary>
+                            <summary>
+                                ¿Qué debo ingresar?
+                            </summary>
+
                             <small id="ayuda-descripcion" class="field-help">
-                            Describe el color, la marca, el tamaño y las características
-                            distintivas del objeto. Máximo 700 caracteres.
-                        </small>
+                                Describe el color, la marca,
+                                el tamaño y las características
+                                distintivas del objeto.
+                                Máximo 700 caracteres.
+                            </small>
                         </details>
                     </label>
+
                 </div>
             </section>
 
+            <!-- PANEL DERECHO -->
             <aside class="side-panel">
+
+                <!-- CARGA DE FOTOGRAFÍA -->
                 <section class="upload-card">
-                    <p>FOTOGRAFIA DEL OBJETO</p>
+
+                    <p>FOTOGRAFÍA DEL OBJETO</p>
 
                     <div class="upload-box">
-                        <span>Subir imagen</span>
-                        <small>PNG, JPG, WEBP</small>
+
+                        <span>
+                            Subir imagen
+                        </span>
+
+                        <small>
+                            PNG, JPG, WEBP
+                        </small>
+
+                        <!-- Selector original de fotografía -->
                         <input name="imagen" type="file" accept="image/png,image/jpeg,image/webp"
                             aria-describedby="ayuda-imagen" />
                     </div>
+
+                    <!-- HU-28: Ayuda contextual -->
                     <details class="field-help-disclosure">
-                        <summary>¿Qué debo ingresar?</summary>
+                        <summary>
+                            ¿Qué debo ingresar?
+                        </summary>
+
                         <small id="ayuda-imagen" class="field-help">
-                        Una foto clara ayuda a identificar el objeto.
-                    </small>
+                            Una foto clara ayuda a identificar
+                            el objeto.
+                        </small>
                     </details>
 
+                    <!-- =================================== -->
+                    <!-- HU-29: ANÁLISIS PRELIMINAR DE IMAGEN -->
+                    <!-- =================================== -->
+
+                    <!--
+                        type="button" evita que este botón
+                        envíe el formulario de registro.
+                    -->
+                    <button type="button" id="btn-analizar-imagen" class="image-analyze-btn">
+                        Analizar imagen
+                    </button>
+
+                    <!-- Resultado de validación de la imagen -->
+                    <p id="resultado-analisis-imagen" class="image-analyze-message" role="status" aria-live="polite">
+                    </p>
+
+                    <!-- FIN HU-29 -->
+
                 </section>
+
+                <!-- CONSEJOS -->
                 <section class="tips-card">
+
                     <h2>Consejos</h2>
+
                     <ul>
-                        <li>Se especifico en la descripcion del objeto.</li>
-                        <li>Incluye marcas, colores y caracteristicas unicas.</li>
-                        <li>Agrega una foto clara si la tienes.</li>
-                        <li>Reporta el objeto lo antes posible.</li>
+                        <li>
+                            Sé específico en la descripción
+                            del objeto.
+                        </li>
+
+                        <li>
+                            Incluye marcas, colores y
+                            características únicas.
+                        </li>
+
+                        <li>
+                            Agrega una foto clara si la tienes.
+                        </li>
+
+                        <li>
+                            Reporta el objeto lo antes posible.
+                        </li>
                     </ul>
+
                 </section>
+
+                <!-- REGISTRO MANUAL ORIGINAL -->
+                <!-- Este botón conserva su funcionalidad -->
                 <button class="submit-wide" type="submit">
                     Registrar objeto perdido
                 </button>
+
             </aside>
+
         </form>
+
     </main>
+
 </body>
 
 </html>
