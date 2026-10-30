@@ -78,6 +78,8 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
             }
 
             if (resultado.estado === "SUGERENCIA") {
+                // HU-31 consume la detección ya realizada; no vuelve a ejecutar el modelo.
+                document.dispatchEvent(new CustomEvent("ufound:imagen-analizada", {detail: resultado}));
                 const confianza = Math.round(resultado.confianza * 100);
                 const color = resultado.colorProbable || "no determinado";
                 mostrarResultado(
