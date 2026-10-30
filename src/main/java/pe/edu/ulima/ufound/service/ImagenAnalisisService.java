@@ -92,11 +92,12 @@ public class ImagenAnalisisService {
         // 5. Decodificar la imagen y comprobar sus dimensiones.
         validarDecodificacion(datos, formato);
 
-        // 6. Devolver únicamente el resultado de validación.
+        // 6. Conservar los bytes ya validados para la inferencia de HU-30.
         return new ResultadoImagen(
             "LISTA_PARA_ANALISIS",
             formato,
-            datos.length
+            datos.length,
+            datos
         );
     }
 
@@ -285,6 +286,7 @@ public class ImagenAnalisisService {
     public record ResultadoImagen(
         String estado,
         String formato,
-        long tamanoBytes
+        long tamanoBytes,
+        byte[] datos
     ) {}
 }
