@@ -8,6 +8,8 @@
     <link rel="stylesheet" th:href="@{/css/hu31-categoria.css}">
     <script th:src="@{/js/analisis-imagen.js}" defer></script>
     <script th:src="@{/js/hu31-categoria.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/hu32-autocompletado.css}">
+    <script th:src="@{/js/hu32-autocompletado.js}" defer></script>
 </head>
 <body class="dashboard-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
@@ -90,6 +92,13 @@
                 <div id="hu31-panel" hidden role="status" aria-live="polite">
                     <p id="hu31-mensaje"></p>
                     <button type="button" id="hu31-aplicar" disabled>Usar categoría sugerida</button>
+                </div>
+                <!-- HU-32: campos autocompletados; Seguridad los confirma o corrige al registrar. -->
+                <div id="hu32-panel" hidden role="status" aria-live="polite">
+                    <p class="hu32-titulo">Autocompletado desde la imagen</p>
+                    <p id="hu32-mensaje"></p>
+                    <ul id="hu32-lista"></ul>
+                    <button type="button" id="hu32-deshacer" hidden>Deshacer autocompletado</button>
                 </div>
             </section>
             <section class="tips-card">
