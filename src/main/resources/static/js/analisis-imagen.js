@@ -7,10 +7,8 @@ const campoImagen = document.querySelector('input[name="imagen"]');
 
 if (botonAnalizar && resultadoAnalisis && campoImagen) {
 
-    function limpiarImagenValid() {
-        campoImagen.value = "";
+    let versionImagen = 0;
 
-    }
     function mostrarResultado(mensaje, estado = "") {
         resultadoAnalisis.textContent = mensaje;
         resultadoAnalisis.className =
@@ -18,6 +16,7 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
     }
 
     campoImagen.addEventListener("change", () => {
+        versionImagen++;
         mostrarResultado("");
     });
 
@@ -35,9 +34,10 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
 
         const datos = new FormData();
         datos.append("imagen", archivo);
+        const versionSolicitud = versionImagen;
 
         botonAnalizar.disabled = true;
-        mostrarResultado("Validando imagen...", "processing");
+        mostrarResultado("Validando y analizando imagen...", "processing");
 
         try {
             const respuesta = await fetch("/imagenes/analizar", {
@@ -59,35 +59,50 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
             }
 
             const resultado = await respuesta.json();
+            if (versionSolicitud !== versionImagen) {
+                return;
+            }
 
             if (!respuesta.ok) {
-                campoImagen.value = "";
+                if (respuesta.status === 400) {
+                    campoImagen.value = "";
+                }
 
                 mostrarResultado(
-                    (resultado.mensaje || "No se pudo validar la imagen.") +
-                    " El archivo fue retirado. Puedes continuar " +
-                    "con el registro manual.",
+                    resultado.mensaje ||
+                    "No se pudo analizar la imagen. Puedes continuar con el registro manual.",
                     "error"
                 );
 
                 return;
             }
 
-            mostrarResultado(
-                "Imagen validada. Formato: " +
-                resultado.formato +
-                ". Lista para un análisis posterior.",
-                "success"
-            );
+            if (resultado.estado === "SUGERENCIA") {
+                const confianza = Math.round(resultado.confianza * 100);
+                const color = resultado.colorProbable || "no determinado";
+                mostrarResultado(
+                    "Sugerencia de IA: tipo " + resultado.tipoProbable +
+                    ", color " + color +
+                    ". Confianza orientativa del detector: " + confianza +
+                    "%. Confirma o corrige la información en el formulario antes de registrar.",
+                    "success"
+                );
+            } else {
+                mostrarResultado(
+                    resultado.mensaje ||
+                    "No hubo detección suficiente. Completa el registro manualmente.",
+                    "processing"
+                );
+            }
 
         } catch (error) {
-            console.error("Error al validar imagen:", error);
-
-            campoImagen.value = "";
+            console.error("Error al analizar imagen:", error);
+            if (versionSolicitud !== versionImagen) {
+                return;
+            }
 
             mostrarResultado(
-                "No se pudo completar la validación. " +
-                "Puedes continuar con el registro manual.",
+                "No se pudo completar el análisis. Puedes continuar con el registro manual.",
                 "error"
             );
 
