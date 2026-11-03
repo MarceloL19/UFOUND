@@ -21,16 +21,21 @@
         mensaje.textContent = "";
     }
 
-    // Una fotografía nueva invalida las sugerencias pendientes de la anterior.
-    imagen.addEventListener("change", () => {
+    function invalidarSugerencia() {
+        // El select de categoría NO se modifica: prevalece la elección manual.
         version++;
         borrarPropuesta();
-    });
+    }
+
+    // Se limpia también al repetir el análisis de la misma foto.
+    imagen.addEventListener("change", invalidarSugerencia);
+    document.addEventListener("ufound:imagen-analisis-iniciado", invalidarSugerencia);
 
     document.addEventListener("ufound:imagen-analizada", async (evento) => {
+        // Cada resultado, incluso SIN_DETECCION y ERROR, invalida respuestas pendientes.
+        invalidarSugerencia();
         const analisis = evento.detail;
         const versionActual = version;
-        borrarPropuesta();
         if (!analisis || analisis.estado !== "SUGERENCIA" || !analisis.tipoProbable) {
             return;
         }

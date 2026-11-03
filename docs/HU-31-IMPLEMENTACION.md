@@ -25,8 +25,8 @@ Los tipos no soportados y las detecciones insuficientes no generan sugerencia.
 
 1. Estudiante o Seguridad selecciona imagen y pulsa **Analizar imagen**.
 2. HU-29 valida y HU-30 ejecuta la detección una única vez (`POST /imagenes/analizar`).
-3. HU-30 emite `ufound:imagen-analizada` solo si la respuesta fue exitosa y vigente.
-4. HU-31 consulta `POST /hu31/sugerir-categoria` con el tipo detectado.
+3. HU-30 emite `ufound:imagen-analisis-iniciado` al iniciar un análisis o cambiar de foto, y `ufound:imagen-analizada` con cualquier resultado vigente (`SUGERENCIA`, `SIN_DETECCION` o `ERROR`).
+4. HU-31 invalida propuestas previas y respuestas pendientes en cada inicio/resultado. Solo ante una detección válida consulta `POST /hu31/sugerir-categoria` con el tipo detectado.
 5. HU-31 muestra la categoría sugerida, sin alterar aún la categoría del formulario.
 6. El usuario pulsa **Usar categoría sugerida**, o selecciona otra categoría manualmente.
 7. El formulario existente guarda la categoría finalmente seleccionada. Ningún campo oculto la suplanta.
@@ -43,6 +43,8 @@ Los tipos no soportados y las detecciones insuficientes no generan sugerencia.
    una categoría válida; cambiarla manualmente y registrar. Verificar que se guarda la elegida.
 7. Repetir como Seguridad en `/objetos-encontrados/registrar`.
 8. Repetir sin foto, con una imagen no reconocida y con cambio de foto: el registro manual sigue disponible.
+9. Ejecutar `node --test docs/hu31-js-smoke.test.cjs docs/hu31-integracion.test.cjs` para probar ambos scripts juntos. Comprobar que un segundo análisis de la misma foto sin detección, con error HTTP o error de red, limpie la sugerencia y deshabilite el botón sin tocar la categoría manual.
+10. Comprobar que una respuesta antigua de HU-30 o de la petición asíncrona de HU-31 no reponga la sugerencia tras un nuevo análisis.
 
 ### Alcance de la HU
 
@@ -52,14 +54,17 @@ La categoría se sugiere, no se impone. No se modifica HU-30 ni se realizan llam
 ### Cambios mínimos sobre archivos previos
 
 Se extendieron tres archivos existentes solo para conectar el flujo:
-- `static/js/analisis-imagen.js`: emite un evento al completar correctamente HU-30.
+- `static/js/analisis-imagen.js`: anuncia el inicio de cada análisis y comunica todos los resultados vigentes, incluidos errores y ausencia de detección; descarta respuestas antiguas.
 - `templates/registrar-objeto-perdido.html`: incluye UI y recursos nuevos de HU-31.
 - `templates/registrar-objeto-encontrado.html`: agrega el botón de HU-30 y la sugerencia de HU-31.
 
-El resto de archivos del ZIP original permanece idéntico, byte a byte.
+- `static/js/hu31-categoria.js`: limpia la propuesta en cada inicio/resultado e invalida peticiones anteriores, sin borrar la categoría que el usuario eligió.
+- `docs/hu31-integracion.test.cjs`: prueba la comunicación real entre ambos scripts.
+
+El resto de archivos del proyecto no necesita cambios para esta corrección.
 
 ### Trabajo en Git
 
 Implementar HU-31 en una rama propia, no directamente en `main` ni sobre la rama de otro integrante.
 Como se parte de HU-30, una vez que el PR de HU-30 sea fusionado a `main`, actualizar la rama
-de HU-31 con `main` y crear un PR donde solo aparezcan los cambios de HU-31.
+de HU-31 con `main` y cambiar la base del PR existente para que solo aparezcan los cambios de HU-31.
