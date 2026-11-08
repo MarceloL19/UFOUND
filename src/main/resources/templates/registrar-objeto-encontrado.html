@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar objeto encontrado | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/hu29-form-responsive.css}">
     <link rel="stylesheet" th:href="@{/css/hu31-categoria.css}">
     <script th:src="@{/js/analisis-imagen.js}" defer></script>
     <script th:src="@{/js/hu31-categoria.js}" defer></script>
     <link rel="stylesheet" th:href="@{/css/hu32-autocompletado.css}">
     <script th:src="@{/js/hu32-autocompletado.js}" defer></script>
 </head>
-<body class="dashboard-page">
+<body class="dashboard-page hu29-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
 <div th:replace="~{fragments/layout :: sidebar('hallazgo', ${usuario})}"></div>
 <main class="dashboard-shell">

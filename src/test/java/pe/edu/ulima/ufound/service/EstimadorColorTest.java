@@ -27,6 +27,22 @@ class EstimadorColorTest {
     }
 
     @Test
+    void distingueRosadosYMarronDelRojo() {
+        assertEquals("Rosado", colorDe(new Color(0xFFC0CB)));
+        assertEquals("Rosado", colorDe(new Color(0xFFAFAF)));
+        assertEquals("Marrón", colorDe(new Color(0xA52A2A)));
+        assertEquals("Rojo", colorDe(new Color(0x8B0000)));
+    }
+
+    @Test
+    void conservaLaClasificacionDeOtrosTonos() {
+        assertEquals("Blanco", colorDe(Color.WHITE));
+        assertEquals("Naranja", colorDe(Color.ORANGE));
+        assertEquals("Amarillo", colorDe(Color.YELLOW));
+        assertEquals("Azul", colorDe(Color.BLUE));
+    }
+
+    @Test
     void noInventaColorCuandoLaCajaEstaFueraDeLaImagen() {
         BufferedImage imagen = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         assertNull(EstimadorColor.estimar(imagen, 20, 20, 30, 30));

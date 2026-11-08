@@ -66,8 +66,13 @@ final class EstimadorColor {
             if (brillo > .84f) return Tono.BLANCO;
             return Tono.GRIS;
         }
-        if (matiz < 15 || matiz >= 345) return Tono.ROJO;
-        if (matiz < 45) return brillo < .60f ? Tono.MARRON : Tono.NARANJA;
+        if (matiz < 15 || matiz >= 345) {
+            // El matiz rojo también aparece en rosas claros y marrones apagados.
+            if (brillo >= .75f && saturacion <= .55f) return Tono.ROSADO;
+            if (brillo < .70f && saturacion < .90f) return Tono.MARRON;
+            return Tono.ROJO;
+        }
+        if (matiz < 50) return brillo < .60f ? Tono.MARRON : Tono.NARANJA;
         if (matiz < 70) return Tono.AMARILLO;
         if (matiz < 160) return Tono.VERDE;
         if (matiz < 200) return Tono.CELESTE;
