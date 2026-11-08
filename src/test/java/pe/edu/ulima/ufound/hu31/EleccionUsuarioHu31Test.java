@@ -9,7 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-/** HU-31: el valor que decide la persona tiene prioridad sobre la sugerencia. */
+/**
+ * HU-31: el valor que decide la persona tiene prioridad sobre la sugerencia.
+ */
 class EleccionUsuarioHu31Test {
 
     @Test
@@ -33,8 +35,11 @@ class EleccionUsuarioHu31Test {
                     return objeto;
                 });
         ObjetoPerdidoService servicio = new ObjetoPerdidoService(
-                repositorio, mock(UploadService.class), mock(EstadoObjetoService.class),
-                mock(CoincidenciaService.class), new ImagenAnalisisService());
+                repositorio,
+                mock(UploadService.class),
+                mock(EstadoObjetoService.class),
+                mock(CoincidenciaService.class),
+                mock(ExtraccionAtributosVisualesService.class));
 
         ObjetoPerdido guardado = servicio.registrar(formulario, null, new Usuario());
         assertEquals(CategoriaObjeto.UTILES, guardado.getCategoria());
@@ -57,8 +62,11 @@ class EleccionUsuarioHu31Test {
                     return objeto;
                 });
         ObjetoEncontradoService servicio = new ObjetoEncontradoService(
-                repositorio, mock(UploadService.class), mock(EstadoObjetoService.class),
-                mock(CoincidenciaService.class));
+                repositorio,
+                mock(UploadService.class),
+                mock(EstadoObjetoService.class),
+                mock(CoincidenciaService.class),
+                mock(ExtraccionAtributosVisualesService.class));
 
         ObjetoEncontrado guardado = servicio.registrar(formulario, null, new Usuario());
         assertEquals(CategoriaObjeto.DOCUMENTOS, guardado.getCategoria());

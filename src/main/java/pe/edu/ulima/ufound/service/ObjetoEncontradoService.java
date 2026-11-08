@@ -18,13 +18,20 @@ public class ObjetoEncontradoService {
     private final UploadService uploadService;
     private final EstadoObjetoService estadoObjetoService;
     private final CoincidenciaService coincidenciaService;
+    private final ExtraccionAtributosVisualesService extraccionAtributosVisualesService;
 
-    public ObjetoEncontradoService(ObjetoEncontradoRepository objetoEncontradoRepository, UploadService uploadService,
-                                   EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService) {
+    public ObjetoEncontradoService(
+            ObjetoEncontradoRepository objetoEncontradoRepository,
+            UploadService uploadService,
+            EstadoObjetoService estadoObjetoService,
+            CoincidenciaService coincidenciaService,
+            ExtraccionAtributosVisualesService extraccionAtributosVisualesService) {
+
         this.objetoEncontradoRepository = objetoEncontradoRepository;
         this.uploadService = uploadService;
         this.estadoObjetoService = estadoObjetoService;
         this.coincidenciaService = coincidenciaService;
+        this.extraccionAtributosVisualesService = extraccionAtributosVisualesService;
     }
 
     @Transactional
@@ -32,6 +39,8 @@ public class ObjetoEncontradoService {
         validar(form);
 
         ObjetoEncontrado objeto = new ObjetoEncontrado();
+        objeto.setAtributosVisuales(
+                extraccionAtributosVisualesService.extraer(imagen));
         objeto.setNombre(form.getNombre().trim());
         objeto.setCategoria(form.getCategoria());
         objeto.setUbicacion(form.getUbicacion());
@@ -40,7 +49,8 @@ public class ObjetoEncontradoService {
         objeto.setUsuario(usuario);
 
         ObjetoEncontrado guardado = objetoEncontradoRepository.save(objeto);
-        estadoObjetoService.registrarEstadoInicial(TipoObjeto.ENCONTRADO, guardado.getIdObjeto(), guardado.getEstado(), usuario);
+        estadoObjetoService.registrarEstadoInicial(TipoObjeto.ENCONTRADO, guardado.getIdObjeto(), guardado.getEstado(),
+                usuario);
         coincidenciaService.detectarParaObjetoEncontrado(guardado);
         return guardado;
     }
@@ -84,4 +94,3 @@ public class ObjetoEncontradoService {
         }
     }
 }
-

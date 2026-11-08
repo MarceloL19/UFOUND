@@ -1,5 +1,6 @@
 package pe.edu.ulima.ufound.model;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -43,6 +44,9 @@ public class ObjetoPerdido {
 
     @Column(name = "imagen_url", length = 255)
     private String imagenUrl;
+
+    @Embedded
+    private AtributosVisuales atributosVisuales;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
@@ -133,5 +137,12 @@ public class ObjetoPerdido {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-}
 
+    public AtributosVisuales getAtributosVisuales() {
+        return atributosVisuales;
+    }
+
+    public void setAtributosVisuales(AtributosVisuales atributosVisuales) {
+        this.atributosVisuales = atributosVisuales;
+    }
+}

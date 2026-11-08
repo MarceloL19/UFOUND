@@ -18,26 +18,30 @@ public class ObjetoPerdidoService {
     private final UploadService uploadService;
     private final EstadoObjetoService estadoObjetoService;
     private final CoincidenciaService coincidenciaService;
-    private final ImagenAnalisisService imagenAnalisisService;
+    private final ExtraccionAtributosVisualesService extraccionAtributosVisualesService;
 
-    public ObjetoPerdidoService(ObjetoPerdidoRepository objetoPerdidoRepository, UploadService uploadService,
-            EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService,
-            ImagenAnalisisService imagenAnalisisService) {
+    public ObjetoPerdidoService(
+            ObjetoPerdidoRepository objetoPerdidoRepository,
+            UploadService uploadService,
+            EstadoObjetoService estadoObjetoService,
+            CoincidenciaService coincidenciaService,
+            ExtraccionAtributosVisualesService extraccionAtributosVisualesService) {
+
         this.objetoPerdidoRepository = objetoPerdidoRepository;
         this.uploadService = uploadService;
         this.estadoObjetoService = estadoObjetoService;
         this.coincidenciaService = coincidenciaService;
-        this.imagenAnalisisService = imagenAnalisisService;
+        this.extraccionAtributosVisualesService = extraccionAtributosVisualesService;
     }
 
     @Transactional
     public ObjetoPerdido registrar(RegistroObjetoPerdidoForm form, MultipartFile imagen, Usuario usuario) {
         validar(form);
-        if (imagen != null && !imagen.isEmpty()) {
-            imagenAnalisisService.validarImagen(imagen);
-        }
 
         ObjetoPerdido objeto = new ObjetoPerdido();
+
+        objeto.setAtributosVisuales(
+                extraccionAtributosVisualesService.extraer(imagen));
 
         objeto.setNombre(form.getNombre().trim());
         objeto.setCategoria(form.getCategoria());
