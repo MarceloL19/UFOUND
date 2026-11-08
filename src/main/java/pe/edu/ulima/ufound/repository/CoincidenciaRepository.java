@@ -12,9 +12,10 @@ import java.util.Optional;
 public interface CoincidenciaRepository extends JpaRepository<Coincidencia, Long> {
 
     Optional<Coincidencia> findByObjetoPerdidoAndObjetoEncontrado(ObjetoPerdido objetoPerdido,
-                                                                  ObjetoEncontrado objetoEncontrado);
+            ObjetoEncontrado objetoEncontrado);
 
-    List<Coincidencia> findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(Usuario usuario);
+    List<Coincidencia> findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDescIdCoincidenciaAsc(
+            Usuario usuario);
 
     long countByObjetoPerdidoUsuario(Usuario usuario);
 }

@@ -58,7 +58,8 @@ public class CoincidenciaService {
     @Transactional(readOnly = true)
     public List<Coincidencia> listarPorUsuario(Usuario usuario) {
         return coincidenciaRepository
-                .findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(usuario);
+                .findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDescIdCoincidenciaAsc(
+                        usuario);
     }
 
     @Transactional(readOnly = true)
