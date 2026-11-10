@@ -44,6 +44,15 @@ public class ObjetoEncontrado {
     @Column(name = "imagen_url", length = 255)
     private String imagenUrl;
 
+    @Column(name = "tipo_visual", length = 30)
+    private String tipoVisual;
+
+    @Column(name = "color_visual", length = 30)
+    private String colorVisual;
+
+    @Column(name = "confianza_visual")
+    private Double confianzaVisual;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private EstadoObjeto estado = EstadoObjeto.REPORTADO;
@@ -116,6 +125,30 @@ public class ObjetoEncontrado {
 
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
+    }
+
+    public String getTipoVisual() {
+        return tipoVisual;
+    }
+
+    public void setTipoVisual(String tipoVisual) {
+        this.tipoVisual = tipoVisual;
+    }
+
+    public String getColorVisual() {
+        return colorVisual;
+    }
+
+    public void setColorVisual(String colorVisual) {
+        this.colorVisual = colorVisual;
+    }
+
+    public Double getConfianzaVisual() {
+        return confianzaVisual;
+    }
+
+    public void setConfianzaVisual(Double confianzaVisual) {
+        this.confianzaVisual = confianzaVisual;
     }
 
     public EstadoObjeto getEstado() {

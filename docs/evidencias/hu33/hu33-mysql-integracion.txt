@@ -1,0 +1,621 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] --------------------< pe.edu.ulima:proyecto-ufound >--------------------
+[INFO] Building PROYECTO-UFOUND 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ proyecto-ufound ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 87 resources from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ proyecto-ufound ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ proyecto-ufound ---
+[INFO] skip non existing resourceDirectory C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ proyecto-ufound ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 23 source files with javac [debug parameters release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ proyecto-ufound ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+13:42:27.385 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest]: RegistroCoincidenciaMySqlTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:42:27.891 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration pe.edu.ulima.ufound.UFoundApplication for test class pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-11-10T13:42:29.592-05:00  INFO 24444 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : Starting RegistroCoincidenciaMySqlTest using Java 17.0.19 with PID 24444 (started by User in C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva)
+2026-11-10T13:42:29.600-05:00  INFO 24444 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : No active profile set, falling back to 1 default profile: "default"
+2026-11-10T13:42:32.163-05:00  INFO 24444 --- [proyecto-ufound] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-10T13:42:32.398-05:00  INFO 24444 --- [proyecto-ufound] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 206 ms. Found 6 JPA repository interfaces.
+2026-11-10T13:42:34.147-05:00  INFO 24444 --- [proyecto-ufound] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-10T13:42:34.623-05:00  INFO 24444 --- [proyecto-ufound] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-10T13:42:34.806-05:00  INFO 24444 --- [proyecto-ufound] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-10T13:42:36.046-05:00  INFO 24444 --- [proyecto-ufound] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-10T13:42:36.290-05:00  INFO 24444 --- [proyecto-ufound] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T13:42:36.981-05:00  INFO 24444 --- [proyecto-ufound] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49d42faf
+2026-11-10T13:42:36.992-05:00  INFO 24444 --- [proyecto-ufound] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T13:42:40.236-05:00  INFO 24444 --- [proyecto-ufound] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate:
+    create table coincidencias (
+        id_coincidencia bigint not null auto_increment,
+        fecha_deteccion datetime(6) not null,
+        nivel_coincidencia enum ('ALTO','BAJO','MEDIO') not null,
+        porcentaje_similitud integer not null,
+        id_objeto_encontrado bigint not null,
+        id_objeto_perdido bigint not null,
+        primary key (id_coincidencia)
+    ) engine=InnoDB
+Hibernate:
+    create table historial_estados (
+        id_historial bigint not null auto_increment,
+        estado_anterior enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO'),
+        estado_nuevo enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null,
+        fecha_cambio datetime(6) not null,
+        id_objeto bigint not null,
+        tipo_objeto enum ('ENCONTRADO','PERDIDO') not null,
+        id_usuario_responsable bigint not null,
+        primary key (id_historial)
+    ) engine=InnoDB
+Hibernate:
+    create table notificaciones (
+        id_notificacion bigint not null auto_increment,
+        estado_leido bit not null,
+        fecha_creacion datetime(6) not null,
+        mensaje varchar(255) not null,
+        id_coincidencia bigint,
+        id_usuario bigint not null,
+        primary key (id_notificacion)
+    ) engine=InnoDB
+Hibernate:
+    create table objetos_encontrados (
+        id_objeto bigint not null auto_increment,
+        categoria enum ('ACCESORIOS','BOTELLAS','DOCUMENTOS','OTROS','ROPA','TECNOLOGIA','UTILES') not null,
+        color_visual varchar(30),
+        confianza_visual float(53),
+        descripcion varchar(700) not null,
+        estado enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null,
+        fecha_hora datetime(6) not null,
+        imagen_url varchar(255),
+        nombre varchar(120) not null,
+        tipo_visual varchar(30),
+        ubicacion enum ('A1','A2','AREAS_DESCANSO','AREAS_VERDES','ASCENSORES','AUDITORIO_G','AUDITORIO_I2','AUDITORIO_O','AUDITORIO_ZUM','AULAS','AULA_MAGNA','AULA_MAGNA_A','AULA_MAGNA_B','AULA_MAGNA_O1','AULA_MAGNA_O2','AULA_MAGNA_O3','AULA_MAGNA_O4','B','BANOS','BIBLIOTECA','C','CAFETERIA','CAFETERIA_EDIFICIO_F2','CAFETERIA_EDIFICIO_O','CAFETERIA_PARQUE_CRUZ_DEL_SUR','CAJEROS_J','CAPILLA_D3','CENTRO_IDIOMAS','CONCESIONARIOS','D1','D2','D3','E1','E2','E3','EDIFICIO_A','EDIFICIO_B','EDIFICIO_C','EDIFICIO_D','EDIFICIO_E','EDUCACION_EJECUTIVA','ENTRADAS_SALIDAS','ESCALERAS','ESPACIOS_POSGRADO','ESPACIOS_PREGRADO','ESTACIONAMIENTO','ESTACIONAMIENTO_A1','ESTACIONAMIENTO_CRUZ_DEL_SUR','ESTACIONAMIENTO_H','ESTACIONAMIENTO_N','F1','F2','G','GALERIA_ULIMA','GIMNASIO_F1','H','I1','I2','J','K','L1','L2','L3','LABORATORIOS','LIBUN_A1','MODULOS_BIBLIOTECA','N','O1','O2','OFICINA_OBJETOS_PERDIDOS_A1_303','OTRO','P','PABELLON_CENTRAL','PASILLOS','PATIOS','PLAZAS','PLAZA_RECREATIVA','QUIOSCOS','RESTAURANTES_CAMPUS','SALAS_ESTUDIO','SALA_LECTURA','SALA_LECTURA_SILENCIOSA','TALLERES','TEATRO_CENTRO_CULTURAL','TIENDA_ULIMA_A1','ZONA_CONSULTA','ZONA_ESTANTERIAS','ZONA_TESIS') not null,
+        id_usuario bigint not null,
+        primary key (id_objeto)
+    ) engine=InnoDB
+Hibernate:
+    create table objetos_perdidos (
+        id_objeto bigint not null auto_increment,
+        categoria enum ('ACCESORIOS','BOTELLAS','DOCUMENTOS','OTROS','ROPA','TECNOLOGIA','UTILES') not null,
+        color_visual varchar(30),
+        confianza_visual float(53),
+        descripcion varchar(700) not null,
+        estado enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null,
+        fecha_hora datetime(6) not null,
+        imagen_url varchar(255),
+        nombre varchar(120) not null,
+        tipo_visual varchar(30),
+        ubicacion enum ('A1','A2','AREAS_DESCANSO','AREAS_VERDES','ASCENSORES','AUDITORIO_G','AUDITORIO_I2','AUDITORIO_O','AUDITORIO_ZUM','AULAS','AULA_MAGNA','AULA_MAGNA_A','AULA_MAGNA_B','AULA_MAGNA_O1','AULA_MAGNA_O2','AULA_MAGNA_O3','AULA_MAGNA_O4','B','BANOS','BIBLIOTECA','C','CAFETERIA','CAFETERIA_EDIFICIO_F2','CAFETERIA_EDIFICIO_O','CAFETERIA_PARQUE_CRUZ_DEL_SUR','CAJEROS_J','CAPILLA_D3','CENTRO_IDIOMAS','CONCESIONARIOS','D1','D2','D3','E1','E2','E3','EDIFICIO_A','EDIFICIO_B','EDIFICIO_C','EDIFICIO_D','EDIFICIO_E','EDUCACION_EJECUTIVA','ENTRADAS_SALIDAS','ESCALERAS','ESPACIOS_POSGRADO','ESPACIOS_PREGRADO','ESTACIONAMIENTO','ESTACIONAMIENTO_A1','ESTACIONAMIENTO_CRUZ_DEL_SUR','ESTACIONAMIENTO_H','ESTACIONAMIENTO_N','F1','F2','G','GALERIA_ULIMA','GIMNASIO_F1','H','I1','I2','J','K','L1','L2','L3','LABORATORIOS','LIBUN_A1','MODULOS_BIBLIOTECA','N','O1','O2','OFICINA_OBJETOS_PERDIDOS_A1_303','OTRO','P','PABELLON_CENTRAL','PASILLOS','PATIOS','PLAZAS','PLAZA_RECREATIVA','QUIOSCOS','RESTAURANTES_CAMPUS','SALAS_ESTUDIO','SALA_LECTURA','SALA_LECTURA_SILENCIOSA','TALLERES','TEATRO_CENTRO_CULTURAL','TIENDA_ULIMA_A1','ZONA_CONSULTA','ZONA_ESTANTERIAS','ZONA_TESIS') not null,
+        id_usuario bigint not null,
+        primary key (id_objeto)
+    ) engine=InnoDB
+Hibernate:
+    create table usuarios (
+        id_usuario bigint not null auto_increment,
+        activo bit not null,
+        correo varchar(120) not null,
+        nombre varchar(100) not null,
+        password varchar(100) not null,
+        rol enum ('ESTUDIANTE','OFICINA','SEGURIDAD') not null,
+        primary key (id_usuario)
+    ) engine=InnoDB
+Hibernate:
+    alter table coincidencias
+       drop index uk_coincidencia_objetos
+Hibernate:
+    alter table coincidencias
+       add constraint uk_coincidencia_objetos unique (id_objeto_perdido, id_objeto_encontrado)
+Hibernate:
+    alter table usuarios
+       drop index UKcdmw5hxlfj78uf4997i3qyyw5
+Hibernate:
+    alter table usuarios
+       add constraint UKcdmw5hxlfj78uf4997i3qyyw5 unique (correo)
+Hibernate:
+    alter table coincidencias
+       add constraint FK3vsuqftrdscl3eq1w2ciip0u1
+       foreign key (id_objeto_encontrado)
+       references objetos_encontrados (id_objeto)
+Hibernate:
+    alter table coincidencias
+       add constraint FKh6b8645gphsyko221lwbryt4l
+       foreign key (id_objeto_perdido)
+       references objetos_perdidos (id_objeto)
+Hibernate:
+    alter table historial_estados
+       add constraint FK4lu5kk6cm87anhrcn9vk8roch
+       foreign key (id_usuario_responsable)
+       references usuarios (id_usuario)
+Hibernate:
+    alter table notificaciones
+       add constraint FKt9v52u3yg6xrvkrqxt5cc2hx1
+       foreign key (id_coincidencia)
+       references coincidencias (id_coincidencia)
+Hibernate:
+    alter table notificaciones
+       add constraint FKrr0ikjdv4qycj44q3lohskm4k
+       foreign key (id_usuario)
+       references usuarios (id_usuario)
+Hibernate:
+    alter table objetos_encontrados
+       add constraint FKgemno8ggvh8d0xjcev126vmm
+       foreign key (id_usuario)
+       references usuarios (id_usuario)
+Hibernate:
+    alter table objetos_perdidos
+       add constraint FK84t89mj6br9fbn4gp0etp6mfv
+       foreign key (id_usuario)
+       references usuarios (id_usuario)
+2026-11-10T13:42:41.482-05:00  INFO 24444 --- [proyecto-ufound] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-10T13:42:42.506-05:00  INFO 24444 --- [proyecto-ufound] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-10T13:42:45.371-05:00  WARN 24444 --- [proyecto-ufound] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-10T13:42:47.287-05:00  INFO 24444 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : Started RegistroCoincidenciaMySqlTest in 18.8 seconds (process running for 22.287)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        objetos_perdidos
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+Hibernate:
+    insert
+    into
+        objetos_encontrados
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+Hibernate:
+    select
+        c1_0.id_coincidencia,
+        c1_0.fecha_deteccion,
+        c1_0.nivel_coincidencia,
+        c1_0.id_objeto_encontrado,
+        c1_0.id_objeto_perdido,
+        c1_0.porcentaje_similitud
+    from
+        coincidencias c1_0
+    where
+        c1_0.id_objeto_perdido=?
+        and c1_0.id_objeto_encontrado=?
+Hibernate:
+    insert
+    into
+        coincidencias
+        (fecha_deteccion, nivel_coincidencia, id_objeto_encontrado, id_objeto_perdido, porcentaje_similitud)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    select
+        n1_0.id_notificacion,
+        n1_0.id_coincidencia,
+        n1_0.estado_leido,
+        n1_0.fecha_creacion,
+        n1_0.mensaje,
+        n1_0.id_usuario
+    from
+        notificaciones n1_0
+    where
+        n1_0.id_usuario=?
+        and n1_0.id_coincidencia=?
+Hibernate:
+    insert
+    into
+        notificaciones
+        (id_coincidencia, estado_leido, fecha_creacion, mensaje, id_usuario)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    update
+        objetos_perdidos
+    set
+        categoria=?,
+        color_visual=?,
+        confianza_visual=?,
+        descripcion=?,
+        estado=?,
+        fecha_hora=?,
+        imagen_url=?,
+        nombre=?,
+        tipo_visual=?,
+        ubicacion=?,
+        id_usuario=?
+    where
+        id_objeto=?
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+    where
+        op1_0.id_objeto=?
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+    where
+        oe1_0.id_objeto=?
+Hibernate:
+    select
+        count(*)
+    from
+        coincidencias c1_0
+Hibernate:
+    select
+        count(*)
+    from
+        notificaciones n1_0
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        objetos_encontrados
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+Hibernate:
+    insert
+    into
+        objetos_perdidos
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+Hibernate:
+    select
+        c1_0.id_coincidencia,
+        c1_0.fecha_deteccion,
+        c1_0.nivel_coincidencia,
+        c1_0.id_objeto_encontrado,
+        c1_0.id_objeto_perdido,
+        c1_0.porcentaje_similitud
+    from
+        coincidencias c1_0
+    where
+        c1_0.id_objeto_perdido=?
+        and c1_0.id_objeto_encontrado=?
+Hibernate:
+    insert
+    into
+        coincidencias
+        (fecha_deteccion, nivel_coincidencia, id_objeto_encontrado, id_objeto_perdido, porcentaje_similitud)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    select
+        n1_0.id_notificacion,
+        n1_0.id_coincidencia,
+        n1_0.estado_leido,
+        n1_0.fecha_creacion,
+        n1_0.mensaje,
+        n1_0.id_usuario
+    from
+        notificaciones n1_0
+    where
+        n1_0.id_usuario=?
+        and n1_0.id_coincidencia=?
+Hibernate:
+    insert
+    into
+        notificaciones
+        (id_coincidencia, estado_leido, fecha_creacion, mensaje, id_usuario)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    update
+        objetos_perdidos
+    set
+        categoria=?,
+        color_visual=?,
+        confianza_visual=?,
+        descripcion=?,
+        estado=?,
+        fecha_hora=?,
+        imagen_url=?,
+        nombre=?,
+        tipo_visual=?,
+        ubicacion=?,
+        id_usuario=?
+    where
+        id_objeto=?
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+    where
+        op1_0.id_objeto=?
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+    where
+        oe1_0.id_objeto=?
+Hibernate:
+    select
+        count(*)
+    from
+        coincidencias c1_0
+Hibernate:
+    select
+        count(*)
+    from
+        notificaciones n1_0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.06 s -- in pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  43.848 s
+[INFO] Finished at: 2026-11-10T13:42:52-05:00
+[INFO] ------------------------------------------------------------------------
