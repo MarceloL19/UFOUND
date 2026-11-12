@@ -1,5 +1,6 @@
 package pe.edu.ulima.ufound.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pe.edu.ulima.ufound.model.Coincidencia;
 import pe.edu.ulima.ufound.model.ObjetoEncontrado;
@@ -15,6 +16,11 @@ public interface CoincidenciaRepository extends JpaRepository<Coincidencia, Long
                                                                   ObjetoEncontrado objetoEncontrado);
 
     List<Coincidencia> findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(Usuario usuario);
+
+    /** Coincidencias de un reporte concreto, ordenadas de mayor a menor similitud. */
+    @EntityGraph(attributePaths = "objetoEncontrado")
+    List<Coincidencia> findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(
+            ObjetoPerdido objetoPerdido);
 
     long countByObjetoPerdidoUsuario(Usuario usuario);
 }

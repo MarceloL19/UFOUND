@@ -30,7 +30,8 @@
             </div>
             <div class="row-actions-stack">
                 <strong th:text="${objeto.estado.etiqueta}">Reportado</strong>
-                <a class="row-action" th:href="@{/estados/{tipo}/{id}(tipo='PERDIDO', id=${objeto.idObjeto})}">Ver estado</a>
+                <a class="row-action" th:href="@{/objetos-perdidos/detalle/{id}(id=${objeto.idObjeto})}">Ver detalle y sugerencias</a>
+                <a class="row-action ghost" th:href="@{/estados/{tipo}/{id}(tipo='PERDIDO', id=${objeto.idObjeto})}">Ver estado</a>
             </div>
         </article>
     </section>
