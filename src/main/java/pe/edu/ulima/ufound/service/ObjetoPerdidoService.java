@@ -19,15 +19,17 @@ public class ObjetoPerdidoService {
     private final EstadoObjetoService estadoObjetoService;
     private final CoincidenciaService coincidenciaService;
     private final ImagenAnalisisService imagenAnalisisService;
+    private final AtributosVisualesService atributosVisualesService;
 
     public ObjetoPerdidoService(ObjetoPerdidoRepository objetoPerdidoRepository, UploadService uploadService,
             EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService,
-            ImagenAnalisisService imagenAnalisisService) {
+            ImagenAnalisisService imagenAnalisisService, AtributosVisualesService atributosVisualesService) {
         this.objetoPerdidoRepository = objetoPerdidoRepository;
         this.uploadService = uploadService;
         this.estadoObjetoService = estadoObjetoService;
         this.coincidenciaService = coincidenciaService;
         this.imagenAnalisisService = imagenAnalisisService;
+        this.atributosVisualesService = atributosVisualesService;
     }
 
     @Transactional
@@ -44,6 +46,11 @@ public class ObjetoPerdidoService {
         objeto.setUbicacion(form.getUbicacion());
         objeto.setDescripcion(form.getDescripcion().trim());
         objeto.setImagenUrl(uploadService.guardarImagenObjetoPerdido(imagen));
+        atributosVisualesService.extraer(imagen).ifPresent(atributos -> {
+            objeto.setTipoVisual(atributos.tipo());
+            objeto.setColorVisual(atributos.color());
+            objeto.setConfianzaVisual(atributos.confianza());
+        });
         objeto.setUsuario(usuario);
 
         ObjetoPerdido guardado = objetoPerdidoRepository.save(objeto);
