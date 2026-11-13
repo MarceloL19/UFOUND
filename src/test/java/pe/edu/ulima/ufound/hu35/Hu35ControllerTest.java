@@ -27,10 +27,15 @@ class Hu35ControllerTest {
     @BeforeEach
     void setUp() {
         hu35Service = mock(Hu35Service.class);
-        mvc = MockMvcBuilders.standaloneSetup(new Hu35Controller(hu35Service)).build();
+
+        mvc = MockMvcBuilders
+                .standaloneSetup(new Hu35Controller(hu35Service))
+                .build();
+
         estudiante = new Usuario();
         estudiante.setIdUsuario(7L);
         estudiante.setRol(Rol.ESTUDIANTE);
+
         session = new MockHttpSession();
         session.setAttribute("usuarioAutenticado", estudiante);
     }
@@ -39,14 +44,24 @@ class Hu35ControllerTest {
     void muestraElDetalleYLasSugerenciasDelReportePropio() throws Exception {
         ObjetoPerdido perdido = new ObjetoPerdido();
         perdido.setIdObjeto(21L);
-        DetalleObjetoPerdidoHu35 detalle = new DetalleObjetoPerdidoHu35(perdido, List.of());
-        when(hu35Service.obtenerDetalleConSugerencias(21L, estudiante)).thenReturn(detalle);
+
+        DetalleObjetoPerdidoHu35 detalle =
+                new DetalleObjetoPerdidoHu35(perdido, List.of());
+
+        when(hu35Service.obtenerDetalleConSugerencias(21L, estudiante))
+                .thenReturn(detalle);
 
         mvc.perform(get("/objetos-perdidos/detalle/21").session(session))
                 .andExpect(status().isOk())
                 .andExpect(view().name("detalle-objeto-perdido"))
+                .andExpect(model().attribute("usuario", estudiante))
                 .andExpect(model().attribute("objeto", perdido))
                 .andExpect(model().attribute("sugerencias", List.of()));
+
+        verify(hu35Service)
+                .obtenerDetalleConSugerencias(21L, estudiante);
+
+        verifyNoMoreInteractions(hu35Service);
     }
 
     @Test
@@ -54,10 +69,12 @@ class Hu35ControllerTest {
         Usuario seguridad = new Usuario();
         seguridad.setIdUsuario(9L);
         seguridad.setRol(Rol.SEGURIDAD);
+
         MockHttpSession sesionSeguridad = new MockHttpSession();
         sesionSeguridad.setAttribute("usuarioAutenticado", seguridad);
 
-        mvc.perform(get("/objetos-perdidos/detalle/21").session(sesionSeguridad))
+        mvc.perform(get("/objetos-perdidos/detalle/21")
+                        .session(sesionSeguridad))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/home"))
                 .andExpect(flash().attributeExists("accesoDenegado"));
@@ -66,13 +83,46 @@ class Hu35ControllerTest {
     }
 
     @Test
-    void redirigeCuandoElReporteNoExisteONoPerteneceAlEstudiante() throws Exception {
+    void rechazaUsuarioSinSesion() throws Exception {
+        mvc.perform(get("/objetos-perdidos/detalle/21"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/home"))
+                .andExpect(flash().attributeExists("accesoDenegado"));
+
+        verifyNoInteractions(hu35Service);
+    }
+
+    @Test
+    void rechazaSesionConObjetoDeTipoIncorrecto() throws Exception {
+        MockHttpSession sesionInvalida = new MockHttpSession();
+        sesionInvalida.setAttribute("usuarioAutenticado", "usuario");
+
+        mvc.perform(get("/objetos-perdidos/detalle/21")
+                        .session(sesionInvalida))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/home"))
+                .andExpect(flash().attributeExists("accesoDenegado"));
+
+        verifyNoInteractions(hu35Service);
+    }
+
+    @Test
+    void redirigeCuandoElReporteNoExisteONoPerteneceAlEstudiante()
+            throws Exception {
+
         when(hu35Service.obtenerDetalleConSugerencias(eq(21L), eq(estudiante)))
-                .thenThrow(new RegistroObjetoException("No se encontro el reporte o no tienes permisos para consultarlo."));
+                .thenThrow(new RegistroObjetoException(
+                        "No se encontro el reporte o no tienes permisos para consultarlo."
+                ));
 
         mvc.perform(get("/objetos-perdidos/detalle/21").session(session))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/objetos-perdidos/mis-reportes"))
                 .andExpect(flash().attributeExists("accesoDenegado"));
+
+        verify(hu35Service)
+                .obtenerDetalleConSugerencias(21L, estudiante);
+
+        verifyNoMoreInteractions(hu35Service);
     }
 }
