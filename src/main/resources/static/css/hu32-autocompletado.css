@@ -1,0 +1,43 @@
+/* HU-32: estilos acotados al autocompletado; no modifica los estilos existentes. */
+#hu32-panel[hidden],
+#hu32-deshacer[hidden] { display: none !important; }
+
+#hu32-panel {
+    border: 1px solid #fdba74;
+    background: #fff7ed;
+    color: #7c2d12;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 12px;
+}
+#hu32-panel p { margin: 0 0 8px; line-height: 1.5; }
+#hu32-panel .hu32-titulo { font-weight: 800; }
+#hu32-lista { margin: 0 0 10px; padding-left: 18px; line-height: 1.5; }
+
+#hu32-deshacer {
+    padding: 8px 12px;
+    border: 1px solid #c2410c;
+    border-radius: 7px;
+    background: #fff;
+    color: #c2410c;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+}
+#hu32-deshacer:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+
+.hu32-sugerido {
+    border-color: #f97316 !important;
+    background: #fff7ed !important;
+}
+
+.hu32-insignia {
+    justify-self: start;
+    background: #ffedd5;
+    color: #c2410c;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}

@@ -1,0 +1,768 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] --------------------< pe.edu.ulima:proyecto-ufound >--------------------
+[INFO] Building PROYECTO-UFOUND 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.3.2:clean (default-clean) @ proyecto-ufound ---
+[INFO] Deleting C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva\target
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ proyecto-ufound ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 87 resources from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ proyecto-ufound ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 71 source files with javac [debug parameters release 17] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ proyecto-ufound ---
+[INFO] skip non existing resourceDirectory C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva\src\test\resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ proyecto-ufound ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 23 source files with javac [debug parameters release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ proyecto-ufound ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running pe.edu.ulima.ufound.analisis.AnalisisPerdidasCalculadoraTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.561 s -- in pe.edu.ulima.ufound.analisis.AnalisisPerdidasCalculadoraTest
+[INFO] Running pe.edu.ulima.ufound.analisis.AnalisisPerdidasServiceTest
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.435 s -- in pe.edu.ulima.ufound.analisis.AnalisisPerdidasServiceTest
+[INFO] Running pe.edu.ulima.ufound.controller.AyudaControllerTest
+13:43:54.119 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [pe.edu.ulima.ufound.controller.AyudaControllerTest]: AyudaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:43:55.313 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration pe.edu.ulima.ufound.UFoundApplication for test class pe.edu.ulima.ufound.controller.AyudaControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-11-10T13:43:57.186-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.controller.AyudaControllerTest   : Starting AyudaControllerTest using Java 17.0.19 with PID 12460 (started by User in C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva)
+2026-11-10T13:43:57.199-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.controller.AyudaControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2026-11-10T13:44:02.200-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:02.201-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:02.208-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
+2026-11-10T13:44:02.317-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.controller.AyudaControllerTest   : Started AyudaControllerTest in 6.6 seconds (process running for 18.695)
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.90 s -- in pe.edu.ulima.ufound.controller.AyudaControllerTest
+[INFO] Running pe.edu.ulima.ufound.controller.ImagenAnalisisControllerTest
+2026-11-10T13:44:05.563-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:05.564-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:05.566-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-11-10T13:44:05.839-05:00 ERROR 12460 --- [proyecto-ufound] [           main] p.e.u.u.c.ImagenAnalisisController       : No se pudo completar el an�lisis visual
+
+java.lang.IllegalStateException: modelo no disponible
+	at pe.edu.ulima.ufound.service.DeteccionVisualService.analizar(DeteccionVisualService.java:47) ~[classes/:na]
+	at pe.edu.ulima.ufound.controller.ImagenAnalisisController.analizar(ImagenAnalisisController.java:59) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.31.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.14.jar:6.1.14]
+	at org.springframework.test.web.servlet.TestDispatcherServlet.service(TestDispatcherServlet.java:72) ~[spring-test-6.1.14.jar:6.1.14]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.31.jar:6.0]
+	at org.springframework.mock.web.MockFilterChain$ServletFilterProxy.doFilter(MockFilterChain.java:165) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.springframework.mock.web.MockFilterChain.doFilter(MockFilterChain.java:132) ~[spring-test-6.1.14.jar:6.1.14]
+	at org.springframework.test.web.servlet.MockMvc.perform(MockMvc.java:201) ~[spring-test-6.1.14.jar:6.1.14]
+	at pe.edu.ulima.ufound.controller.ImagenAnalisisControllerTest.debePermitirRegistroManualSiFallaElDetector(ImagenAnalisisControllerTest.java:136) ~[test-classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728) ~[junit-platform-commons-1.10.5.jar:1.10.5]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69) ~[junit-jupiter-engine-5.10.5.jar:5.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.10.5.jar:1.10.5]
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) ~[surefire-junit-platform-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.2.5.jar:3.2.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.2.5.jar:3.2.5]
+
+2026-11-10T13:44:05.929-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:05.931-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:05.932-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:06.122-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:06.127-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:06.128-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:06.214-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:06.215-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:06.216-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:06.285-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:06.287-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:06.288-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:07.060-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:07.061-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:07.062-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:07.921-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:07.922-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:07.922-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:07.964-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:07.965-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:07.966-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:07.999-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:08.000-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:08.004-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:08.538-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:08.539-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:08.540-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.310 s -- in pe.edu.ulima.ufound.controller.ImagenAnalisisControllerTest
+[INFO] Running pe.edu.ulima.ufound.hu31.CategoriaSugerenciaControllerTest
+2026-11-10T13:44:08.632-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:08.633-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:08.636-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:08.837-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:08.838-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:08.838-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-11-10T13:44:08.870-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:08.870-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:08.871-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.307 s -- in pe.edu.ulima.ufound.hu31.CategoriaSugerenciaControllerTest
+[INFO] Running pe.edu.ulima.ufound.hu31.CategoriaSugerenciaServiceTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s -- in pe.edu.ulima.ufound.hu31.CategoriaSugerenciaServiceTest
+[INFO] Running pe.edu.ulima.ufound.hu31.EleccionUsuarioHu31Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.076 s -- in pe.edu.ulima.ufound.hu31.EleccionUsuarioHu31Test
+[INFO] Running pe.edu.ulima.ufound.hu32.AutocompletadoFormularioControllerTest
+2026-11-10T13:44:10.129-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:10.129-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:10.130-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:10.204-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:10.205-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:10.206-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:10.244-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:10.245-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:10.246-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-10T13:44:10.279-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-11-10T13:44:10.281-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-10T13:44:10.282-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.246 s -- in pe.edu.ulima.ufound.hu32.AutocompletadoFormularioControllerTest
+[INFO] Running pe.edu.ulima.ufound.hu32.AutocompletadoFormularioServiceTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in pe.edu.ulima.ufound.hu32.AutocompletadoFormularioServiceTest
+[INFO] Running pe.edu.ulima.ufound.hu32.ValoresConfirmadosHu32Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in pe.edu.ulima.ufound.hu32.ValoresConfirmadosHu32Test
+[INFO] Running pe.edu.ulima.ufound.service.AtributosVisualesServiceTest
+2026-11-10T13:44:10.445-05:00  WARN 12460 --- [proyecto-ufound] [           main] p.e.u.u.s.AtributosVisualesService       : No se obtuvieron atributos visuales para el registro: java.lang.IllegalStateException: modelo no disponible
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s -- in pe.edu.ulima.ufound.service.AtributosVisualesServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.AuthServiceTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.319 s -- in pe.edu.ulima.ufound.service.AuthServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.AyudaServiceTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.118 s -- in pe.edu.ulima.ufound.service.AyudaServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.CalculadoraCoincidenciaTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 s -- in pe.edu.ulima.ufound.service.CalculadoraCoincidenciaTest
+[INFO] Running pe.edu.ulima.ufound.service.CoincidenciaServiceTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.397 s -- in pe.edu.ulima.ufound.service.CoincidenciaServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.DeteccionVisualServiceTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.051 s -- in pe.edu.ulima.ufound.service.DeteccionVisualServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.EstadisticasPerdidasServiceTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 s -- in pe.edu.ulima.ufound.service.EstadisticasPerdidasServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.EstimadorColorTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in pe.edu.ulima.ufound.service.EstimadorColorTest
+[INFO] Running pe.edu.ulima.ufound.service.EvaluacionHu33Test
+P01 etiqueta=1 base=100 visual=100
+P02 etiqueta=1 base=68 visual=88
+P03 etiqueta=1 base=68 visual=88
+P04 etiqueta=1 base=88 visual=100
+P05 etiqueta=1 base=68 visual=68
+P06 etiqueta=1 base=88 visual=88
+N01 etiqueta=0 base=63 visual=38
+N02 etiqueta=0 base=88 visual=73
+N03 etiqueta=0 base=88 visual=98
+N04 etiqueta=0 base=33 visual=8
+N05 etiqueta=0 base=50 visual=50
+N06 etiqueta=0 base=0 visual=0
+Conjunto provisional: pares=12 positivos=6 negativos=6 fotos_unicas=18 ausencias_de_foto=6
+umbral=40 motor=base VP=6 FP=4 VN=2 FN=0 precision=0.600 recall=1.000 F1=0.750
+umbral=40 motor=visual VP=6 FP=3 VN=3 FN=0 precision=0.667 recall=1.000 F1=0.800
+umbral=60 motor=base VP=6 FP=3 VN=3 FN=0 precision=0.667 recall=1.000 F1=0.800
+umbral=60 motor=visual VP=6 FP=2 VN=4 FN=0 precision=0.750 recall=1.000 F1=0.857
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in pe.edu.ulima.ufound.service.EvaluacionHu33Test
+[INFO] Running pe.edu.ulima.ufound.service.ImagenAnalisisServiceTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.107 s -- in pe.edu.ulima.ufound.service.ImagenAnalisisServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.ObjetoPerdidoServiceTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in pe.edu.ulima.ufound.service.ObjetoPerdidoServiceTest
+[INFO] Running pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+2026-11-10T13:44:12.832-05:00  INFO 12460 --- [proyecto-ufound] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest]: RegistroCoincidenciaMySqlTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-10T13:44:13.007-05:00  INFO 12460 --- [proyecto-ufound] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration pe.edu.ulima.ufound.UFoundApplication for test class pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-11-10T13:44:13.132-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : Starting RegistroCoincidenciaMySqlTest using Java 17.0.19 with PID 12460 (started by User in C:\Users\User\Documents\ChatGPT\INGENIERIA DE SOFTWARE 2\UFOUND-HU33-nueva)
+2026-11-10T13:44:13.132-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : No active profile set, falling back to 1 default profile: "default"
+2026-11-10T13:44:15.227-05:00  INFO 12460 --- [proyecto-ufound] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-10T13:44:15.870-05:00  INFO 12460 --- [proyecto-ufound] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 574 ms. Found 6 JPA repository interfaces.
+2026-11-10T13:44:18.534-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-10T13:44:18.960-05:00  INFO 12460 --- [proyecto-ufound] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-11-10T13:44:19.188-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-10T13:44:20.281-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-10T13:44:20.422-05:00  INFO 12460 --- [proyecto-ufound] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-10T13:44:21.220-05:00  INFO 12460 --- [proyecto-ufound] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@64b242b3
+2026-11-10T13:44:21.226-05:00  INFO 12460 --- [proyecto-ufound] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-10T13:44:24.026-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate:
+    alter table coincidencias
+       modify column nivel_coincidencia enum ('ALTO','BAJO','MEDIO') not null
+Hibernate:
+    alter table historial_estados
+       modify column estado_anterior enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO')
+Hibernate:
+    alter table historial_estados
+       modify column estado_nuevo enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null
+Hibernate:
+    alter table historial_estados
+       modify column tipo_objeto enum ('ENCONTRADO','PERDIDO') not null
+Hibernate:
+    alter table objetos_encontrados
+       modify column categoria enum ('ACCESORIOS','BOTELLAS','DOCUMENTOS','OTROS','ROPA','TECNOLOGIA','UTILES') not null
+Hibernate:
+    alter table objetos_encontrados
+       modify column estado enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null
+Hibernate:
+    alter table objetos_encontrados
+       modify column ubicacion enum ('A1','A2','AREAS_DESCANSO','AREAS_VERDES','ASCENSORES','AUDITORIO_G','AUDITORIO_I2','AUDITORIO_O','AUDITORIO_ZUM','AULAS','AULA_MAGNA','AULA_MAGNA_A','AULA_MAGNA_B','AULA_MAGNA_O1','AULA_MAGNA_O2','AULA_MAGNA_O3','AULA_MAGNA_O4','B','BANOS','BIBLIOTECA','C','CAFETERIA','CAFETERIA_EDIFICIO_F2','CAFETERIA_EDIFICIO_O','CAFETERIA_PARQUE_CRUZ_DEL_SUR','CAJEROS_J','CAPILLA_D3','CENTRO_IDIOMAS','CONCESIONARIOS','D1','D2','D3','E1','E2','E3','EDIFICIO_A','EDIFICIO_B','EDIFICIO_C','EDIFICIO_D','EDIFICIO_E','EDUCACION_EJECUTIVA','ENTRADAS_SALIDAS','ESCALERAS','ESPACIOS_POSGRADO','ESPACIOS_PREGRADO','ESTACIONAMIENTO','ESTACIONAMIENTO_A1','ESTACIONAMIENTO_CRUZ_DEL_SUR','ESTACIONAMIENTO_H','ESTACIONAMIENTO_N','F1','F2','G','GALERIA_ULIMA','GIMNASIO_F1','H','I1','I2','J','K','L1','L2','L3','LABORATORIOS','LIBUN_A1','MODULOS_BIBLIOTECA','N','O1','O2','OFICINA_OBJETOS_PERDIDOS_A1_303','OTRO','P','PABELLON_CENTRAL','PASILLOS','PATIOS','PLAZAS','PLAZA_RECREATIVA','QUIOSCOS','RESTAURANTES_CAMPUS','SALAS_ESTUDIO','SALA_LECTURA','SALA_LECTURA_SILENCIOSA','TALLERES','TEATRO_CENTRO_CULTURAL','TIENDA_ULIMA_A1','ZONA_CONSULTA','ZONA_ESTANTERIAS','ZONA_TESIS') not null
+Hibernate:
+    alter table objetos_perdidos
+       modify column categoria enum ('ACCESORIOS','BOTELLAS','DOCUMENTOS','OTROS','ROPA','TECNOLOGIA','UTILES') not null
+Hibernate:
+    alter table objetos_perdidos
+       modify column estado enum ('ARCHIVADO','COINCIDENCIA_DETECTADA','DISPONIBLE_OFICINA','ENTREGADO','EN_CUSTODIA','EN_REVISION','RECUPERADO','REGISTRADO','REPORTADO') not null
+Hibernate:
+    alter table objetos_perdidos
+       modify column ubicacion enum ('A1','A2','AREAS_DESCANSO','AREAS_VERDES','ASCENSORES','AUDITORIO_G','AUDITORIO_I2','AUDITORIO_O','AUDITORIO_ZUM','AULAS','AULA_MAGNA','AULA_MAGNA_A','AULA_MAGNA_B','AULA_MAGNA_O1','AULA_MAGNA_O2','AULA_MAGNA_O3','AULA_MAGNA_O4','B','BANOS','BIBLIOTECA','C','CAFETERIA','CAFETERIA_EDIFICIO_F2','CAFETERIA_EDIFICIO_O','CAFETERIA_PARQUE_CRUZ_DEL_SUR','CAJEROS_J','CAPILLA_D3','CENTRO_IDIOMAS','CONCESIONARIOS','D1','D2','D3','E1','E2','E3','EDIFICIO_A','EDIFICIO_B','EDIFICIO_C','EDIFICIO_D','EDIFICIO_E','EDUCACION_EJECUTIVA','ENTRADAS_SALIDAS','ESCALERAS','ESPACIOS_POSGRADO','ESPACIOS_PREGRADO','ESTACIONAMIENTO','ESTACIONAMIENTO_A1','ESTACIONAMIENTO_CRUZ_DEL_SUR','ESTACIONAMIENTO_H','ESTACIONAMIENTO_N','F1','F2','G','GALERIA_ULIMA','GIMNASIO_F1','H','I1','I2','J','K','L1','L2','L3','LABORATORIOS','LIBUN_A1','MODULOS_BIBLIOTECA','N','O1','O2','OFICINA_OBJETOS_PERDIDOS_A1_303','OTRO','P','PABELLON_CENTRAL','PASILLOS','PATIOS','PLAZAS','PLAZA_RECREATIVA','QUIOSCOS','RESTAURANTES_CAMPUS','SALAS_ESTUDIO','SALA_LECTURA','SALA_LECTURA_SILENCIOSA','TALLERES','TEATRO_CENTRO_CULTURAL','TIENDA_ULIMA_A1','ZONA_CONSULTA','ZONA_ESTANTERIAS','ZONA_TESIS') not null
+Hibernate:
+    alter table usuarios
+       modify column rol enum ('ESTUDIANTE','OFICINA','SEGURIDAD') not null
+2026-11-10T13:44:24.623-05:00  INFO 12460 --- [proyecto-ufound] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-10T13:44:25.795-05:00  INFO 12460 --- [proyecto-ufound] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-10T13:44:29.186-05:00  WARN 12460 --- [proyecto-ufound] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-10T13:44:30.472-05:00  INFO 12460 --- [proyecto-ufound] [           main] p.e.u.u.s.RegistroCoincidenciaMySqlTest  : Started RegistroCoincidenciaMySqlTest in 17.435 seconds (process running for 46.851)
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        objetos_perdidos
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+Hibernate:
+    insert
+    into
+        objetos_encontrados
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+Hibernate:
+    select
+        c1_0.id_coincidencia,
+        c1_0.fecha_deteccion,
+        c1_0.nivel_coincidencia,
+        c1_0.id_objeto_encontrado,
+        c1_0.id_objeto_perdido,
+        c1_0.porcentaje_similitud
+    from
+        coincidencias c1_0
+    where
+        c1_0.id_objeto_perdido=?
+        and c1_0.id_objeto_encontrado=?
+Hibernate:
+    insert
+    into
+        coincidencias
+        (fecha_deteccion, nivel_coincidencia, id_objeto_encontrado, id_objeto_perdido, porcentaje_similitud)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    select
+        n1_0.id_notificacion,
+        n1_0.id_coincidencia,
+        n1_0.estado_leido,
+        n1_0.fecha_creacion,
+        n1_0.mensaje,
+        n1_0.id_usuario
+    from
+        notificaciones n1_0
+    where
+        n1_0.id_usuario=?
+        and n1_0.id_coincidencia=?
+Hibernate:
+    insert
+    into
+        notificaciones
+        (id_coincidencia, estado_leido, fecha_creacion, mensaje, id_usuario)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    update
+        objetos_perdidos
+    set
+        categoria=?,
+        color_visual=?,
+        confianza_visual=?,
+        descripcion=?,
+        estado=?,
+        fecha_hora=?,
+        imagen_url=?,
+        nombre=?,
+        tipo_visual=?,
+        ubicacion=?,
+        id_usuario=?
+    where
+        id_objeto=?
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+    where
+        op1_0.id_objeto=?
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+    where
+        oe1_0.id_objeto=?
+Hibernate:
+    select
+        count(*)
+    from
+        coincidencias c1_0
+Hibernate:
+    select
+        count(*)
+    from
+        notificaciones n1_0
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        usuarios
+        (activo, correo, nombre, password, rol)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        objetos_encontrados
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+Hibernate:
+    insert
+    into
+        objetos_perdidos
+        (categoria, color_visual, confianza_visual, descripcion, estado, fecha_hora, imagen_url, nombre, tipo_visual, ubicacion, id_usuario)
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        he1_0.id_historial,
+        he1_0.estado_anterior,
+        he1_0.estado_nuevo,
+        he1_0.fecha_cambio,
+        he1_0.id_objeto,
+        he1_0.tipo_objeto,
+        he1_0.id_usuario_responsable
+    from
+        historial_estados he1_0
+    where
+        he1_0.tipo_objeto=?
+        and he1_0.id_objeto=?
+    order by
+        he1_0.fecha_cambio
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+Hibernate:
+    select
+        c1_0.id_coincidencia,
+        c1_0.fecha_deteccion,
+        c1_0.nivel_coincidencia,
+        c1_0.id_objeto_encontrado,
+        c1_0.id_objeto_perdido,
+        c1_0.porcentaje_similitud
+    from
+        coincidencias c1_0
+    where
+        c1_0.id_objeto_perdido=?
+        and c1_0.id_objeto_encontrado=?
+Hibernate:
+    insert
+    into
+        coincidencias
+        (fecha_deteccion, nivel_coincidencia, id_objeto_encontrado, id_objeto_perdido, porcentaje_similitud)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    select
+        n1_0.id_notificacion,
+        n1_0.id_coincidencia,
+        n1_0.estado_leido,
+        n1_0.fecha_creacion,
+        n1_0.mensaje,
+        n1_0.id_usuario
+    from
+        notificaciones n1_0
+    where
+        n1_0.id_usuario=?
+        and n1_0.id_coincidencia=?
+Hibernate:
+    insert
+    into
+        notificaciones
+        (id_coincidencia, estado_leido, fecha_creacion, mensaje, id_usuario)
+    values
+        (?, ?, ?, ?, ?)
+Hibernate:
+    insert
+    into
+        historial_estados
+        (estado_anterior, estado_nuevo, fecha_cambio, id_objeto, tipo_objeto, id_usuario_responsable)
+    values
+        (?, ?, ?, ?, ?, ?)
+Hibernate:
+    update
+        objetos_perdidos
+    set
+        categoria=?,
+        color_visual=?,
+        confianza_visual=?,
+        descripcion=?,
+        estado=?,
+        fecha_hora=?,
+        imagen_url=?,
+        nombre=?,
+        tipo_visual=?,
+        ubicacion=?,
+        id_usuario=?
+    where
+        id_objeto=?
+Hibernate:
+    select
+        op1_0.id_objeto,
+        op1_0.categoria,
+        op1_0.color_visual,
+        op1_0.confianza_visual,
+        op1_0.descripcion,
+        op1_0.estado,
+        op1_0.fecha_hora,
+        op1_0.imagen_url,
+        op1_0.nombre,
+        op1_0.tipo_visual,
+        op1_0.ubicacion,
+        op1_0.id_usuario
+    from
+        objetos_perdidos op1_0
+    where
+        op1_0.id_objeto=?
+Hibernate:
+    select
+        oe1_0.id_objeto,
+        oe1_0.categoria,
+        oe1_0.color_visual,
+        oe1_0.confianza_visual,
+        oe1_0.descripcion,
+        oe1_0.estado,
+        oe1_0.fecha_hora,
+        oe1_0.imagen_url,
+        oe1_0.nombre,
+        oe1_0.tipo_visual,
+        oe1_0.ubicacion,
+        oe1_0.id_usuario
+    from
+        objetos_encontrados oe1_0
+    where
+        oe1_0.id_objeto=?
+Hibernate:
+    select
+        count(*)
+    from
+        coincidencias c1_0
+Hibernate:
+    select
+        count(*)
+    from
+        notificaciones n1_0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.45 s -- in pe.edu.ulima.ufound.service.RegistroCoincidenciaMySqlTest
+[INFO] Running pe.edu.ulima.ufound.service.UploadServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s -- in pe.edu.ulima.ufound.service.UploadServiceTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 91, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:19 min
+[INFO] Finished at: 2026-11-10T13:44:35-05:00
+[INFO] ------------------------------------------------------------------------

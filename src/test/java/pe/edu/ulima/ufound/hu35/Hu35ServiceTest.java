@@ -9,6 +9,7 @@ import pe.edu.ulima.ufound.repository.CoincidenciaRepository;
 import pe.edu.ulima.ufound.repository.ObjetoPerdidoRepository;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +30,13 @@ class Hu35ServiceTest {
     }
 
     @Test
-    void devuelveElReporteYLasCoincidenciasOrdenadasPorElRepositorio() {
+    void devuelveElReporteYLasCoincidencias() {
         Usuario estudiante = usuario(7L);
         ObjetoPerdido perdido = objetoPerdido(21L, estudiante);
         Coincidencia coincidencia = new Coincidencia();
 
         when(objetoPerdidoRepository.findById(21L)).thenReturn(Optional.of(perdido));
-        when(coincidenciaRepository
-                .findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(perdido))
+        when(coincidenciaRepository.findByObjetoPerdido(perdido))
                 .thenReturn(List.of(coincidencia));
 
         DetalleObjetoPerdidoHu35 resultado = service.obtenerDetalleConSugerencias(21L, estudiante);
@@ -44,8 +44,29 @@ class Hu35ServiceTest {
         assertSame(perdido, resultado.objeto());
         assertEquals(1, resultado.coincidencias().size());
         assertSame(coincidencia, resultado.coincidencias().get(0));
-        verify(coincidenciaRepository)
-                .findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(perdido);
+        verify(coincidenciaRepository).findByObjetoPerdido(perdido);
+    }
+
+    @Test
+    void ordenaPorPuntajeFechaEIdAunqueElRepositorioDevuelvaOtroOrden() {
+        Usuario estudiante = usuario(7L);
+        ObjetoPerdido perdido = objetoPerdido(21L, estudiante);
+        LocalDateTime ayer = LocalDateTime.of(2026, 11, 9, 10, 0);
+        LocalDateTime hoy = LocalDateTime.of(2026, 11, 10, 10, 0);
+        Coincidencia baja = coincidencia(5L, 40, hoy);
+        Coincidencia empateIdMenor = coincidencia(2L, 80, hoy);
+        Coincidencia masReciente = coincidencia(4L, 80, hoy);
+        Coincidencia masAntigua = coincidencia(3L, 80, ayer);
+        Coincidencia mayorPuntaje = coincidencia(1L, 95, ayer);
+
+        when(objetoPerdidoRepository.findById(21L)).thenReturn(Optional.of(perdido));
+        when(coincidenciaRepository.findByObjetoPerdido(perdido))
+                .thenReturn(List.of(baja, empateIdMenor, masAntigua, masReciente, mayorPuntaje));
+
+        List<Long> ids = service.obtenerDetalleConSugerencias(21L, estudiante).coincidencias().stream()
+                .map(Coincidencia::getIdCoincidencia).toList();
+
+        assertEquals(List.of(1L, 4L, 2L, 3L, 5L), ids);
     }
 
     @Test
@@ -54,8 +75,7 @@ class Hu35ServiceTest {
         ObjetoPerdido perdido = objetoPerdido(21L, estudiante);
 
         when(objetoPerdidoRepository.findById(21L)).thenReturn(Optional.of(perdido));
-        when(coincidenciaRepository
-                .findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(perdido))
+        when(coincidenciaRepository.findByObjetoPerdido(perdido))
                 .thenReturn(List.of());
 
         DetalleObjetoPerdidoHu35 resultado = service.obtenerDetalleConSugerencias(21L, estudiante);
@@ -99,5 +119,13 @@ class Hu35ServiceTest {
         objeto.setIdObjeto(id);
         objeto.setUsuario(propietario);
         return objeto;
+    }
+
+    private Coincidencia coincidencia(Long id, int puntaje, LocalDateTime fecha) {
+        Coincidencia coincidencia = new Coincidencia();
+        coincidencia.setIdCoincidencia(id);
+        coincidencia.setPorcentajeSimilitud(puntaje);
+        coincidencia.setFechaDeteccion(fecha);
+        return coincidencia;
     }
 }

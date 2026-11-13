@@ -1,0 +1,22 @@
+/* HU-31: estilos acotados; no modifica los estilos existentes. */
+#hu31-panel[hidden] { display: none !important; }
+#hu31-panel {
+    border: 1px solid #93c5fd;
+    background: #eff6ff;
+    color: #1e3a8a;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 12px;
+}
+#hu31-panel p { margin: 0 0 8px; line-height: 1.5; }
+#hu31-aplicar {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 7px;
+    background: #1d4ed8;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+}
+#hu31-aplicar:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+#hu31-aplicar:disabled { opacity: .5; cursor: not-allowed; }

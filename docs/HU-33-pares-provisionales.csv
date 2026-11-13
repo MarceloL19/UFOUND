@@ -1,0 +1,13 @@
+id;etiqueta_provisional;categoria_perdido;ubicacion_perdido;nombre_perdido;descripcion_perdido;foto_perdido;tipo_visual_perdido;color_visual_perdido;confianza_perdido;categoria_encontrado;ubicacion_encontrado;nombre_encontrado;descripcion_encontrado;foto_encontrado;tipo_visual_encontrado;color_visual_encontrado;confianza_encontrado
+P01;1;TECNOLOGIA;A2;Laptop gris;Funda negra con etiqueta;sim-p01.jpg;Laptop;Gris;0.81;TECNOLOGIA;A2;Laptop gris;Funda negra con etiqueta;sim-e01.jpg;Laptop;Gris;0.78
+P02;1;ACCESORIOS;BIBLIOTECA;Mochila negra;Bolsillo con cierre rojo;sim-p02.jpg;Mochila;Negro;0.73;ACCESORIOS;A1;Mochila oscura;Bolsillo con cierre rojo;sim-e02.jpg;Mochila;Negro;0.69
+P03;1;BOTELLAS;AULAS;Botella verde;Plastico con tapa;sim-p03.jpg;Botella;Verde;0.75;BOTELLAS;PASILLOS;Tomatodo verde;Plastico con tapa;sim-e03.jpg;Botella;Verde;0.68
+P04;1;TECNOLOGIA;LABORATORIOS;Mouse negro;Cable corto;sim-p04.jpg;Mouse;Negro;0.62;TECNOLOGIA;LABORATORIOS;Raton negro;Cable corto;sim-e04.jpg;Mouse;Negro;0.59
+P05;1;UTILES;A1;Libro algebra;Tapa azul;;;;;UTILES;A2;Libro calculo;Tapa azul;;;;
+P06;1;TECNOLOGIA;A2;Celular negro;Funda verde;sim-p06.jpg;Celular;Negro;0.71;TECNOLOGIA;A2;Telefono negro;Funda verde;;;;
+N01;0;TECNOLOGIA;BIBLIOTECA;Laptop negra;Marca lenovo;sim-p07.jpg;Laptop;Negro;0.84;TECNOLOGIA;BIBLIOTECA;Mouse blanco;Marca logitech;sim-e07.jpg;Mouse;Blanco;0.77
+N02;0;ACCESORIOS;A1;Mochila roja;Cierre metal;sim-p08.jpg;Mochila;Rojo;0.70;ACCESORIOS;A1;Maleta roja;Cierre metal;sim-e08.jpg;Maleta;Rojo;0.65
+N03;0;BOTELLAS;A2;Botella verde;Plastico tapa;sim-p09.jpg;Botella;Verde;0.76;BOTELLAS;A2;Botella morada;Plastico tapa;sim-e09.jpg;Botella;Morado;0.72
+N04;0;TECNOLOGIA;A1;Laptop negra;Funda negra;sim-p10.jpg;Laptop;Negro;0.80;UTILES;A1;Libro azul;Tapa negra;sim-e10.jpg;Libro;Azul;0.61
+N05;0;ACCESORIOS;A2;Bolso oscuro;Correa corta;;;;;ACCESORIOS;A2;Maleta clara;Ruedas dobles;;;;
+N06;0;BOTELLAS;PASILLOS;Botella roja;Tapa blanca;sim-p12.jpg;Botella;Rojo;0.66;TECNOLOGIA;AULAS;Celular azul;Pantalla rota;;;;

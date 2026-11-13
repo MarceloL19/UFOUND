@@ -42,7 +42,7 @@ public class Hu35Controller {
             model.addAttribute("sugerencias", detalle.coincidencias());
             return "detalle-objeto-perdido";
         } catch (RegistroObjetoException exception) {
-            redirectAttributes.addFlashAttribute("accesoDenegado", exception.getMessage());
+            redirectAttributes.addFlashAttribute("accesoDenegado", Hu35Service.MENSAJE_SIN_ACCESO);
             return "redirect:/objetos-perdidos/mis-reportes";
         }
     }

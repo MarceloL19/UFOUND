@@ -18,13 +18,16 @@ public class ObjetoEncontradoService {
     private final UploadService uploadService;
     private final EstadoObjetoService estadoObjetoService;
     private final CoincidenciaService coincidenciaService;
+    private final AtributosVisualesService atributosVisualesService;
 
     public ObjetoEncontradoService(ObjetoEncontradoRepository objetoEncontradoRepository, UploadService uploadService,
-                                   EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService) {
+                                   EstadoObjetoService estadoObjetoService, CoincidenciaService coincidenciaService,
+                                   AtributosVisualesService atributosVisualesService) {
         this.objetoEncontradoRepository = objetoEncontradoRepository;
         this.uploadService = uploadService;
         this.estadoObjetoService = estadoObjetoService;
         this.coincidenciaService = coincidenciaService;
+        this.atributosVisualesService = atributosVisualesService;
     }
 
     @Transactional
@@ -37,6 +40,11 @@ public class ObjetoEncontradoService {
         objeto.setUbicacion(form.getUbicacion());
         objeto.setDescripcion(form.getDescripcion().trim());
         objeto.setImagenUrl(uploadService.guardarImagenObjetoEncontrado(imagen));
+        atributosVisualesService.extraer(imagen).ifPresent(atributos -> {
+            objeto.setTipoVisual(atributos.tipo());
+            objeto.setColorVisual(atributos.color());
+            objeto.setConfianzaVisual(atributos.confianza());
+        });
         objeto.setUsuario(usuario);
 
         ObjetoEncontrado guardado = objetoEncontradoRepository.save(objeto);

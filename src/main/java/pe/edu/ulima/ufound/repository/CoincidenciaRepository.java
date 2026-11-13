@@ -17,10 +17,9 @@ public interface CoincidenciaRepository extends JpaRepository<Coincidencia, Long
 
     List<Coincidencia> findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(Usuario usuario);
 
-    /** Coincidencias de un reporte concreto, ordenadas de mayor a menor similitud. */
+    /** Coincidencias de un reporte concreto con los objetos encontrados cargados. */
     @EntityGraph(attributePaths = "objetoEncontrado")
-    List<Coincidencia> findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(
-            ObjetoPerdido objetoPerdido);
+    List<Coincidencia> findByObjetoPerdido(ObjetoPerdido objetoPerdido);
 
     long countByObjetoPerdidoUsuario(Usuario usuario);
 }

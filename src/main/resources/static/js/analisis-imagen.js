@@ -1,4 +1,3 @@
-
 "use strict";
 
 const botonAnalizar = document.getElementById("btn-analizar-imagen");
@@ -7,29 +6,42 @@ const campoImagen = document.querySelector('input[name="imagen"]');
 
 if (botonAnalizar && resultadoAnalisis && campoImagen) {
 
-    function limpiarImagenValid() {
-        campoImagen.value = "";
+    // Se invalida tanto al cambiar de foto como al repetir el análisis de la misma foto.
+    let versionImagen = 0;
 
-    }
     function mostrarResultado(mensaje, estado = "") {
         resultadoAnalisis.textContent = mensaje;
-        resultadoAnalisis.className =
-            "image-analyze-message " + estado;
+        resultadoAnalisis.className = "image-analyze-message " + estado;
+    }
+
+    function notificarInicio() {
+        document.dispatchEvent(new CustomEvent("ufound:imagen-analisis-iniciado"));
+    }
+
+    function notificarResultado(resultado) {
+        // HU-31 también necesita conocer los errores y los resultados sin detección.
+        document.dispatchEvent(new CustomEvent("ufound:imagen-analizada", {detail: resultado}));
     }
 
     campoImagen.addEventListener("change", () => {
+        versionImagen++;
+        // Si cambió la foto durante una solicitud, se puede analizar la nueva.
+        // El finally de la solicitud anterior no debe interferir con la nueva.
+        botonAnalizar.disabled = false;
+        notificarInicio();
         mostrarResultado("");
     });
 
     botonAnalizar.addEventListener("click", async () => {
+        // Primero se retira cualquier sugerencia anterior, aunque no haya archivo.
+        const versionSolicitud = ++versionImagen;
+        notificarInicio();
 
         const archivo = campoImagen.files?.[0];
-
         if (!archivo) {
-            mostrarResultado(
-                "Selecciona una imagen antes de analizarla.",
-                "error"
-            );
+            const mensaje = "Selecciona una imagen antes de analizarla.";
+            mostrarResultado(mensaje, "error");
+            notificarResultado({estado: "ERROR", mensaje});
             return;
         }
 
@@ -37,62 +49,67 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
         datos.append("imagen", archivo);
 
         botonAnalizar.disabled = true;
-        mostrarResultado("Validando imagen...", "processing");
+        mostrarResultado("Validando y analizando imagen...", "processing");
 
         try {
             const respuesta = await fetch("/imagenes/analizar", {
                 method: "POST",
                 body: datos,
                 credentials: "same-origin",
-                headers: {
-                    Accept: "application/json"
-                }
+                headers: {Accept: "application/json"}
             });
+            if (versionSolicitud !== versionImagen) return;
 
-            const tipoRespuesta =
-                respuesta.headers.get("content-type") || "";
-
+            const tipoRespuesta = respuesta.headers.get("content-type") || "";
             if (!tipoRespuesta.includes("application/json")) {
-                throw new Error(
-                    "El servidor no devolvió una respuesta JSON."
-                );
+                throw new Error("El servidor no devolvió una respuesta JSON.");
             }
 
             const resultado = await respuesta.json();
+            if (versionSolicitud !== versionImagen) return;
 
             if (!respuesta.ok) {
-                campoImagen.value = "";
-
-                mostrarResultado(
-                    (resultado.mensaje || "No se pudo validar la imagen.") +
-                    " El archivo fue retirado. Puedes continuar " +
-                    "con el registro manual.",
-                    "error"
-                );
-
+                if (respuesta.status === 400) {
+                    campoImagen.value = "";
+                }
+                const mensaje = resultado.mensaje ||
+                    "No se pudo analizar la imagen. Puedes continuar con el registro manual.";
+                notificarResultado({estado: "ERROR", mensaje});
+                mostrarResultado(mensaje, "error");
                 return;
             }
 
-            mostrarResultado(
-                "Imagen validada. Formato: " +
-                resultado.formato +
-                ". Lista para un análisis posterior.",
-                "success"
-            );
-
+            // Comunicar también SIN_DETECCION; HU-31 descarta la propuesta previa.
+            notificarResultado(resultado);
+            if (resultado.estado === "SUGERENCIA" && resultado.tipoProbable) {
+                const confianza = Math.round(resultado.confianza * 100);
+                const color = resultado.colorProbable || "no determinado";
+                mostrarResultado(
+                    "Sugerencia de IA: tipo " + resultado.tipoProbable +
+                    ", color " + color +
+                    ". Confianza orientativa del detector: " + confianza +
+                    "%. Confirma o corrige la información en el formulario antes de registrar.",
+                    "success"
+                );
+            } else {
+                mostrarResultado(
+                    resultado.mensaje ||
+                    "No hubo detección suficiente. Completa el registro manualmente.",
+                    "processing"
+                );
+            }
         } catch (error) {
-            console.error("Error al validar imagen:", error);
-
-            campoImagen.value = "";
-
-            mostrarResultado(
-                "No se pudo completar la validación. " +
-                "Puedes continuar con el registro manual.",
-                "error"
-            );
-
+            // Una respuesta tardía de una solicitud anterior nunca cambia la interfaz.
+            if (versionSolicitud !== versionImagen) return;
+            console.error("Error al analizar imagen:", error);
+            const mensaje =
+                "No se pudo completar el análisis. Puedes continuar con el registro manual.";
+            notificarResultado({estado: "ERROR", mensaje});
+            mostrarResultado(mensaje, "error");
         } finally {
-            botonAnalizar.disabled = false;
+            if (versionSolicitud === versionImagen) {
+                botonAnalizar.disabled = false;
+            }
         }
     });
 }

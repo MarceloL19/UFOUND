@@ -4,14 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import pe.edu.ulima.ufound.controller.ObjetoPerdidoController;
 import pe.edu.ulima.ufound.model.ObjetoPerdido;
 import pe.edu.ulima.ufound.model.Rol;
 import pe.edu.ulima.ufound.model.Usuario;
+import pe.edu.ulima.ufound.service.ObjetoPerdidoService;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class Hu35ControllerTest {
 
     private Hu35Service hu35Service;
+    private ObjetoPerdidoService objetoPerdidoService;
     private MockMvc mvc;
     private MockHttpSession session;
     private Usuario estudiante;
@@ -27,7 +32,9 @@ class Hu35ControllerTest {
     @BeforeEach
     void setUp() {
         hu35Service = mock(Hu35Service.class);
-        mvc = MockMvcBuilders.standaloneSetup(new Hu35Controller(hu35Service)).build();
+        objetoPerdidoService = mock(ObjetoPerdidoService.class);
+        mvc = MockMvcBuilders.standaloneSetup(new Hu35Controller(hu35Service),
+                new ObjetoPerdidoController(objetoPerdidoService)).build();
         estudiante = new Usuario();
         estudiante.setIdUsuario(7L);
         estudiante.setRol(Rol.ESTUDIANTE);
@@ -66,13 +73,23 @@ class Hu35ControllerTest {
     }
 
     @Test
-    void redirigeCuandoElReporteNoExisteONoPerteneceAlEstudiante() throws Exception {
-        when(hu35Service.obtenerDetalleConSugerencias(eq(21L), eq(estudiante)))
-                .thenThrow(new RegistroObjetoException("No se encontro el reporte o no tienes permisos para consultarlo."));
+    void elAvisoLlegaAMisReportesSiElReporteEsAjenoONoExiste() throws Exception {
+        when(hu35Service.obtenerDetalleConSugerencias(anyLong(), eq(estudiante)))
+                .thenThrow(new RegistroObjetoException(Hu35Service.MENSAJE_SIN_ACCESO));
+        when(objetoPerdidoService.listarPorUsuario(estudiante)).thenReturn(List.of());
 
-        mvc.perform(get("/objetos-perdidos/detalle/21").session(session))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/objetos-perdidos/mis-reportes"))
-                .andExpect(flash().attributeExists("accesoDenegado"));
+        for (long id : new long[]{21L, 99L}) {
+            MvcResult redireccion = mvc.perform(get("/objetos-perdidos/detalle/{id}", id).session(session))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(redirectedUrl("/objetos-perdidos/mis-reportes"))
+                    .andExpect(flash().attribute("accesoDenegado", Hu35Service.MENSAJE_SIN_ACCESO))
+                    .andReturn();
+
+            mvc.perform(get("/objetos-perdidos/mis-reportes").session(session)
+                            .flashAttrs(redireccion.getFlashMap()))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("mis-objetos-perdidos"))
+                    .andExpect(model().attribute("accesoDenegado", Hu35Service.MENSAJE_SIN_ACCESO));
+        }
     }
 }

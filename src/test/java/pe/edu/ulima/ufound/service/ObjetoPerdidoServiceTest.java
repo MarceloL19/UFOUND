@@ -44,7 +44,8 @@ class ObjetoPerdidoServiceTest {
                 uploadService,
                 estadoService,
                 coincidenciaService,
-                analizador);
+                analizador,
+                mock(AtributosVisualesService.class));
     }
 
     private RegistroObjetoPerdidoForm crearFormulario() {

@@ -1,0 +1,31 @@
+✔ integración: segundo análisis de la misma foto sin detección limpia la sugerencia y conserva selección manual (14.3139ms)
+✔ integración: error HTTP en reanálisis no conserva sugerencia ni modifica categoría (8.4757ms)
+✔ integración: fallo de red en reanálisis limpia propuesta y permite registro manual (4.1741ms)
+✔ integración: respuesta pendiente de HU-31 no reactiva sugerencia tras segundo análisis sin detección (3.5217ms)
+✔ integración: respuesta atrasada de HU-30 no altera el resultado de la foto nueva (3.6255ms)
+✔ integración: volver a analizar sin archivo también elimina propuesta antigua (3.8164ms)
+✔ integración: una respuesta antigua de HU-31 no reemplaza una sugerencia nueva (3.736ms)
+✔ integración: cambiar la imagen durante un análisis permite iniciar uno nuevo (3.4033ms)
+✔ HU31 sugiere sin modificar el formulario hasta confirmar y deja corregir (5.7739ms)
+✔ HU31 no presenta categoría inventada aunque backend la devuelva (1.4766ms)
+✔ HU31 ignora una sugerencia antigua si cambia la foto (3.8688ms)
+✔ HU31 no altera la categoría ante ausencia de detección (1.474ms)
+✔ HU32 completa solo los campos respaldados y marca cada uno como sugerido (11.7937ms)
+✔ HU32 no sobrescribe lo que el usuario ya había ingresado (2.3756ms)
+✔ HU32 conserva la edición del usuario: deja de ser sugerencia y no se deshace (3.1235ms)
+✔ HU32 retira sugerencias no editadas al cambiar la foto e ignora respuestas antiguas (2.6422ms)
+✔ HU32 no completa una categoría que no existe en el select (2.5771ms)
+✔ HU32 ignora análisis sin detección (2.2569ms)
+✔ HU32 deshacer invalida una respuesta pendiente (2.9356ms)
+✔ HU32 un nuevo análisis invalida una respuesta pendiente (3.9603ms)
+✔ HU32 limpia sugerencias ante SIN_DETECCION y conserva cambios manuales (2.3088ms)
+✔ HU32 limpia sugerencias ante ERROR y conserva cambios manuales (2.4343ms)
+✔ HU32 al iniciar otro análisis retira sugerencias y conserva la categoría manual (2.0297ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 363.9228
