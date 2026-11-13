@@ -23,7 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-/** HU-34: las coincidencias se muestran de mayor a menor puntaje con un desempate reproducible. */
+/**
+ * HU-34: las coincidencias se muestran de mayor a menor puntaje con un
+ * desempate reproducible.
+ */
 class OrdenCoincidenciasHu34Test {
 
     private static final LocalDateTime AYER = LocalDateTime.of(2026, 11, 9, 10, 0);
@@ -67,21 +70,41 @@ class OrdenCoincidenciasHu34Test {
     }
 
     @Test
-    void elOrdenUsaElPuntajeQueCalculaElMotorDeCoincidencias() {
-        // Los encontrados llegan del menos al más parecido; la lista debe invertir ese orden.
+    void elOrdenUsaElPuntajeVisualDeHu33() {
         ObjetoPerdido perdido = perdido();
         ObjetoEncontrado mochila = encontrado(10L, "Mochila gris", "Mochila gris con llavero",
                 CategoriaObjeto.ACCESORIOS);
-        ObjetoEncontrado laptopNegra = encontrado(11L, "Laptop negra Lenovo", "Laptop negra",
-                CategoriaObjeto.TECNOLOGIA);
-        ObjetoEncontrado laptopGris = encontrado(12L, "Laptop gris", "Laptop gris con stickers",
-                CategoriaObjeto.TECNOLOGIA);
+        ObjetoEncontrado candidatoDiscordante = encontrado(11L, perdido.getNombre(),
+                perdido.getDescripcion(), CategoriaObjeto.TECNOLOGIA);
+        ObjetoEncontrado candidatoCompatible = encontrado(12L, perdido.getNombre(),
+                perdido.getDescripcion(), CategoriaObjeto.TECNOLOGIA);
+
+        perdido.setImagenUrl("/pruebas/perdido.jpg");
+        perdido.setTipoVisual("Laptop");
+        perdido.setColorVisual("Gris");
+        perdido.setConfianzaVisual(0.95);
+
+        candidatoDiscordante.setImagenUrl("/pruebas/candidato-discordante.jpg");
+        candidatoDiscordante.setTipoVisual("Mouse");
+        candidatoDiscordante.setColorVisual("Negro");
+        candidatoDiscordante.setConfianzaVisual(0.95);
+
+        candidatoCompatible.setImagenUrl("/pruebas/candidato-compatible.jpg");
+        candidatoCompatible.setTipoVisual("Laptop");
+        candidatoCompatible.setColorVisual("Gris");
+        candidatoCompatible.setConfianzaVisual(0.95);
+
+        CalculadoraCoincidencia calculadora = new CalculadoraCoincidencia();
+        assertEquals(100, calculadora.calcularBase(perdido, candidatoCompatible));
+        assertEquals(100, calculadora.calcularBase(perdido, candidatoDiscordante));
 
         CoincidenciaRepository coincidencias = mock(CoincidenciaRepository.class);
         ObjetoEncontradoRepository encontrados = mock(ObjetoEncontradoRepository.class);
         NotificacionRepository notificaciones = mock(NotificacionRepository.class);
         List<Coincidencia> guardadas = new ArrayList<>();
-        when(encontrados.findAll()).thenReturn(List.of(mochila, laptopNegra, laptopGris));
+        // El candidato discordante recibe un ID mayor y ganaría si ambos puntajes
+        // siguieran empatados.
+        when(encontrados.findAll()).thenReturn(List.of(mochila, candidatoCompatible, candidatoDiscordante));
         when(coincidencias.findByObjetoPerdidoAndObjetoEncontrado(any(), any())).thenReturn(Optional.empty());
         when(coincidencias.save(any(Coincidencia.class))).thenAnswer(invocacion -> {
             Coincidencia coincidencia = invocacion.getArgument(0);
@@ -93,15 +116,16 @@ class OrdenCoincidenciasHu34Test {
         when(notificaciones.findByUsuarioAndCoincidencia(any(), any())).thenReturn(Optional.empty());
         when(coincidencias.findByObjetoPerdidoUsuario(perdido.getUsuario())).thenAnswer(invocacion -> guardadas);
         CoincidenciaService servicio = new CoincidenciaService(coincidencias, notificaciones,
-                mock(ObjetoPerdidoRepository.class), encontrados, mock(EstadoObjetoService.class));
+                mock(ObjetoPerdidoRepository.class), encontrados, mock(EstadoObjetoService.class),
+                calculadora);
 
         servicio.detectarParaObjetoPerdido(perdido);
         List<Coincidencia> lista = servicio.listarPorUsuario(perdido.getUsuario());
 
-        assertEquals(List.of(laptopGris, laptopNegra, mochila),
+        assertEquals(List.of(candidatoCompatible, candidatoDiscordante, mochila),
                 lista.stream().map(Coincidencia::getObjetoEncontrado).toList());
-        assertTrue(lista.get(0).getPorcentajeSimilitud() > lista.get(1).getPorcentajeSimilitud());
-        assertTrue(lista.get(1).getPorcentajeSimilitud() > lista.get(2).getPorcentajeSimilitud());
+        assertEquals(List.of(100, 75, 46),
+                lista.stream().map(Coincidencia::getPorcentajeSimilitud).toList());
     }
 
     @Test
@@ -115,7 +139,7 @@ class OrdenCoincidenciasHu34Test {
         when(repositorio.findByObjetoPerdidoUsuario(usuario)).thenReturn(List.of(datos));
         CoincidenciaService servicio = new CoincidenciaService(repositorio, mock(NotificacionRepository.class),
                 mock(ObjetoPerdidoRepository.class), mock(ObjetoEncontradoRepository.class),
-                mock(EstadoObjetoService.class));
+                mock(EstadoObjetoService.class), new CalculadoraCoincidencia());
         return servicio.listarPorUsuario(usuario);
     }
 
