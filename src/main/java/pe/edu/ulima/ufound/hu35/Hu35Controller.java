@@ -1,62 +1,76 @@
 package pe.edu.ulima.ufound.hu35;
 
-import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pe.edu.ulima.ufound.model.Coincidencia;
+import pe.edu.ulima.ufound.model.ObjetoPerdido;
 import pe.edu.ulima.ufound.model.Rol;
 import pe.edu.ulima.ufound.model.Usuario;
+import pe.edu.ulima.ufound.repository.CoincidenciaRepository;
+import pe.edu.ulima.ufound.repository.ObjetoPerdidoRepository;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
 
-@Controller
-public class Hu35Controller {
+import java.util.List;
+import java.util.Objects;
 
-    private final Hu35Service hu35Service;
+/**
+ * Consulta HU-35: muestra las coincidencias previamente calculadas
+ * para un reporte perdido, sin recalcularlas ni alterar estados.
+ */
+@Service
+public class Hu35Service {
 
-    public Hu35Controller(Hu35Service hu35Service) {
-        this.hu35Service = hu35Service;
+    private static final String MENSAJE_SIN_ACCESO =
+            "No se encontro el reporte o no tienes permisos para consultarlo.";
+
+    private final ObjetoPerdidoRepository objetoPerdidoRepository;
+    private final CoincidenciaRepository coincidenciaRepository;
+
+    public Hu35Service(
+            ObjetoPerdidoRepository objetoPerdidoRepository,
+            CoincidenciaRepository coincidenciaRepository) {
+
+        this.objetoPerdidoRepository = objetoPerdidoRepository;
+        this.coincidenciaRepository = coincidenciaRepository;
     }
 
-    @GetMapping("/objetos-perdidos/detalle/{id}")
-    public String verDetalleConSugerencias(
-            @PathVariable Long id,
-            HttpSession session,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+    @Transactional(readOnly = true)
+    public DetalleObjetoPerdidoHu35 obtenerDetalleConSugerencias(
+            Long idObjetoPerdido,
+            Usuario usuario) {
 
-        Object usuarioSesion = session.getAttribute("usuarioAutenticado");
-
-        if (!(usuarioSesion instanceof Usuario usuario)
+        // Validacion de entrada y autorizacion
+        if (idObjetoPerdido == null
+                || idObjetoPerdido <= 0
+                || usuario == null
+                || usuario.getIdUsuario() == null
                 || usuario.getRol() != Rol.ESTUDIANTE) {
 
-            redirectAttributes.addFlashAttribute(
-                    "accesoDenegado",
-                    "Solo el estudiante propietario puede consultar sus sugerencias."
-            );
-
-            return "redirect:/home";
+            throw new RegistroObjetoException(MENSAJE_SIN_ACCESO);
         }
 
-        try {
-            DetalleObjetoPerdidoHu35 detalle =
-                    hu35Service.obtenerDetalleConSugerencias(id, usuario);
+        // Obtener el reporte
+        ObjetoPerdido objeto = objetoPerdidoRepository
+                .findById(idObjetoPerdido)
+                .orElseThrow(() ->
+                        new RegistroObjetoException(MENSAJE_SIN_ACCESO));
 
-            model.addAttribute("usuario", usuario);
-            model.addAttribute("objeto", detalle.objeto());
-            model.addAttribute("sugerencias", detalle.coincidencias());
+        // Validar que pertenezca al estudiante autenticado
+        if (objeto.getUsuario() == null
+                || !Objects.equals(
+                        objeto.getUsuario().getIdUsuario(),
+                        usuario.getIdUsuario())) {
 
-            return "detalle-objeto-perdido";
-
-        } catch (RegistroObjetoException exception) {
-
-            redirectAttributes.addFlashAttribute(
-                    "accesoDenegado",
-                    exception.getMessage()
-            );
-
-            return "redirect:/objetos-perdidos/mis-reportes";
+            throw new RegistroObjetoException(MENSAJE_SIN_ACCESO);
         }
+
+        // Consultar coincidencias previamente calculadas
+        List<Coincidencia> coincidencias =
+                coincidenciaRepository
+                        .findByObjetoPerdidoOrderByPorcentajeSimilitudDescFechaDeteccionDesc(
+                                objeto
+                        );
+
+        return new DetalleObjetoPerdidoHu35(objeto, coincidencias);
     }
 }
