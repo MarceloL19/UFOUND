@@ -28,9 +28,9 @@ La sugerencia es informativa: consultar una coincidencia no confirma la propieda
 
 ## Integración con HU-33 y HU-34
 
-Esta rama incorpora el `main` que ya contiene HU-33 (PR #73). HU-35 presenta el porcentaje guardado por ese motor: no recalcula las coincidencias al abrir la página ni modifica las existentes.
+Esta rama incorpora el `main` que ya contiene HU-33 (PR #73) y HU-34 (PR #75). HU-35 presenta el porcentaje guardado por el motor de HU-33: no recalcula las coincidencias al abrir la página ni modifica las existentes.
 
-HU-34 (PR #75) aún no está integrada en `main`. Mientras tanto, `Hu35Service` aplica el mismo criterio acordado allí: porcentaje de similitud descendente, fecha de detección descendente e ID de coincidencia descendente. El repositorio consulta las coincidencias del reporte y carga el objeto encontrado; el servicio ordena incluso si llegan en otro orden. Cuando HU-34 se integre, sustituir el comparador local por `OrdenCoincidencias.POR_RELEVANCIA` para mantener una sola definición y repetir las pruebas sobre la combinación final.
+`Hu35Service` reutiliza directamente `OrdenCoincidencias.POR_RELEVANCIA` de HU-34. Las dos pantallas aplican así el mismo criterio: porcentaje de similitud descendente, fecha de detección descendente e ID de coincidencia descendente. El repositorio consulta las coincidencias del reporte y carga el objeto encontrado; el servicio las ordena incluso si llegan en otro orden.
 
 ## Archivos agregados
 

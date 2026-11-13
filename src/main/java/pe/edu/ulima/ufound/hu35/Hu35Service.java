@@ -7,9 +7,9 @@ import pe.edu.ulima.ufound.model.ObjetoPerdido;
 import pe.edu.ulima.ufound.model.Usuario;
 import pe.edu.ulima.ufound.repository.CoincidenciaRepository;
 import pe.edu.ulima.ufound.repository.ObjetoPerdidoRepository;
+import pe.edu.ulima.ufound.service.OrdenCoincidencias;
 import pe.edu.ulima.ufound.service.RegistroObjetoException;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,12 +21,6 @@ import java.util.Objects;
 public class Hu35Service {
 
     static final String MENSAJE_SIN_ACCESO = "No se pudo acceder al reporte solicitado.";
-
-    // Mismo criterio de HU-34 mientras su comparador no este integrado en main.
-    private static final Comparator<Coincidencia> POR_RELEVANCIA = Comparator
-            .comparing(Coincidencia::getPorcentajeSimilitud, Comparator.nullsLast(Comparator.reverseOrder()))
-            .thenComparing(Coincidencia::getFechaDeteccion, Comparator.nullsLast(Comparator.reverseOrder()))
-            .thenComparing(Coincidencia::getIdCoincidencia, Comparator.nullsLast(Comparator.reverseOrder()));
 
     private final ObjetoPerdidoRepository objetoPerdidoRepository;
     private final CoincidenciaRepository coincidenciaRepository;
@@ -52,7 +46,7 @@ public class Hu35Service {
         }
 
         List<Coincidencia> coincidencias = coincidenciaRepository.findByObjetoPerdido(objeto).stream()
-                .sorted(POR_RELEVANCIA)
+                .sorted(OrdenCoincidencias.POR_RELEVANCIA)
                 .toList();
 
         return new DetalleObjetoPerdidoHu35(objeto, coincidencias);
