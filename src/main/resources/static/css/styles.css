@@ -1282,6 +1282,18 @@ textarea:focus {
     color: #dc2626;
 }
 
+.match-rank {
+    color: #7e22ce;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.match-order-note {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
 .similarity-line {
     background: #edf2f7;
     border-radius: 999px;

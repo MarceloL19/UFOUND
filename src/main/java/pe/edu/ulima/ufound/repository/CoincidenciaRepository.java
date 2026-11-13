@@ -14,7 +14,7 @@ public interface CoincidenciaRepository extends JpaRepository<Coincidencia, Long
     Optional<Coincidencia> findByObjetoPerdidoAndObjetoEncontrado(ObjetoPerdido objetoPerdido,
                                                                   ObjetoEncontrado objetoEncontrado);
 
-    List<Coincidencia> findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(Usuario usuario);
+    List<Coincidencia> findByObjetoPerdidoUsuario(Usuario usuario);
 
     long countByObjetoPerdidoUsuario(Usuario usuario);
 }

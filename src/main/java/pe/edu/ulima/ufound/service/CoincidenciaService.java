@@ -55,7 +55,9 @@ public class CoincidenciaService {
 
     @Transactional(readOnly = true)
     public List<Coincidencia> listarPorUsuario(Usuario usuario) {
-        return coincidenciaRepository.findByObjetoPerdidoUsuarioOrderByPorcentajeSimilitudDescFechaDeteccionDesc(usuario);
+        return coincidenciaRepository.findByObjetoPerdidoUsuario(usuario).stream()
+                .sorted(OrdenCoincidencias.POR_RELEVANCIA)
+                .toList();
     }
 
     @Transactional(readOnly = true)

@@ -14,18 +14,20 @@
         <div>
             <h1>Coincidencias detectadas</h1>
             <p>Posibles relaciones entre tus reportes y objetos encontrados.</p>
+            <p class="match-order-note">Ordenadas de mayor a menor similitud. Con el mismo porcentaje, primero la detectada más recientemente.</p>
         </div>
         <span class="results-badge" th:text="${#lists.size(coincidencias) + ' resultado(s)'}">0 resultados</span>
     </section>
 
     <section class="matches-grid" th:if="${!#lists.isEmpty(coincidencias)}">
-        <article class="match-card" th:each="coincidencia : ${coincidencias}">
+        <article class="match-card" th:each="coincidencia, posicion : ${coincidencias}">
             <div class="object-thumb match-thumb">
                 <img th:if="${coincidencia.objetoEncontrado.imagenUrl != null}" th:src="@{${coincidencia.objetoEncontrado.imagenUrl}}" th:alt="${coincidencia.objetoEncontrado.nombre}">
                 <span th:if="${coincidencia.objetoEncontrado.imagenUrl == null}">Sin foto</span>
             </div>
             <div class="match-body">
                 <div class="match-meta">
+                    <span class="match-rank" th:text="${'#' + posicion.count}">#1</span>
                     <span class="level-pill"
                           th:classappend="${coincidencia.nivelCoincidencia.name().toLowerCase()}"
                           th:text="${coincidencia.nivelCoincidencia.etiqueta}">Nivel</span>
