@@ -30,11 +30,12 @@ La lista **Coincidencias** del estudiante se ordena con una regla única y repro
 - Orden de mayor a menor puntaje.
 - Desempate por fecha y por id.
 - Mismo resultado tras 25 mezclas aleatorias de la entrada.
-- Con el motor real de coincidencias, encontrados que llegan del menos al más parecido se muestran del más al
-  menos parecido.
+- Con `CalculadoraCoincidencia` de HU-33, dos candidatos que empatan en 100 puntos base quedan en 100 y 75
+  puntos al evaluar sus atributos visuales. El listado del estudiante muestra primero al candidato de
+  100 puntos, aunque ambos tengan la misma fecha de detección y el candidato de 75 puntos tenga el ID mayor.
 - Lista vacía.
 
-## Validación manual
+## Validación manual del orden con el motor base
 
 1. Se registraron cinco objetos encontrados: dos `Laptop gris` idénticos, `Laptop negra Lenovo`,
    `Mochila gris` y `Casaca azul`.
@@ -53,6 +54,5 @@ La lista **Coincidencias** del estudiante se ordena con una regla única y repro
 
 ## Dependencias y límites
 
-- HU-34 no cambia cómo se calcula el puntaje. Ordena por el puntaje que guarda el motor de coincidencias.
-- Cuando se integre el motor mejorado de HU-33, el orden usará ese puntaje sin más cambios.
-- Las coincidencias históricas no se recalculan: se ordenan con el puntaje que tenían guardado.
+- HU-33 está integrada. HU-34 ordena las coincidencias por el puntaje que guarda ese motor.
+- Las coincidencias históricas conservan el puntaje almacenado y se ordenan con ese valor.
