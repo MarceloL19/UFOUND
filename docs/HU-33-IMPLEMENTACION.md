@@ -21,6 +21,27 @@ puntaje_final = max(0, min(100, puntaje_base + ajuste_tipo + ajuste_color))
 
 El tipo tiene mas peso que el color porque este puede variar con luz y encuadre. Una discrepancia de tipo penaliza mas que una concordancia lo beneficia, para evitar unir objetos distintos de una misma categoria. El ajuste es acotado porque nombre y categoria pueden contener sugerencias de HU-32 y por tanto no son evidencia visual independiente. Esta es una regla explicita y comprobable, **no una calibracion estadistica**. Se mantienen 40 para crear coincidencia, 60 para notificar y cambiar el estado del perdido, y 60/80 para nivel medio/alto. La restriccion unica por pareja, permisos y flujos de notificacion existentes no cambian. Se separo el calculo en `CalculadoraCoincidencia`; una interfaz Strategy no aportaria claridad con estas dos formulas fijas.
 
+## Comparacion reproducible con pares etiquetados por Daniel
+
+`docs/HU-33-pares-equipo.csv` incorpora los **30 pares etiquetados por Daniel Sandoval** en `docs/hu33/hu33-pares-ampliado.csv` de la rama anterior `feature/HU-33-coincidencias-visuales`. Conserva las etiquetas, nombres, categorias, ubicaciones, descripciones, atributos visuales y justificaciones; adapta las columnas al formato de esta prueba. Son 14 positivos y 16 negativos, formados a partir de seis objetos perdidos y cinco encontrados del escenario controlado de clase. Un mismo objeto aparece en varios pares, por lo que se repiten sus atributos y la referencia logica de su foto. Las seis referencias `escenario-*.jpg` se asignaron durante la conversion para representar que habia atributos visuales persistidos; **no son rutas a fotos verificadas ni se ejecuta de nuevo el detector**. Una fila sin atributos visuales conserva vacia la foto, el tipo, el color y la confianza. Esta muestra no constituye una validacion independiente ni demuestra mejora general.
+
+`EvaluacionHu33Test` verifica que no haya ID de par duplicado, permite referencias de foto repetidas, y calcula ambos motores sobre exactamente los mismos pares con umbrales 40 y 60. Reproducir desde la raiz del proyecto:
+
+```powershell
+mvn -B '-Dtest=EvaluacionHu33Test' '-Dhu33.dataset=docs/HU-33-pares-equipo.csv' test
+```
+
+La comparacion con la regla de esta rama (fijada antes de incorporar el conjunto de Daniel) da:
+
+| Umbral | Motor | VP | FP | VN | FN | Precision | Recall | F1 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 40 | Base | 8 | 0 | 16 | 6 | 1.000 | 0.571 | 0.727 |
+| 40 | Visual | 8 | 0 | 16 | 6 | 1.000 | 0.571 | 0.727 |
+| 60 | Base | 6 | 0 | 16 | 8 | 1.000 | 0.429 | 0.600 |
+| 60 | Visual | 6 | 0 | 16 | 8 | 1.000 | 0.429 | 0.600 |
+
+Los puntajes visuales cambian en varios pares, pero ninguna prediccion cruza estos umbrales. Por tanto el F1 es igual al de la formula base en esta muestra. La aceptacion del alcance y de la evidencia sigue pendiente de la decision del Product Owner; hacen falta pares independientes y diversos para estimar rendimiento general.
+
 ## Evaluacion provisional, sin validacion del equipo
 
 `HU-33-pares-provisionales.csv` contiene **12 escenarios hipoteticos**, seis etiquetados positivos y seis negativos por esta implementacion. Sus 18 identificadores de foto son unicos, pero **no apuntan a fotos reales**: los atributos visuales y las etiquetas son simulados. Hay seis lados sin foto. Esto prueba el procedimiento de comparacion, no la precision del detector ni la identidad real de objetos. La regla se fijo antes de ejecutar esta evaluacion y no se ajusto tras ver los resultados. `EvaluacionHu33Test` usa los mismos pares y umbrales para ambos motores; imprime cada puntaje y la matriz de confusion. La salida completa esta en `evidencias/hu33/evaluacion-provisional-mvn-test.txt`.
@@ -34,10 +55,10 @@ El tipo tiene mas peso que el color porque este puede variar con luz y encuadre.
 
 **No hay una mejora demostrada**: el conjunto es pequeno, hipotetico y no fue etiquetado por el equipo. Incluso en el ejemplo N02, dos objetos distintos de la misma categoria superan el umbral tras el ajuste visual. La decision final requiere pares reales, etiquetas revisadas por el equipo, reglas fijadas antes de usar esos pares y aceptacion del Product Owner.
 
-`HU-33-plantilla-etiquetado.csv` proporciona las primeras 18 columnas que consume la prueba y columnas adicionales para revisor, fecha y motivo. Cada foto real debe tener identificador unico en todo el conjunto; si no hay foto, deje vacios foto, tipo, color y confianza. Registrar positivos y negativos variados, acordar la etiqueta entre revisores y separar pares para ajuste de regla de pares para evaluacion final. Guarde el archivo validado como `docs/HU-33-pares-equipo.csv` y ejecute:
+`HU-33-plantilla-etiquetado.csv` proporciona las primeras 18 columnas que consume la prueba y columnas adicionales para revisor, fecha y motivo. Cada par debe tener ID unico; un objeto y su foto pueden repetirse en varios pares. Si no hay foto, deje vacios foto, tipo, color y confianza. Registrar positivos y negativos variados, acordar la etiqueta entre revisores y separar pares para ajuste de regla de pares para evaluacion final. Para otro conjunto validado, guarde un CSV distinto y ejecute:
 
 ```powershell
-mvn -B '-Dtest=EvaluacionHu33Test' '-Dhu33.dataset=docs/HU-33-pares-equipo.csv' test
+mvn -B '-Dtest=EvaluacionHu33Test' '-Dhu33.dataset=docs/otro-conjunto-validado.csv' test
 ```
 
 ## Pruebas y reproduccion

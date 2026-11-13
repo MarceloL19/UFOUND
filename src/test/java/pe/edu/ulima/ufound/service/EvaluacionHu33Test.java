@@ -36,7 +36,8 @@ class EvaluacionHu33Test {
             assertTrue(c.length >= 18, linea);
             assertTrue(ids.add(c[0]), "ID repetido: " + c[0]);
             for (int indice : new int[]{6, 14}) {
-                if (!c[indice].isBlank()) assertTrue(fotos.add(c[indice]), "Foto repetida: " + c[indice]);
+                // Un mismo objeto puede participar en varios pares del conjunto etiquetado.
+                if (!c[indice].isBlank()) fotos.add(c[indice]);
                 else sinFoto++;
             }
             boolean positivo = switch (c[1]) {
@@ -59,7 +60,8 @@ class EvaluacionHu33Test {
         }
         assertTrue(ids.size() >= 12);
         assertTrue(positivos >= 4 && negativos >= 4 && sinFoto >= 2);
-        System.out.printf("Conjunto provisional: pares=%d positivos=%d negativos=%d fotos_unicas=%d ausencias_de_foto=%d%n",
+        System.out.printf("Conjunto %s: pares=%d positivos=%d negativos=%d fotos_unicas=%d ausencias_de_foto=%d%n",
+                System.getProperty("hu33.dataset", "docs/HU-33-pares-provisionales.csv"),
                 ids.size(), positivos, negativos, fotos.size(), sinFoto);
         for (int t = 0; t < 2; t++) {
             for (int motor = 0; motor < 2; motor++) {
