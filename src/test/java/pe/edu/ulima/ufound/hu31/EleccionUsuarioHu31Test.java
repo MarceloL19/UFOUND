@@ -34,7 +34,8 @@ class EleccionUsuarioHu31Test {
                 });
         ObjetoPerdidoService servicio = new ObjetoPerdidoService(
                 repositorio, mock(UploadService.class), mock(EstadoObjetoService.class),
-                mock(CoincidenciaService.class), new ImagenAnalisisService());
+                mock(CoincidenciaService.class), new ImagenAnalisisService(),
+                mock(AtributosVisualesService.class));
 
         ObjetoPerdido guardado = servicio.registrar(formulario, null, new Usuario());
         assertEquals(CategoriaObjeto.UTILES, guardado.getCategoria());
@@ -58,7 +59,7 @@ class EleccionUsuarioHu31Test {
                 });
         ObjetoEncontradoService servicio = new ObjetoEncontradoService(
                 repositorio, mock(UploadService.class), mock(EstadoObjetoService.class),
-                mock(CoincidenciaService.class));
+                mock(CoincidenciaService.class), mock(AtributosVisualesService.class));
 
         ObjetoEncontrado guardado = servicio.registrar(formulario, null, new Usuario());
         assertEquals(CategoriaObjeto.DOCUMENTOS, guardado.getCategoria());
