@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de objeto perdido | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="dashboard-page">
+<div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
+<div th:replace="~{fragments/layout :: sidebar('objetos', ${usuario})}"></div>
+<main class="dashboard-shell">
+    <a class="back-link" th:href="@{/objetos-perdidos/mis-reportes}">Volver a mis objetos perdidos</a>
+
+    <section class="section-title">
+        <div>
+            <h1>Detalle de tu objeto perdido</h1>
+            <p>Revisa la información de tu reporte y las posibles coincidencias encontradas.</p>
+        </div>
+        <span class="results-badge" th:text="${#lists.size(sugerencias) + ' sugerencia(s)'}">0 sugerencias</span>
+    </section>
+
+    <section class="status-header-card">
+        <div class="object-thumb status-thumb">
+            <img th:if="${objeto.imagenUrl != null}" th:src="@{${objeto.imagenUrl}}" th:alt="${objeto.nombre}">
+            <span th:if="${objeto.imagenUrl == null}">Sin foto</span>
+        </div>
+        <div>
+            <span class="status-pill">Objeto perdido</span>
+            <h1 th:text="${objeto.nombre}">Nombre del objeto</h1>
+            <p th:text="${objeto.categoria.etiqueta + ' · ' + objeto.ubicacion.etiqueta}">Categoría · Ubicación</p>
+            <p th:text="${#temporals.format(objeto.fechaHora, 'dd/MM/yyyy HH:mm')}">Fecha del reporte</p>
+        </div>
+        <strong class="current-status" th:text="${objeto.estado.etiqueta}">Reportado</strong>
+    </section>
+
+    <section class="match-detail-card">
+        <h2>Descripción de tu reporte</h2>
+        <p class="detail-description" th:text="${objeto.descripcion}">Descripción del objeto perdido.</p>
+        <div class="detail-actions">
+            <a class="secondary-button" th:href="@{/estados/{tipo}/{id}(tipo='PERDIDO', id=${objeto.idObjeto})}">Ver seguimiento del objeto</a>
+            <a class="secondary-button" th:href="@{/objetos-perdidos/mis-reportes}">Volver a mis reportes</a>
+        </div>
+    </section>
+
+    <section class="section-title" style="margin-top: 28px;">
+        <div>
+            <h2>Posibles coincidencias</h2>
+            <p>Objetos encontrados relacionados con las características de tu reporte, ordenados por similitud.</p>
+        </div>
+    </section>
+
+    <section class="matches-grid" th:if="${!#lists.isEmpty(sugerencias)}">
+        <article class="match-card" th:each="sugerencia : ${sugerencias}">
+            <div class="object-thumb match-thumb">
+                <img th:if="${sugerencia.objetoEncontrado.imagenUrl != null}"
+                     th:src="@{${sugerencia.objetoEncontrado.imagenUrl}}"
+                     th:alt="${sugerencia.objetoEncontrado.nombre}">
+                <span th:if="${sugerencia.objetoEncontrado.imagenUrl == null}">Sin foto</span>
+            </div>
+            <div class="match-body">
+                <div class="match-meta">
+                    <span class="level-pill"
+                          th:classappend="${sugerencia.nivelCoincidencia.name().toLowerCase()}"
+                          th:text="${sugerencia.nivelCoincidencia.etiqueta}">Nivel de coincidencia</span>
+                    <strong th:text="${sugerencia.porcentajeSimilitud + '% de similitud'}">80% de similitud</strong>
+                </div>
+                <h3 th:text="${sugerencia.objetoEncontrado.nombre}">Objeto encontrado</h3>
+                <p><strong>Categoría:</strong>
+                    <span th:text="${sugerencia.objetoEncontrado.categoria.etiqueta}">Categoría</span>
+                </p>
+                <p><strong>Ubicación:</strong>
+                    <span th:text="${sugerencia.objetoEncontrado.ubicacion.etiqueta}">Ubicación</span>
+                </p>
+                <p><strong>Estado actual:</strong>
+                    <span th:text="${sugerencia.objetoEncontrado.estado.etiqueta}">Estado</span>
+                </p>
+                <div class="similarity-line">
+                    <span th:style="'width:' + ${sugerencia.porcentajeSimilitud} + '%'"></span>
+                </div>
+                <div class="match-actions">
+                    <a class="primary-link"
+                       th:href="@{/coincidencias/{id}(id=${sugerencia.idCoincidencia})}">Consultar detalle</a>
+                    <small>Posible coincidencia</small>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="empty-state" th:if="${#lists.isEmpty(sugerencias)}">
+        <h2>Aún no encontramos coincidencias</h2>
+        <p>Cuando se registre un objeto encontrado que coincida con tu reporte, aparecerá aquí automáticamente.</p>
+    </section>
+
+    <p class="match-info-banner">
+        Las coincidencias son sugerencias informativas. Consultar un objeto no confirma su propiedad ni registra una entrega.
+    </p>
+</main>
+</body>
+</html>
