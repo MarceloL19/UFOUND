@@ -21,7 +21,7 @@
 <aside class="app-sidebar">
     <p>MENU PRINCIPAL</p>
     <nav>
-        <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''">Dashboard</a>
+        <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''">Inicio</a>
         <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/registrar}" th:classappend="${active == 'reportar'} ? ' active' : ''">Reportar objeto</a>
         <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/mis-reportes}" th:classappend="${active == 'objetos'} ? ' active' : ''">Mis objetos perdidos</a>
         <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/coincidencias}" th:classappend="${active == 'coincidencias'} ? ' active' : ''">Coincidencias</a>

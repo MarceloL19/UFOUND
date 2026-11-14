@@ -59,8 +59,8 @@
             if (!disponible) return;
 
             propuesta = resultado.categoria;
-            mensaje.textContent = "HU-31 sugiere: " + resultado.etiqueta +
-                    ". Puedes usarla o elegir otra categoría manualmente.";
+            mensaje.textContent = "Categoría sugerida: " + resultado.etiqueta +
+                    ". Puedes elegir otra en el formulario.";
             panel.hidden = false;
             botonAplicar.disabled = false;
         } catch (error) {

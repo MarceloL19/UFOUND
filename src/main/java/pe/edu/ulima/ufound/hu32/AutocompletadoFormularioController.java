@@ -40,7 +40,7 @@ public class AutocompletadoFormularioController {
                 datos.estado(), datos.tipoProbable(), datos.colorProbable());
         if (campos.isEmpty()) {
             return ResponseEntity.ok(new RespuestaAutocompletado("SIN_DATOS", campos,
-                    "El análisis no respalda ningún campo. Completa el formulario manualmente."));
+                    "Completa el formulario con los datos del objeto."));
         }
         return ResponseEntity.ok(new RespuestaAutocompletado("AUTOCOMPLETADO", campos,
                 "Revisa los campos sugeridos y corrígelos si hace falta. La ubicación debes indicarla tú."));
