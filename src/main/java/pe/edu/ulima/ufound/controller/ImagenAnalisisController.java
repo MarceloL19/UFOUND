@@ -60,7 +60,7 @@ public class ImagenAnalisisController {
 
             String mensaje = "SUGERENCIA".equals(visual.estado())
                     ? "Se encontraron características probables. Confirma o corrige los datos antes de registrar."
-                    : "La imagen es válida, pero no se identificó un objeto con suficiente confianza. Continúa manualmente.";
+                    : "No pudimos identificar el objeto en la imagen. Puedes completar el formulario manualmente.";
             return ResponseEntity
                     .ok(new RespuestaAnalisis(
                             visual.estado(),

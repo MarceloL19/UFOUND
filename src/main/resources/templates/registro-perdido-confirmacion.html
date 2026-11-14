@@ -11,9 +11,8 @@
 <div th:replace="~{fragments/layout :: sidebar('reportar', ${usuario})}"></div>
 <main class="dashboard-shell">
     <section class="confirmation-card">
-        <span>OK</span>
         <h1>Objeto perdido registrado</h1>
-        <p>Tu reporte fue guardado correctamente con el codigo:</p>
+        <p>Código de tu reporte</p>
         <strong th:text="${'UF-PER-' + idObjeto}">UF-PER-1</strong>
         <div class="confirmation-actions">
             <a class="secondary-button" th:href="@{/objetos-perdidos/registrar}">Registrar otro</a>

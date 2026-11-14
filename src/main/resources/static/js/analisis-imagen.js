@@ -85,16 +85,15 @@ if (botonAnalizar && resultadoAnalisis && campoImagen) {
                 const confianza = Math.round(resultado.confianza * 100);
                 const color = resultado.colorProbable || "no determinado";
                 mostrarResultado(
-                    "Sugerencia de IA: tipo " + resultado.tipoProbable +
-                    ", color " + color +
-                    ". Confianza orientativa del detector: " + confianza +
-                    "%. Confirma o corrige la información en el formulario antes de registrar.",
+                    "Tipo sugerido: " + resultado.tipoProbable +
+                    ". Color sugerido: " + color +
+                    ". Confianza del análisis: " + confianza + "%.",
                     "success"
                 );
             } else {
                 mostrarResultado(
                     resultado.mensaje ||
-                    "No hubo detección suficiente. Completa el registro manualmente.",
+                    "No pudimos identificar el objeto en la imagen. Puedes completar el formulario manualmente.",
                     "processing"
                 );
             }

@@ -123,7 +123,7 @@
     const items = completados.slice();
     if (conservados.length > 0) {
       items.push(
-        "Se conservó lo que ya habías ingresado en: " +
+        "Campos que ya habías completado: " +
           conservados.join(", ") +
           ".",
       );
@@ -131,19 +131,18 @@
 
     if (completados.length > 0) {
       mostrarPanel(
-        "Se completaron solo los campos respaldados por la imagen. Revísalos y corrígelos " +
-          "si hace falta antes de registrar. La ubicación debes indicarla tú.",
+        "Revisa los campos completados y corrígelos si hace falta. Selecciona la ubicación.",
         items,
       );
     } else if (conservados.length > 0) {
       mostrarPanel(
-        "No se modificó ningún campo porque ya los habías completado.",
+        "Conservamos los datos que ingresaste.",
         items,
       );
     } else {
       mostrarPanel(
         (resultado && resultado.mensaje) ||
-          "El análisis no respalda ningún campo. Completa el formulario manualmente.",
+          "Completa el formulario con los datos del objeto.",
         [],
       );
     }
