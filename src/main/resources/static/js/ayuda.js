@@ -26,6 +26,36 @@
     const enviar = formulario.querySelector('button[type="submit"]');
     const error = widget.querySelector('.assistant-error');
     const api = widget.dataset.api;
+    const llegadaApi = widget.dataset.llegadaApi;
+    const clave = 'ufound:ulises:' + api + ':' + widget.dataset.usuario;
+    const claveLlegada = clave + ':llegada';
+
+    // Comparar los valores detecta tambien autocompletados y selecciones de archivos.
+    function valores(form) {
+        return JSON.stringify(Array.from(form.elements).filter(campo => campo.name && !campo.disabled
+            && !['submit', 'button', 'hidden'].includes(campo.type)).map(campo => {
+            if (campo.type === 'file') return [campo.name, Array.from(campo.files).map(f => [f.name, f.size, f.lastModified])];
+            if (campo.type === 'checkbox' || campo.type === 'radio') return [campo.name, campo.checked];
+            if (campo.multiple) return [campo.name, Array.from(campo.selectedOptions).map(o => o.value)];
+            return [campo.name, campo.value];
+        }));
+    }
+    const formularios = Array.from(document.forms).filter(form => form !== formulario);
+    const iniciales = new Map(formularios.map(form => [form, valores(form)]));
+
+    function guardar(clave, valor) {
+        try {
+            if (valor === null) sessionStorage.removeItem(clave);
+            else sessionStorage.setItem(clave, valor);
+            return true;
+        } catch (_error) {
+            return false;
+        }
+    }
+
+    function leer(clave) {
+        try { return sessionStorage.getItem(clave); } catch (_error) { return null; }
+    }
 
     function mostrarError(texto) {
         error.textContent = texto;
@@ -67,13 +97,17 @@
             window.location.assign(respuesta.url);
             return null;
         }
+        if (!(respuesta.headers.get('content-type') || '').includes('application/json')) {
+            throw new Error('Respuesta inesperada');
+        }
         const estado = await respuesta.json();
         renderizar(estado);
-        return respuesta.ok;
+        return respuesta.ok ? estado : null;
     }
 
     async function abrir() {
         panel.hidden = false;
+        guardar(clave, 'abierto');
         toggle.setAttribute('aria-expanded', 'true');
         toggle.setAttribute('aria-label', 'Cerrar asistente de ayuda Ulises');
         const tema = widget.dataset.autoOpen === 'true' ? new URLSearchParams(location.search).get('tema') : null;
@@ -87,6 +121,7 @@
 
     function cerrarPanel() {
         panel.hidden = true;
+        guardar(clave, null);
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-label', 'Abrir asistente de ayuda Ulises');
         toggle.focus();
@@ -110,6 +145,7 @@
             mostrarError('Escribe una pregunta de 1 a 300 caracteres.');
             return;
         }
+        if (enviar.disabled) return;
         enviar.disabled = true;
         try {
             const correcto = await solicitar(api, {
@@ -117,7 +153,10 @@
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({ pregunta: texto })
             });
-            if (correcto) pregunta.value = '';
+            if (correcto) {
+                pregunta.value = '';
+                if (correcto.navegacion) await navegar(correcto.navegacion);
+            }
         } catch (_error) {
             mostrarError('No se pudo enviar la pregunta. Inténtalo nuevamente.');
         } finally {
@@ -126,5 +165,52 @@
         }
     });
 
-    if (widget.dataset.autoOpen === 'true') abrir();
+    async function confirmarLlegada(navegacion) {
+        await solicitar(llegadaApi, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ token: navegacion.token, ruta: location.pathname })
+        });
+    }
+
+    async function navegar(navegacion) {
+        const destino = new URL(navegacion.ruta, location.origin);
+        const base = new URL(api, location.origin).pathname.replace(/\/ayuda\/conversacion$/, '');
+        // La ruta se decide en el servidor; el navegador rechaza otros origenes y rutas ajenas a la app.
+        if (destino.origin !== location.origin || !destino.pathname.startsWith(base + '/')
+                || !navegacion.ruta.startsWith('/') || navegacion.ruta.startsWith('//')) {
+            throw new Error('Destino inesperado');
+        }
+        if (destino.pathname === location.pathname && !location.search) {
+            await confirmarLlegada(navegacion);
+            return;
+        }
+        const hayCambios = formularios.some(form => valores(form) !== iniciales.get(form));
+        if (hayCambios && !window.confirm('Tienes cambios sin guardar. ¿Quieres salir de este apartado y descartarlos?')) {
+            mostrarError('Navegación cancelada. Tus datos siguen en el formulario.');
+            return;
+        }
+        if (!guardar(claveLlegada, JSON.stringify(navegacion))) {
+            mostrarError('No pude preparar la navegación. Tu navegador debe permitir el almacenamiento de sesión para conservar la ayuda al llegar.');
+            return;
+        }
+        window.location.assign(destino.href);
+    }
+
+    async function iniciar() {
+        const pendiente = leer(claveLlegada);
+        guardar(claveLlegada, null);
+        if (widget.dataset.autoOpen !== 'true' && leer(clave) !== 'abierto' && !pendiente) return;
+        await abrir();
+        if (pendiente) {
+            try {
+                const navegacion = JSON.parse(pendiente);
+                if (navegacion.ruta === location.pathname) await confirmarLlegada(navegacion);
+            } catch (_error) {
+                mostrarError('No pude confirmar la llegada. Puedes hacer otra consulta.');
+            }
+        }
+    }
+
+    iniciar();
 })();
