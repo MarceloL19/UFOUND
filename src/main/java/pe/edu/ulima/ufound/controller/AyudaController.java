@@ -1,6 +1,7 @@
 package pe.edu.ulima.ufound.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -15,11 +16,15 @@ import pe.edu.ulima.ufound.service.AyudaService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.Objects;
 
 @Controller
 public class AyudaController {
 
     private static final String HISTORIAL = "ayudaHistorial";
+    private static final String USUARIO_HISTORIAL = "ayudaUsuario";
+    private static final String NAVEGACION = "ayudaNavegacion";
     private static final String ROL_HISTORIAL = "ayudaRol";
     private static final int MAX_PREGUNTA = 300;
     private static final int MAX_INTERCAMBIOS = 10;
@@ -48,14 +53,22 @@ public class AyudaController {
 
     @PostMapping("/ayuda/conversacion")
     @ResponseBody
-    public ResponseEntity<EstadoAyuda> responderEnVentana(@RequestParam String pregunta, HttpSession session) {
+    public ResponseEntity<EstadoAyuda> responderEnVentana(@RequestParam String pregunta, HttpSession session, HttpServletRequest request) {
         Rol rol = ((Usuario) session.getAttribute("usuarioAutenticado")).getRol();
         String texto = pregunta.strip();
         if (texto.isEmpty() || texto.length() > MAX_PREGUNTA) {
             return ResponseEntity.badRequest().body(estado(session, rol, "", "Escribe una pregunta de 1 a 300 caracteres."));
         }
-        agregarIntercambio(session, rol, texto);
-        return ResponseEntity.ok(estado(session, rol, "", ""));
+        synchronized (session) {
+            AyudaService.Destino destino = agregarIntercambio(session, rol, texto);
+            Navegacion navegacion = null;
+            if (destino != null) {
+                navegacion = new Navegacion(UUID.randomUUID().toString(), request.getContextPath() + destino.ruta());
+                session.setAttribute(NAVEGACION, new Pendiente(navegacion, destino));
+            }
+            EstadoAyuda estado = estado(session, rol, "", "");
+            return ResponseEntity.ok(new EstadoAyuda(estado.mensajes(), estado.temas(), "", "", navegacion));
+        }
     }
 
     @PostMapping("/ayuda")
@@ -72,31 +85,65 @@ public class AyudaController {
         return "redirect:/ayuda";
     }
 
-    private void agregarIntercambio(HttpSession session, Rol rol, String texto) {
-        String respuesta = ayudaService.responder(rol, texto);
+    @PostMapping("/ayuda/llegada")
+    @ResponseBody
+    public ResponseEntity<EstadoAyuda> confirmarLlegada(@RequestParam String token, @RequestParam String ruta,
+                                                       HttpSession session) {
+        Rol rol = ((Usuario) session.getAttribute("usuarioAutenticado")).getRol();
+        synchronized (session) {
+            historial(session, rol);
+            Pendiente pendiente = (Pendiente) session.getAttribute(NAVEGACION);
+            if (pendiente == null || !pendiente.navegacion().token().equals(token)
+                    || !pendiente.navegacion().ruta().equals(ruta)) {
+                return ResponseEntity.badRequest().body(estado(session, rol, "", "La navegación ya no está disponible. Puedes hacer otra consulta."));
+            }
+            List<Mensaje> mensajes = new ArrayList<>(historial(session, rol));
+            mensajes.add(new Mensaje("asistente", "Abrí el apartado " + pendiente.destino().titulo()
+                    + ". " + pendiente.destino().descripcion()));
+            guardarHistorial(session, mensajes);
+            session.removeAttribute(NAVEGACION);
+            return ResponseEntity.ok(estado(session, rol, "", ""));
+        }
+    }
+
+    private AyudaService.Destino agregarIntercambio(HttpSession session, Rol rol, String texto) {
+        AyudaService.Respuesta respuesta = ayudaService.orientar(rol, texto);
         synchronized (session) {
             List<Mensaje> mensajes = new ArrayList<>(historial(session, rol));
+            session.removeAttribute(NAVEGACION);
             mensajes.add(new Mensaje("usuario", texto));
-            mensajes.add(new Mensaje("asistente", respuesta));
-            if (mensajes.size() > 1 + 2 * MAX_INTERCAMBIOS) {
-                mensajes.subList(1, 3).clear();
-            }
-            session.setAttribute(HISTORIAL, List.copyOf(mensajes));
+            mensajes.add(new Mensaje("asistente", respuesta.texto()));
+            guardarHistorial(session, mensajes);
+            return respuesta.destino();
         }
+    }
+
+    private void guardarHistorial(HttpSession session, List<Mensaje> mensajes) {
+        while (mensajes.stream().filter(m -> m.emisor().equals("usuario")).count() > MAX_INTERCAMBIOS) {
+            mensajes.remove(1);
+            while (mensajes.size() > 1 && !mensajes.get(1).emisor().equals("usuario")) {
+                mensajes.remove(1);
+            }
+        }
+        session.setAttribute(HISTORIAL, List.copyOf(mensajes));
     }
 
     private EstadoAyuda estado(HttpSession session, Rol rol, String tema, String error) {
         List<Opcion> opciones = ayudaService.temasPara(rol).stream()
                 .map(t -> new Opcion(t.id(), t.titulo(), t.pregunta())).toList();
-        return new EstadoAyuda(historial(session, rol), opciones, ayudaService.preguntaSugerida(rol, tema), error);
+        return new EstadoAyuda(historial(session, rol), opciones, ayudaService.preguntaSugerida(rol, tema), error, null);
     }
 
     @SuppressWarnings("unchecked")
     private List<Mensaje> historial(HttpSession session, Rol rol) {
         synchronized (session) {
-            if (session.getAttribute(ROL_HISTORIAL) != rol) {
+            Long usuarioId = ((Usuario) session.getAttribute("usuarioAutenticado")).getIdUsuario();
+            if (session.getAttribute(ROL_HISTORIAL) != rol
+                    || !Objects.equals(session.getAttribute(USUARIO_HISTORIAL), usuarioId)) {
                 List<Mensaje> inicial = List.of(new Mensaje("asistente", ayudaService.saludo(rol)));
+                session.removeAttribute(NAVEGACION);
                 session.setAttribute(ROL_HISTORIAL, rol);
+                session.setAttribute(USUARIO_HISTORIAL, usuarioId);
                 session.setAttribute(HISTORIAL, inicial);
                 return inicial;
             }
@@ -110,6 +157,13 @@ public class AyudaController {
     public record Opcion(String id, String titulo, String pregunta) {
     }
 
-    public record EstadoAyuda(List<Mensaje> mensajes, List<Opcion> temas, String preguntaSugerida, String error) {
+    private record Pendiente(Navegacion navegacion, AyudaService.Destino destino) {
+    }
+
+    public record Navegacion(String token, String ruta) {
+    }
+
+    public record EstadoAyuda(List<Mensaje> mensajes, List<Opcion> temas, String preguntaSugerida, String error,
+                              Navegacion navegacion) {
     }
 }

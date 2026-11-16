@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pe.edu.ulima.ufound.model.Rol;
 
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -17,13 +18,19 @@ public class AyudaService {
             Rol.ESTUDIANTE, List.of(
                     new Tema("reportar-perdida", "Reportar una pérdida", "¿Cómo registro un objeto perdido?",
                             "En el menú, abre Reportar objeto (/objetos-perdidos/registrar). Escribe el título y la descripción, elige categoría y ubicación y, si tienes una, adjunta una foto. La fecha y hora se asignan automáticamente. Envía el formulario; después podrás ver el reporte en Mis objetos perdidos.",
-                            List.of("registrar un objeto perdido", "registrar objeto perdido", "registrar mi objeto perdido", "registro un objeto perdido", "registro mi objeto perdido", "registro de objeto perdido", "reportar objeto perdido", "reportar una perdida", "reportar perdida", "reporto una perdida", "perdi un objeto", "extravie un objeto")),
+                            List.of("registrar un objeto perdido", "registrar objeto perdido", "registrar mi objeto perdido", "registro un objeto perdido", "registro mi objeto perdido", "registro de objeto perdido", "reportar objeto perdido", "reportar una perdida", "reportar perdida", "reporto una perdida", "perdi un objeto", "extravie un objeto", "reportar objeto", "reportar algo que perdi", "registrar perdida", "reportar un objeto perdido", "registrar una perdida")),
                     new Tema("buscar-hallazgos", "Buscar hallazgos", "¿Cómo busco un objeto encontrado?",
                             "Abre Buscar (/buscar) desde el menú. Puedes buscar por nombre o descripción y filtrar por categoría, ubicación o fechas. En los resultados, selecciona Ver detalle para consultar un hallazgo.",
                             List.of("buscar", "busco", "busqueda", "filtrar", "filtros", "encontrar un objeto", "hallazgos", "objeto encontrado")),
                     new Tema("mis-reportes", "Mis reportes", "¿Dónde veo mis reportes?",
                             "Abre Mis objetos perdidos (/objetos-perdidos/mis-reportes) desde el menú. Allí aparecen los reportes registrados por tu cuenta y el estado de cada uno.",
                             List.of("mis reportes", "mi reporte", "mis objetos perdidos", "historial de reportes")),
+                    new Tema("coincidencias", "Coincidencias", "Quiero ver mis coincidencias",
+                            "Abre Coincidencias (/coincidencias). Revisa las posibles coincidencias de tus reportes y abre su detalle; el puntaje de similitud no demuestra que el objeto sea tuyo.",
+                            List.of("coincidencias", "coincidencia")),
+                    new Tema("notificaciones", "Notificaciones", "Quiero ver mis notificaciones",
+                            "Abre Notificaciones (/notificaciones). Consulta los avisos de tu cuenta y marca como leídos los que hayas revisado.",
+                            List.of("notificaciones", "notificacion", "avisos")),
                     new Tema("seguimiento", "Seguimiento", "¿Cómo hago seguimiento de mi objeto?",
                             "Abre Mis objetos perdidos (/objetos-perdidos/mis-reportes) y pulsa Ver estado en tu reporte. Verás su estado y la línea de tiempo. También puedes revisar Coincidencias (/coincidencias) y Notificaciones (/notificaciones) si se detectó un posible hallazgo.",
                             List.of("seguimiento", "seguir mi objeto", "estado", "rastrear", "progreso"))
@@ -45,12 +52,21 @@ public class AyudaService {
                             List.of("consultar estados", "consultar los estados", "consulto los estados", "consultar el estado", "ver estados", "ver el estado", "listado de estados", "seguimiento")),
                     new Tema("gestionar-estados", "Gestionar estados", "¿Cómo cambio el estado de un objeto?",
                             "Abre Estados (/oficina/estados), selecciona un objeto, elige el nuevo estado en su detalle y guarda el cambio. La actualización queda registrada en el historial del objeto.",
-                            List.of("gestionar estados", "gestionar los estados", "cambiar estado", "cambiar el estado", "cambio el estado", "actualizar estado", "actualizar el estado", "modificar estado"))
+                            List.of("gestionar estados", "gestionar los estados", "cambiar estado", "cambiar el estado", "cambio el estado", "actualizar estado", "actualizar el estado", "modificar estado")),
+                    new Tema("analisis-perdidas", "Análisis de pérdidas", "Quiero ver el análisis de pérdidas",
+                            "Abre Análisis de pérdidas (/analisis-perdidas). Selecciona un periodo para consultar las categorías y ubicaciones con más reportes de pérdida y compararlas con el periodo anterior.",
+                            List.of("analisis", "estadisticas", "categorias frecuentes", "tendencias", "perdidas por ubicacion"))
             )
     );
 
     public List<Tema> temasPara(Rol rol) {
-        return TEMAS.getOrDefault(rol, List.of());
+        List<Tema> temas = new ArrayList<>(TEMAS.getOrDefault(rol, List.of()));
+        if (!temas.isEmpty()) {
+            temas.add(new Tema("inicio", "Inicio", "Llévame al inicio",
+                    "Abre Inicio (/home) para consultar el resumen y los accesos disponibles para tu rol.",
+                    List.of("inicio", "home", "panel principal", "dashboard")));
+        }
+        return List.copyOf(temas);
     }
 
     public String preguntaSugerida(Rol rol, String id) {
@@ -66,9 +82,13 @@ public class AyudaService {
     }
 
     public String responder(Rol rol, String pregunta) {
+        return orientar(rol, pregunta).texto();
+    }
+
+    public Respuesta orientar(Rol rol, String pregunta) {
         String texto = normalizar(pregunta);
-        if (texto.isBlank() || mencionaCuenta(texto)) {
-            return limite(rol);
+        if (texto.isBlank() || mencionaCuenta(texto) || solicitaAccionAjena(rol, texto)) {
+            return new Respuesta(limite(rol), null);
         }
 
         List<Tema> coincidencias = temasPara(rol).stream()
@@ -78,15 +98,67 @@ public class AyudaService {
         if (rol == Rol.ESTUDIANTE && coincidencias.size() == 2 && !contieneFrase(texto, "y")
                 && coincidencias.stream().anyMatch(tema -> tema.id().equals("mis-reportes"))
                 && coincidencias.stream().anyMatch(tema -> tema.id().equals("seguimiento"))) {
-            return coincidencias.stream().filter(tema -> tema.id().equals("seguimiento"))
-                    .findFirst().orElseThrow().respuesta();
+            Tema tema = coincidencias.stream().filter(t -> t.id().equals("seguimiento"))
+                    .findFirst().orElseThrow();
+            return new Respuesta(tema.respuesta(), destino(rol, tema));
         }
-        return coincidencias.size() == 1 ? coincidencias.get(0).respuesta() : limite(rol);
+        if (coincidencias.size() != 1) {
+            return new Respuesta(limite(rol), null);
+        }
+        Tema tema = coincidencias.get(0);
+        return new Respuesta(tema.respuesta(), destino(rol, tema));
+    }
+
+    private boolean solicitaAccionAjena(Rol rol, String texto) {
+        return (rol != Rol.SEGURIDAD && List.of("registrar hallazgo", "registrar un hallazgo",
+                "registrar objeto encontrado", "registrar un objeto encontrado", "registro un hallazgo",
+                "encontre un objeto", "halle un objeto").stream().anyMatch(f -> contieneFrase(texto, f)))
+                || (rol != Rol.ESTUDIANTE && List.of("reportar perdida", "reportar una perdida",
+                "registrar objeto perdido", "registrar un objeto perdido", "mis reportes",
+                "mis coincidencias", "mis notificaciones").stream().anyMatch(f -> contieneFrase(texto, f)))
+                || (rol != Rol.OFICINA && List.of("cambiar estado", "cambiar el estado", "cambio el estado",
+                "gestionar estados", "actualizar estado", "actualizar el estado", "modificar estado",
+                "analisis de perdidas", "estadisticas").stream().anyMatch(f -> contieneFrase(texto, f)));
+    }
+
+    private Destino destino(Rol rol, Tema tema) {
+        return switch (tema.id()) {
+            case "reportar-perdida" -> new Destino("/objetos-perdidos/registrar", "Reportar objeto",
+                    "Puedes escribir el título y la descripción, elegir categoría y ubicación y adjuntar una foto. El reporte se crea cuando envías el formulario; aún no he registrado nada.");
+            case "buscar-hallazgos" -> new Destino("/buscar", "Buscar",
+                    "Puedes buscar por nombre o descripción, filtrar los hallazgos y abrir su detalle.");
+            case "mis-reportes", "seguimiento" -> new Destino("/objetos-perdidos/mis-reportes", "Mis objetos perdidos",
+                    "Puedes consultar tus reportes y pulsar Ver estado para revisar su línea de tiempo. Elige el reporte que quieres seguir.");
+            case "coincidencias" -> new Destino("/coincidencias", "Coincidencias",
+                    "Puedes consultar posibles coincidencias y abrir su detalle. La similitud no es una probabilidad de propiedad.");
+            case "notificaciones" -> new Destino("/notificaciones", "Notificaciones",
+                    "Puedes revisar tus avisos y marcarlos como leídos. No he marcado ninguna notificación por ti.");
+            case "registrar-hallazgo" -> new Destino("/objetos-encontrados/registrar", "Registrar hallazgo",
+                    "Puedes completar nombre, descripción, categoría, ubicación y una foto opcional. El hallazgo se registra al enviar el formulario; aún no he registrado nada.");
+            case "consultar-hallazgos", "seguimiento-hallazgo" -> new Destino("/objetos-encontrados", "Objetos encontrados",
+                    "Puedes consultar los hallazgos y abrir Ver detalle o Ver estado para revisar su línea de tiempo. Los cambios de estado corresponden a Oficina.");
+            case "consultar-estados", "gestionar-estados" -> new Destino("/oficina/estados", "Estados",
+                    "Puedes consultar la actividad de objetos perdidos y encontrados y abrir uno para revisar su historial o cambiar su estado. No he cambiado ningún estado.");
+            case "analisis-perdidas" -> new Destino("/analisis-perdidas", "Análisis de pérdidas",
+                    "Puedes seleccionar el periodo, consultar categorías y ubicaciones frecuentes y comparar con el periodo anterior. Se cuentan reportes de pérdida, no hallazgos.");
+            case "inicio" -> new Destino("/home", "Inicio", switch (rol) {
+                case ESTUDIANTE -> "Puedes consultar el resumen de tus reportes, coincidencias y notificaciones y acceder a las funciones de estudiante.";
+                case SEGURIDAD -> "Puedes consultar los hallazgos recientes y acceder al registro y listado de objetos encontrados.";
+                case OFICINA -> "Puedes consultar el resumen administrativo y acceder a Estados y Análisis de pérdidas.";
+            });
+            default -> throw new IllegalArgumentException("Tema sin destino");
+        };
+    }
+
+    public record Respuesta(String texto, Destino destino) {
+    }
+
+    public record Destino(String ruta, String titulo, String descripcion) {
     }
 
     private String limite(Rol rol) {
         return "No tengo una respuesta segura para esa consulta. Solo puedo orientar sobre "
-                + opciones(rol) + ". Elige uno de esos temas o formula una pregunta más específica.";
+                + opciones(rol) + ". ¿A qué apartado quieres ir? Elige un tema o formula una pregunta más específica.";
     }
 
     private String opciones(Rol rol) {

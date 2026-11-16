@@ -18,6 +18,8 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -62,7 +64,7 @@ class AyudaControllerTest {
                 .andExpect(content().string(containsString("data-api=\"/ayuda/conversacion\"")));
         assertEquals(1, historial(sesion).size());
         mvc.perform(get("/ayuda/conversacion").session(sesion).param("tema", "reportar-perdida"))
-                .andExpect(jsonPath("$.temas.length()").value(4))
+                .andExpect(jsonPath("$.temas.length()").value(7))
                 .andExpect(jsonPath("$.preguntaSugerida").value("¿Cómo registro un objeto perdido?"))
                 .andExpect(content().string(not(containsString("Gestionar estados"))));
     }
@@ -147,6 +149,98 @@ class AyudaControllerTest {
         mvc.perform(get("/uploads/objetos-perdidos/mochila-negra.jpg"))
                 .andExpect(status().isOk())
                 .andExpect(content().bytes(foto));
+    }
+
+
+    @Test
+    void confirmaSoloUnaVezEnElDestinoYConservaLaConversacion() throws Exception {
+        MockHttpSession sesion = sesion(Rol.ESTUDIANTE);
+        JsonNode navegacion = enviar(sesion, "Quiero ver mis coincidencias").get("navegacion");
+        assertEquals("/coincidencias", navegacion.get("ruta").asText());
+        mvc.perform(get("/ayuda/conversacion").session(sesion))
+                .andExpect(jsonPath("$.navegacion").isEmpty())
+                .andExpect(jsonPath("$.mensajes.length()").value(3));
+        mvc.perform(post("/ayuda/llegada").session(sesion)
+                        .param("token", navegacion.get("token").asText()).param("ruta", "/coincidencias"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.mensajes[3].texto").value(containsString("Abrí el apartado Coincidencias")))
+                .andExpect(jsonPath("$.mensajes[3].texto").value(containsString("probabilidad de propiedad")))
+                .andExpect(jsonPath("$.navegacion").isEmpty());
+        mvc.perform(post("/ayuda/llegada").session(sesion)
+                        .param("token", navegacion.get("token").asText()).param("ruta", "/coincidencias"))
+                .andExpect(status().isBadRequest());
+        assertEquals(4, historial(sesion).size());
+    }
+
+    @Test
+    void rechazaRutaAlteradaTokenAjenoYCambioDeRol() throws Exception {
+        MockHttpSession sesion = sesion(Rol.SEGURIDAD);
+        JsonNode n = enviar(sesion, "Quiero registrar un hallazgo").get("navegacion");
+        mvc.perform(post("/ayuda/llegada").session(sesion).param("token", n.get("token").asText())
+                        .param("ruta", "/oficina/estados"))
+                .andExpect(status().isBadRequest());
+        mvc.perform(post("/ayuda/llegada").session(sesion(Rol.SEGURIDAD)).param("token", n.get("token").asText())
+                        .param("ruta", n.get("ruta").asText()))
+                .andExpect(status().isBadRequest());
+        ((Usuario) sesion.getAttribute("usuarioAutenticado")).setRol(Rol.OFICINA);
+        mvc.perform(post("/ayuda/llegada").session(sesion).param("token", n.get("token").asText())
+                        .param("ruta", n.get("ruta").asText()))
+                .andExpect(status().isBadRequest());
+        assertEquals(1, historial(sesion).size());
+    }
+
+    @Test
+    void invalidaNavegacionAnteriorConNuevaConsultaYNoAceptaPreguntasLargas() throws Exception {
+        MockHttpSession sesion = sesion(Rol.ESTUDIANTE);
+        JsonNode n = enviar(sesion, "Quiero ver mis reportes").get("navegacion");
+        assertTrue(enviar(sesion, "Quiero buscar y ver mis notificaciones").get("navegacion").isNull());
+        mvc.perform(post("/ayuda/llegada").session(sesion).param("token", n.get("token").asText())
+                        .param("ruta", n.get("ruta").asText()))
+                .andExpect(status().isBadRequest());
+        mvc.perform(post("/ayuda/conversacion").session(sesion).param("pregunta", "a".repeat(301)))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.navegacion").isEmpty());
+        mvc.perform(post("/ayuda/llegada").param("token", "invalido").param("ruta", "/buscar"))
+                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/login"));
+        mvc.perform(post("/ayuda/conversacion").param("pregunta", "buscar"))
+                .andExpect(status().is3xxRedirection()).andExpect(redirectedUrl("/login"));
+    }
+
+    @Test
+    void cambiaDeCuentaDelMismoRolSinReutilizarHistorialNiDestino() throws Exception {
+        MockHttpSession sesion = sesion(Rol.ESTUDIANTE);
+        ((Usuario) sesion.getAttribute("usuarioAutenticado")).setIdUsuario(1L);
+        JsonNode n = enviar(sesion, "Quiero buscar").get("navegacion");
+        ((Usuario) sesion.getAttribute("usuarioAutenticado")).setIdUsuario(2L);
+        mvc.perform(post("/ayuda/llegada").session(sesion).param("token", n.get("token").asText())
+                        .param("ruta", n.get("ruta").asText()))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.mensajes.length()").value(1));
+    }
+
+    @Test
+    void respetaContextoDeDespliegue() throws Exception {
+        mvc.perform(post("/ufound/ayuda/conversacion").contextPath("/ufound")
+                        .session(sesion(Rol.OFICINA)).param("pregunta", "Quiero ver estadísticas"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.navegacion.ruta").value("/ufound/analisis-perdidas"));
+    }
+
+    @Test
+    void limitaHistorialPorIntercambiosCompletosIncluyendoLlegadas() throws Exception {
+        MockHttpSession sesion = sesion(Rol.ESTUDIANTE);
+        for (int i = 0; i < 12; i++) {
+            JsonNode n = enviar(sesion, "Quiero buscar").get("navegacion");
+            mvc.perform(post("/ayuda/llegada").session(sesion).param("token", n.get("token").asText())
+                            .param("ruta", n.get("ruta").asText())).andExpect(status().isOk());
+        }
+        assertEquals(31, historial(sesion).size());
+        assertEquals("usuario", historial(sesion).get(1).emisor());
+        assertEquals(10, historial(sesion).stream().filter(m -> m.emisor().equals("usuario")).count());
+    }
+
+    private JsonNode enviar(MockHttpSession sesion, String pregunta) throws Exception {
+        String json = mvc.perform(post("/ayuda/conversacion").session(sesion).param("pregunta", pregunta))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString(java.nio.charset.StandardCharsets.UTF_8);
+        return new ObjectMapper().readTree(json);
     }
 
     private MockHttpSession sesion(Rol rol) {

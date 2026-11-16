@@ -33,7 +33,7 @@
         <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/buscar}" th:classappend="${active == 'buscar'} ? ' active' : ''">Buscar</a>
     </nav>
 </aside>
-    <div class="assistant-widget" th:attr="data-api=@{/ayuda/conversacion},data-auto-open=${active == 'ayuda'}">
+    <div class="assistant-widget" th:attr="data-api=@{/ayuda/conversacion},data-llegada-api=@{/ayuda/llegada},data-usuario=${usuario.idUsuario},data-auto-open=${active == 'ayuda'}">
         <section id="assistant-panel" class="assistant-panel" aria-label="Conversación con Ulises" hidden>
             <header class="assistant-header">
                 <img th:src="@{/img/ulises-asistente.png}" alt="" width="42" height="42">
