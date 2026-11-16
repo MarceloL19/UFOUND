@@ -13,7 +13,7 @@ Esta sección sustituye las afirmaciones de estado actual del registro históric
 | Retrospectiva #43 | Abierta; aporte de Marcelo publicado, pendiente participación del resto y consolidación de acuerdos |
 | Coordinación #64 | Abierta; seguimiento de documentación y cierre administrativo del Sprint 2 |
 | Sprint 3 y entrega final | Milestones cerrados, con cuatro y tres issues cerrados respectivamente |
-| Sprint 1 | Milestone abierto, sin issues asociados; conservar límites de la evidencia de estabilización |
+| Sprint 1 | Milestone cerrado administrativamente, sin issues asociados; descripción de cierre y límites de evidencia conservados |
 | Caso simulado #40 | Cerrado como Not planned, con revisión de código documentada; no representa una corrección implementada |
 | PR #72 | Cerrada sin fusionar; sustituida por #75 |
 
@@ -27,7 +27,7 @@ La consulta del Project mostró 29 SP del Sprint 2: HU-26=8, HU-27=5, HU-28=3, H
 
 Sprint 3 y las historias finales aparecían sin SP. El seguimiento, tareas y PR no duplican puntos de historias. Las capturas iniciales de Insights no reflejan el cierre actual y el historial de importación no demuestra progreso previo. Los cierres de noviembre no acreditan entregas en septiembre u octubre.
 
-El plan ubica HU-33 a HU-35 en la entrega final, sin Sprint 4. En el tablero se observaron con iteración Sprint 3 y milestone Entrega final. Debe conciliarse esa asignación antes de interpretar métricas por iteración; esta edición no cambia el Project.
+El plan ubica HU-33 a HU-35 en la entrega final, sin Sprint 4. Se verificó la conciliación del tablero: las tres historias conservan Status Done y milestone Entrega final - Release 2, con el campo Sprint vacío. HU-29 a HU-32 permanecen en Sprint 3.
 
 ### Evidencia técnica y límites
 
@@ -35,7 +35,7 @@ La evidencia de Sprint 1 conserva su fecha 20/09/2026 y cinco pruebas de AuthSer
 
 HU-33, HU-34 y HU-35 están integradas mediante PR #73, #75 y #76. La evaluación de 30 pares de HU-33 no demostró mejora de precisión en los umbrales analizados; véase [su documentación](HU-33-IMPLEMENTACION.md). Cerrar las historias no convierte ese resultado en una mejora estadística demostrada.
 
-El cierre del Project sigue pendiente de terminar #43 y #64 y resolver los milestones abiertos. Esta actualización documenta el avance; no declara cerrado el proyecto completo.
+El cierre del Project sigue pendiente de terminar #43 y #64 y cerrar el milestone Sprint 2. Esta actualización documenta el avance; no declara cerrado el proyecto completo.
 
 ## Registro histórico de preparación del laboratorio
 

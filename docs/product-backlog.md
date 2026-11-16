@@ -76,7 +76,7 @@ No duplicar los Story Points de una historia en sus tareas. El seguimiento admin
 - HU-33: PR #73; evaluación comparativa y limitaciones en [HU-33-IMPLEMENTACION.md](HU-33-IMPLEMENTACION.md). No se demostró mejora de precisión en el conjunto de 30 pares evaluado.
 - HU-34: PR #75; orden descendente por puntaje, fecha e ID. La PR anterior #72 quedó cerrada sin fusionar.
 - HU-35: PR #76; consulta de sugerencias para reportes propios, sin confirmar propiedad ni entrega.
-- Milestones Sprint 3 y Entrega final cerrados; Sprint 1 y Sprint 2 abiertos al corte.
+- Milestones Sprint 1, Sprint 3 y Entrega final cerrados; Sprint 2 abierto al corte. El cierre de Sprint 1 es administrativo y conserva sus límites de evidencia.
 - Seguimiento pendiente: retrospectiva #43 y documentación/cierre administrativo #64.
 
-HU-33 a HU-35 se mantienen como entrega final en este plan. En el Project se observaron con iteración Sprint 3 y milestone Entrega final; esa diferencia debe conciliarse antes de utilizar la iteración como métrica de alcance. Esta edición documental no modifica campos del tablero.
+HU-33 a HU-35 se mantienen como entrega final en este plan. Se verificó su asignación corregida en el Project: campo Sprint vacío, Status Done y milestone Entrega final - Release 2. HU-29 a HU-32 conservan Sprint 3. No se crea Sprint 4 ni se añaden estimaciones retrospectivas.

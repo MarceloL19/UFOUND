@@ -128,7 +128,7 @@ Corte de seguimiento: **16/11/2026**. Se mantienen tres sprints y una entrega fi
 
 | Entrega | Fecha prevista | Alcance | Estado al corte |
 |---|---|---|---|
-| Sprint 1 | 18/09/2026 | Estabilización de R1; autenticación, sesión y home por rol | Evidencia de cinco pruebas de AuthService del 20/09; milestone abierto sin issues asociados |
+| Sprint 1 | 18/09/2026 | Estabilización de R1; autenticación, sesión y home por rol | Evidencia de cinco pruebas de AuthService del 20/09; milestone cerrado administrativamente, sin issues asociados |
 | Sprint 2 | 09/10/2026 | HU-26, 27, 28, 36, 37 y 38 | Seis historias cerradas como Completed; Daily #41 y Review #42 cerrados; retrospectiva #43 abierta |
 | Sprint 3 | 30/10/2026 | HU-29 a HU-32: registro asistido por imágenes | Cuatro issues cerrados como Completed y milestone cerrado |
 | Entrega final | 13/11/2026 | HU-33 a HU-35: coincidencias con atributos visuales, orden y sugerencias | Tres issues cerrados como Completed y milestone cerrado |
@@ -158,7 +158,7 @@ La consulta del Project mostró 29 SP en las seis HU del Sprint 2: 8, 5, 3, 5, 3
 
 Los gráficos y sus capturas iniciales son antecedentes: sus ceros y conteos no representan el estado actual. El historial de importación de GitHub no reconstruye el desarrollo previo; el conteo de ítems tampoco equivale a esfuerzo. Las aceptaciones consolidadas acreditan el resultado funcional actual del Sprint 2, no el cumplimiento del plazo previsto.
 
-Quedan abiertas [la retrospectiva #43](https://github.com/MarceloL19/UFOUND/issues/43), a la espera de aportes del equipo y acuerdos, y [el seguimiento #64](https://github.com/MarceloL19/UFOUND/issues/64), que incluye integrar esta documentación y cerrar administrativamente el Sprint 2. Sprint 1 también conserva su milestone abierto. Esta actualización no cierra esos registros ni el Project.
+Quedan abiertas [la retrospectiva #43](https://github.com/MarceloL19/UFOUND/issues/43), a la espera de aportes del equipo y acuerdos, y [el seguimiento #64](https://github.com/MarceloL19/UFOUND/issues/64), que incluye integrar esta documentación y cerrar administrativamente el Sprint 2. Sprint 1 ya tiene su milestone cerrado administrativamente, con sus límites de evidencia documentados. Esta actualización no cierra esos registros ni el Project.
 
 ### Despliegue
 
