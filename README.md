@@ -122,39 +122,51 @@ URL:
 http://localhost:8080/login
 ```
 
-## Gestión Scrum y laboratorio 4
+## Organización del proyecto en Ingeniería de Software II
 
-El trabajo del curso se organiza en tres sprints y una entrega final, usando la línea base del Release 1.
+La aplicación construida en **Ingeniería de Software I** es la **línea base heredada**. No es el Release 1 del curso actual.
 
-| Entrega | Cierre | Objetivo y alcance |
-|---|---|---|
-| Sprint 1 | 18/09/2026 | Estabilizar la línea base; revisar autenticación, sesión y home por rol. La evidencia de cinco pruebas de AuthService está en docs y conserva su fecha original del 20/09/2026. |
-| Sprint 2 | 09/10/2026 | Ayuda contextual y estadísticas de pérdidas: HU-26, 27, 28, 36, 37 y 38. |
-| Sprint 3 | 30/10/2026 | Registro asistido por imágenes: HU-29 a HU-32. |
-| Entrega final | 13/11/2026 | Coincidencias avanzadas: HU-33 a HU-35; integración, pruebas y documentación. |
+En **Ingeniería de Software II se desarrollan dos releases con dos sprints cada uno**. La numeración global de los sprints es 1, 2, 3 y 4; dentro de cada release corresponde a Sprint 1 y Sprint 2. La cuarta etapa del cronograma corresponde al Sprint 4, aunque algunos registros históricos la denominen «Entrega final».
 
-Equipo confirmado para el Sprint 2: Gabriel Revoredo (Scrum Master), Sergio Chaparro (Product Owner) y Marcelo Loayza, Rodrigo Figueroa y Daniel Sandoval (Developers). Las cuentas de GitHub confirmadas en la documentación son `MarceloL19` y `danielsandtyler`; las de Gabriel, Sergio y Rodrigo deben registrarse cuando se verifiquen.
+| Release de Software II | Sprint global | Periodo de referencia | Hito de cierre registrado | Objetivo y alcance |
+|---|---|---|---|---|
+| Release 1 | Sprint 1 (R1-S1) | Inicio de referencia: 29/08/2026, por confirmar | 18/09/2026 | Revisar y estabilizar la aplicación heredada: autenticación, sesión y acceso por rol; pruebas iniciales. |
+| Release 1 | Sprint 2 (R1-S2) | 19/09–09/10/2026 | 09/10/2026 | Asistencia y ayuda contextual (HU-26–28) y estadísticas descriptivas (HU-36–38). |
+| Release 2 | Sprint 3 (R2-S1) | 10/10–30/10/2026 | 30/10/2026 | Registro asistido por imágenes: validación, detección, categoría y autocompletado editable (HU-29–32). |
+| Release 2 | Sprint 4 (R2-S2) | 31/10–13/11/2026 | 13/11/2026 | Coincidencias con atributos visuales, ordenamiento y sugerencias (HU-33–35), integración, pruebas y documentación. |
 
-Capacidad y Story Points del Release 2: pendientes de Planning Poker. Diferencias de estimación y sus motivos: pendientes de registrar después de la sesión. No se declaran ceremonias ni aprobaciones que todavía no ocurrieron.
+Las fechas anteriores son los hitos del cronograma registrado. La entrega del informe final es el **16/11/2026** y la exposición el **17/11/2026**; estas fechas no sustituyen las fechas reales de commits, pruebas, aceptaciones ni publicaciones de evidencias. Las mejoras finales adicionales incluyen la navegación de Ulises (HU-39, issue #79) y los ajustes visuales de integración.
 
-- [Product Backlog con 38 HU y tareas](docs/product-backlog.md).
-- [Plan del laboratorio, roles, configuración y seguimiento](docs/gestion-scrum.md).
-- [Avance y alcance comprobado del Sprint 1](docs/sprint-1-estabilizacion.md).
-- Configuración del laboratorio: [#39](https://github.com/MarceloL19/UFOUND/issues/39).
+Las HU-01–25 describen funcionalidades heredadas que se revisan y estabilizan cuando corresponde. No deben contabilizarse como implementación nueva ni como velocidad de los sprints por el solo hecho de haber sido importadas a GitHub. Las HU-26–38 constituyen el alcance de evolución originalmente registrado para Software II; HU-39 es una mejora adicional posterior.
 
-Las 25 HU heredadas de R1 se identifican como antecedentes; no cuentan como implementación nueva ni como velocidad de los sprints de R2. Las fechas de cierre de sus issues corresponden a su importación en GitHub.
+### Documentación y seguimiento
 
-## Tablero y seguimiento configurados
+- [Product Backlog y enlaces a historias](docs/product-backlog.md).
+- [Organización de releases, sprints y evidencias](docs/gestion-scrum.md).
+- [Evidencia de estabilización del Sprint 1](docs/sprint-1-estabilizacion.md).
+- [Project UFOUND - Gestión Scrum IS2](https://github.com/users/MarceloL19/projects/1).
+- [Daily y planificación del Sprint 2: #41](https://github.com/MarceloL19/UFOUND/issues/41).
+- [Review del Sprint 2: #42](https://github.com/MarceloL19/UFOUND/issues/42).
+- [Retrospectiva y balance individual: #43](https://github.com/MarceloL19/UFOUND/issues/43).
+- [Seguimiento de mejoras: #64](https://github.com/MarceloL19/UFOUND/issues/64).
 
-- [Project UFOUND - Gestion Scrum IS2](https://github.com/users/MarceloL19/projects/1).
+Los documentos históricos pueden conservar la nomenclatura anterior que agrupaba el trabajo actual bajo «R2» o separaba la cuarta etapa como «Entrega final». Para el informe y la organización vigente del curso se utiliza la correspondencia de la tabla anterior. Esta aclaración no modifica las evidencias históricas.
+
+### Evidencias de implementación
+
+- Asistente y ayuda contextual: PR #60 y #61.
+- Registro asistido por imágenes: PR #65, #67, #68 y #69.
+- Coincidencias avanzadas: PR #73, #75 y #76.
+- Navegación de Ulises y mejoras visuales finales: PR #80 y #82.
+
+Los resultados de pruebas corresponden a la versión y fecha indicadas en cada evidencia. Por ejemplo, las cinco pruebas originales de AuthService conservan la fecha del 20/09/2026. La evaluación de HU-33 con 30 pares no demostró mejora de precisión frente al motor base en los umbrales utilizados; no debe presentarse como una mejora cuantitativa comprobada.
+
+### Métricas del proyecto
+
+El esfuerzo se sigue mediante Story Points de historias estimadas por el equipo. Las tareas, PR y registros de reuniones no vuelven a sumar los puntos de sus historias. Los puntos históricos de tareas del Sprint 1 no son automáticamente Story Points de historias ni capacidad de los siguientes sprints.
+
+Los gráficos se interpretan con sus datos y fechas reales. Un valor cero con estimaciones vacías no demuestra esfuerzo nulo y la importación de issues no reproduce el avance anterior. Los gráficos históricos del Sprint 2 deben identificarse con su fecha de captura:
+
 - [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4).
 - [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2).
 - [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3).
-
-El Project contiene las 38 HU, 12 tareas del Sprint 2 vinculadas como sub-issues y los registros de seguimiento. Las seis HU previstas para Sprint 2 y sus tareas están en Sprint Backlog; ese alcance sigue sujeto a validar capacidad con Planning Poker. Sprint 3 mantiene HU-29 a HU-32 y la entrega final HU-33 a HU-35. Los hitos cierran el 18/09, 09/10, 30/10 y 13/11/2026. La referencia de inicio del Sprint 1 en el calendario es 29/08; el equipo debe confirmarla.
-
-Daniel Sandoval, colaborador existente del repositorio con la cuenta `danielsandtyler`, tiene Write en el Project. Los roles PO y SM ya están acordados por el equipo. En `main` está activa la regla de PR obligatorio con una aprobación; el PR #57 fue aprobado por Daniel e integrado.
-
-**¿Se cumplirá el Sprint Goal según el Burn up?** Todavía no se puede concluir. El gráfico registra 18 ítems abiertos (6 historias y 12 tareas), cero cierres del Sprint 2 y datos importados el 03/10/2026. El salto de esa fecha representa el alta en GitHub, no ejecución histórica. Faltan estimaciones, disponibilidad y evidencia de avance real. El conteo de ítems no equivale a esfuerzo.
-
-Si el pronóstico muestra que no alcanza la capacidad, el PO debe conservar primero las HU Must (26–28), revisar el alcance Should (36–38), dividir historias grandes y devolver lo que no quepa al Product Backlog. Registrar bloqueos en Daily y actualizar el pronóstico con los cierres reales. Carga y velocidad están configuradas con suma de Story Points, pero sus ceros actuales reflejan puntos sin asignar; las 25 HU heredadas no se computan como velocidad de R2.
