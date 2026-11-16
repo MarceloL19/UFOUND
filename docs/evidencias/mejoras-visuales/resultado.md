@@ -2,6 +2,8 @@
 
 Ejecución: 16/11/2026, America/Lima. Base inicial de main: `c4f0dbbfd14f02ddc95fd89f51438637ebc647ca`. Rama `style/mejoras-visuales-entrega`.
 
+Resultados iniciales, anteriores a la actualización con main:
+
 | Verificación | Resultado |
 |---|---|
 | `mvn clean verify`, JDK 17 | 114 pruebas, 0 fallos, 0 errores, 2 omitidas; BUILD SUCCESS y jar empaquetado |
@@ -52,3 +54,23 @@ En una worktree temporal, se combinó la propuesta visual con `origin/feature/HU
 - Se inspeccionó el [mensaje de llegada en móvil](asistente-llegada-hu39-movil.png): acento diferenciado y entrada visible.
 
 Esto comprueba compatibilidad técnica con el estado revisado de #80, pero no fusiona esa PR ni sustituye su revisión.
+
+
+## Actualizacion de la rama con main y HU-39 — 16/11/2026
+
+Después de que la PR #80 se fusionara en main, actualicé la rama de la PR #82 con `origin/main` en `9321bf8`. El merge local `82613bd` se resolvió sin conflictos, conservando los cambios visuales y la navegación del asistente. A diferencia de la prueba temporal anterior, esta actualización sí forma parte de la rama de #82.
+
+Comprobaciones nuevas sobre la rama actualizada:
+
+| Verificación | Resultado |
+|---|---|
+| `mvn clean verify`, JDK 17 | **145 pruebas, 0 fallos, 0 errores y 2 omitidas**, BUILD SUCCESS y jar empaquetado |
+| `node --test docs/*.test.cjs` | **23 correctas**, 0 fallos |
+| Sintaxis de ayuda.js | Correcta |
+| [Recorrido HU-39](actualizacion-main-hu39.txt) | **26 comprobaciones correctas**: navegación por rol, llegada, recarga y protección de formularios |
+| [Recorrido visual actualizado](actualizacion-main-visual.txt) | **15 grupos correctos**, tres roles, menús a 1440/1024/768/390 px, paneles IA y asistente |
+| Diferencias contra main | Sin conflictos ni errores de espacios |
+
+Ajusté el script visual para esperar la navegación y la confirmación de llegada que ahora forman parte de main. Este recorrido visual se ejecutó sin la opción de crear registros; la evidencia anterior de los cuatro registros con/sin foto se conserva. Las dos omisiones MySQL siguen siendo las mismas de la línea base. Los recorridos nuevos se ejecutaron contra la base aislada de trabajo, sin cambios en Railway.
+
+Marcelo ya había confirmado la validación visual y la carga de los datos en su entorno local; esa confirmación consta en la descripción de #82. La revisión y aprobación de otro integrante siguen pendientes y la PR se conserva abierta, sin fusionarla.

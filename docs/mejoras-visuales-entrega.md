@@ -23,9 +23,11 @@ Las rutas, formularios, selectores JavaScript y permisos por rol se conservan. P
 
 En Seguridad, los dos indicadores que antes eran valores fijos acompañados de “EPIC posterior” se presentan con un guion y orientación al detalle del hallazgo. No se añadieron cálculos para convertirlos en métricas nuevas.
 
-## Relacion con las PR pendientes
+## Relacion con main y las otras PR
 
-La base inicial es `main` en `c4f0dbb`. Las PR #78 (cierre Scrum) y #80 (HU-39) estaban abiertas. Esta tarea no incorpora sus commits ni fusiona esas PR. El estilo de confirmación del chatbot reconoce el mensaje de llegada de HU-39 sin modificar su lógica de navegación. Se comprobó su combinación sin conflictos en una worktree temporal: 145 pruebas Java (2 omitidas) y las 26 comprobaciones de navegador de HU-39, correctas. Esa combinación no se incorporó a esta rama.
+La base inicial fue `main` en `c4f0dbb`. Después de la integración de la PR #80, actualicé esta rama mediante merge de `origin/main` en `9321bf8`, que contiene HU-39. La actualización se resolvió sin conflictos y conserva las mejoras visuales y la navegación automática de Ulises. Los cambios de documentación de la PR #78 permanecen separados.
+
+La prueba anterior en una worktree temporal fue una comprobación previa. La verificación de la rama ya actualizada queda registrada en la evidencia de esta tarea. La PR #82 se mantiene abierta para revisión; esta actualización no la fusiona en main.
 
 ## Verificacion
 
@@ -50,4 +52,4 @@ El recorrido usa una respuesta de detección IA controlada para mostrar los pane
 
 Resultados, capturas y límites: [evidencias](evidencias/mejoras-visuales/resultado.md).
 
-La revisión de otro integrante y la aceptación del equipo permanecen pendientes. La carga de datos de exposición es optativa; no se accedió al MySQL del usuario ni se desplegó en Railway.
+Marcelo confirmó la validación visual y la carga del conjunto de demostración en su MySQL local; la descripción de la PR #82 registra esa comprobación manual. La revisión y aprobación de otro integrante permanecen pendientes. Las comprobaciones automatizadas aquí descritas se ejecutaron en bases aisladas.

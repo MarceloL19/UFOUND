@@ -61,8 +61,11 @@ with sync_playwright() as pw:
         page.locator('.assistant-toggle').click()
         expect(page.locator('.assistant-message').first).to_be_visible()
         page.locator('#assistant-question').fill('Quiero buscar' if rol == 'ESTUDIANTE' else 'Como veo el estado de un hallazgo' if rol == 'SEGURIDAD' else 'Como consulto los estados')
-        page.locator('.assistant-form button[type=submit]').click()
-        expect(page.locator('.assistant-message')).to_have_count(3)
+        with page.expect_response(lambda r: r.url.endswith('/ayuda/llegada') and r.request.method == 'POST') as llegada:
+            page.locator('.assistant-form button[type=submit]').click()
+        assert llegada.value.status == 200
+        expect(page.locator('.assistant-message')).to_have_count(4)
+        expect(page.locator('.assistant-message-arrival')).to_be_visible()
         panel = page.locator('.assistant-panel').bounding_box()
         assert panel and panel['x'] >= 0 and panel['x'] + panel['width'] <= 390
         expect(page.locator('#assistant-question')).to_be_in_viewport()
