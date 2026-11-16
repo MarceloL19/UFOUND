@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Seguridad | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}">
 </head>
 <body class="dashboard-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
@@ -20,19 +21,21 @@
     </section>
     <section class="stats-grid">
         <article><span>Registrados</span><strong th:text="${totalHallazgos}">0</strong><small>Por tu usuario</small></article>
-        <article><span>En revision</span><strong>0</strong><small>EPIC posterior</small></article>
-        <article><span>Entregados hoy</span><strong>0</strong><small>EPIC posterior</small></article>
+        <article><span>En revision</span><strong aria-label="Sin resumen disponible">—</strong><small>Consulta el detalle de los hallazgos</small></article>
+        <article><span>Entregados hoy</span><strong aria-label="Sin resumen disponible">—</strong><small>Consulta el detalle de los hallazgos</small></article>
     </section>
     <section class="actions-grid dashboard-actions">
         <a class="home-card" th:href="@{/objetos-encontrados/registrar}">
-            <span>+</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('hallazgo')}"></svg></span>
             <h2>Registrar hallazgo</h2>
             <p>Registra objetos encontrados dentro del campus.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
         <a class="home-card" th:href="@{/objetos-encontrados}">
-            <span>#</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('lista')}"></svg></span>
             <h2>Objetos encontrados</h2>
             <p>Visualiza los hallazgos registrados en el sistema.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
     </section>
 </main>

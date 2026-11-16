@@ -74,14 +74,20 @@ public class ObjetoPerdidoController {
     }
 
     @GetMapping("/confirmacion/{id}")
-    public String confirmacion(@PathVariable Long id, HttpSession session, Model model) {
+    public String confirmacion(@PathVariable Long id, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         Usuario usuario = obtenerUsuario(session);
         if (!esEstudiante(usuario)) {
             return "redirect:/home";
         }
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("idObjeto", id);
-        return "registro-perdido-confirmacion";
+        try {
+            model.addAttribute("objeto", objetoPerdidoService.obtenerPropio(id, usuario));
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("idObjeto", id);
+            return "registro-perdido-confirmacion";
+        } catch (RegistroObjetoException exception) {
+            redirectAttributes.addFlashAttribute("accesoDenegado", exception.getMessage());
+            return "redirect:/objetos-perdidos/mis-reportes";
+        }
     }
 
     @GetMapping("/mis-reportes")

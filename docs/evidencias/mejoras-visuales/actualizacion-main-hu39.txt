@@ -1,0 +1,26 @@
+ESTUDIANTE: Quiero reportar algo que perdi -> /objetos-perdidos/registrar
+ESTUDIANTE: Quiero buscar hallazgos -> /buscar
+ESTUDIANTE: Quiero ver mis reportes -> /objetos-perdidos/mis-reportes
+ESTUDIANTE: Como hago seguimiento de mi reporte -> /objetos-perdidos/mis-reportes
+ESTUDIANTE: Quiero ver mis coincidencias -> /coincidencias
+ESTUDIANTE: Quiero ver mis notificaciones -> /notificaciones
+ESTUDIANTE: Llevame al inicio -> /home
+ESTUDIANTE: recarga conserva historial sin repetir llegada
+ESTUDIANTE: ambiguedad y solicitud de otro rol no navegan
+ESTUDIANTE: cancelar conserva datos y aceptar permite salir
+ESTUDIANTE: panel y entrada visibles en movil 390x844
+ESTUDIANTE: error de red conserva pregunta y permite reintentar
+ESTUDIANTE: sesion vencida redirige al login
+SEGURIDAD: Quiero registrar un hallazgo -> /objetos-encontrados/registrar
+SEGURIDAD: Quiero consultar hallazgos -> /objetos-encontrados
+SEGURIDAD: Como veo el estado de un hallazgo -> /objetos-encontrados
+SEGURIDAD: Llevame al inicio -> /home
+SEGURIDAD: recarga conserva historial sin repetir llegada
+SEGURIDAD: cancelar conserva datos y aceptar permite salir
+SEGURIDAD: panel y entrada visibles en movil 390x844
+OFICINA: Quiero consultar estados -> /oficina/estados
+OFICINA: Quiero cambiar el estado de un objeto -> /oficina/estados
+OFICINA: Quiero ver estadisticas -> /analisis-perdidas
+OFICINA: Llevame al inicio -> /home
+OFICINA: recarga conserva historial sin repetir llegada
+OFICINA: panel y entrada visibles en movil 390x844

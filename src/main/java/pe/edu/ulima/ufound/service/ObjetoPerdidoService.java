@@ -70,6 +70,17 @@ public class ObjetoPerdidoService {
         return objetoPerdidoRepository.countByUsuario(usuario);
     }
 
+    @Transactional(readOnly = true)
+    public ObjetoPerdido obtenerPropio(Long id, Usuario usuario) {
+        ObjetoPerdido objeto = objetoPerdidoRepository.findById(id)
+                .orElseThrow(() -> new RegistroObjetoException("No se pudo acceder al reporte solicitado."));
+        if (usuario == null || usuario.getIdUsuario() == null || objeto.getUsuario() == null
+                || !usuario.getIdUsuario().equals(objeto.getUsuario().getIdUsuario())) {
+            throw new RegistroObjetoException("No se pudo acceder al reporte solicitado.");
+        }
+        return objeto;
+    }
+
     private void validar(RegistroObjetoPerdidoForm form) {
         if (form.getNombre() == null || form.getNombre().isBlank()) {
             throw new RegistroObjetoException("Ingresa el titulo del objeto perdido.");

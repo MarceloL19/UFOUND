@@ -11,6 +11,7 @@
 
     <!-- HU-36: estilos independientes del análisis estadístico -->
     <link rel="stylesheet" th:href="@{/css/estadisticas-perdidas.css}">
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}">
 </head>
 
 <body class="dashboard-page">
@@ -55,7 +56,13 @@
         <section class="admin-kpi-grid">
             <article class="admin-kpi-card" th:each="kpi : ${kpis}" th:classappend="${kpi.tipo}">
 
-                <span class="kpi-icon"></span>
+                <span class="kpi-icon" th:switch="${kpi.tipo}">
+                    <span th:case="'lost'"><svg th:replace="~{fragments/iconos :: icono('reportar')}"></svg></span>
+                    <span th:case="'found'"><svg th:replace="~{fragments/iconos :: icono('hallazgo')}"></svg></span>
+                    <span th:case="'match'"><svg th:replace="~{fragments/iconos :: icono('coincidencias')}"></svg></span>
+                    <span th:case="'delivered'"><svg th:replace="~{fragments/iconos :: icono('confirmado')}"></svg></span>
+                    <span th:case="*"><svg th:replace="~{fragments/iconos :: icono('archivo')}"></svg></span>
+                </span>
                 <strong th:text="${kpi.valor}">0</strong>
                 <p th:text="${kpi.titulo}">Indicador</p>
                 <small th:text="${kpi.detalle}">Detalle</small>
