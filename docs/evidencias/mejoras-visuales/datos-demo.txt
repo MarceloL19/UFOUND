@@ -1,0 +1,4 @@
+OK: repetir carga conserva 48 perdidos y 36 encontrados, sin duplicados.
+OK: retiro elimina solo los 84 objetos demo y conserva ambos controles ajenos al conjunto.
+OK: retiro conserva el reporte demo gestionado por otra cuenta y su historial.
+OK: 7 categorias, varias ubicaciones y periodos, con fotos y registros sin foto. Usuarios demo desactivados.

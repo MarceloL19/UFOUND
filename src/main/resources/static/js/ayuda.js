@@ -1,11 +1,12 @@
 (() => {
     // Si no existe el archivo subido ni una foto predeterminada con el mismo nombre, se muestra el aviso.
-    document.querySelectorAll('img[src*="/uploads/"]').forEach((img) => {
+    document.querySelectorAll('img[src*="/uploads/"], .search-object-image img, .found-main-image img, .confirmation-photo img').forEach((img) => {
         const mostrarAusente = () => {
             if (img.dataset.sinFoto) return;
             img.dataset.sinFoto = 'true';
             img.hidden = true;
             const aviso = document.createElement('span');
+            aviso.className = 'foto-ausente';
             aviso.textContent = 'Foto no disponible';
             img.insertAdjacentElement('afterend', aviso);
         };
@@ -37,6 +38,9 @@
         estado.mensajes.forEach((mensaje) => {
             const articulo = document.createElement('article');
             articulo.className = 'assistant-message' + (mensaje.emisor === 'usuario' ? ' assistant-message-user' : '');
+            if (mensaje.emisor === 'asistente' && mensaje.texto.startsWith('Abrí el apartado ')) {
+                articulo.classList.add('assistant-message-arrival');
+            }
             const autor = document.createElement('strong');
             autor.textContent = mensaje.emisor === 'usuario' ? 'Tú' : 'Ulises';
             const texto = document.createElement('p');

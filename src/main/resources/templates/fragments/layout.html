@@ -21,16 +21,16 @@
 <aside class="app-sidebar">
     <p>MENU PRINCIPAL</p>
     <nav>
-        <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''">Inicio</a>
-        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/registrar}" th:classappend="${active == 'reportar'} ? ' active' : ''">Reportar objeto</a>
-        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/mis-reportes}" th:classappend="${active == 'objetos'} ? ' active' : ''">Mis objetos perdidos</a>
-        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/coincidencias}" th:classappend="${active == 'coincidencias'} ? ' active' : ''">Coincidencias</a>
-        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/notificaciones}" th:classappend="${active == 'notificaciones'} ? ' active' : ''">Notificaciones</a>
-        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados/registrar}" th:classappend="${active == 'hallazgo'} ? ' active' : ''">Registrar hallazgo</a>
-        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados}" th:classappend="${active == 'encontrados'} ? ' active' : ''">Objetos encontrados</a>
-        <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/oficina/estados}" th:classappend="${active == 'estados'} ? ' active' : ''">Estados</a>
-        <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/analisis-perdidas}" th:classappend="${active == 'analisis'} ? ' active' : ''">Analisis de perdidas</a>
-        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/buscar}" th:classappend="${active == 'buscar'} ? ' active' : ''">Buscar</a>
+        <a th:href="@{/home}" th:classappend="${active == 'dashboard'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('inicio')}"></svg><span>Inicio</span></a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/registrar}" th:classappend="${active == 'reportar'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('reportar')}"></svg><span>Reportar objeto</span></a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/objetos-perdidos/mis-reportes}" th:classappend="${active == 'objetos'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('lista')}"></svg><span>Mis objetos perdidos</span></a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/coincidencias}" th:classappend="${active == 'coincidencias'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('coincidencias')}"></svg><span>Coincidencias</span></a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/notificaciones}" th:classappend="${active == 'notificaciones'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('notificaciones')}"></svg><span>Notificaciones</span></a>
+        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados/registrar}" th:classappend="${active == 'hallazgo'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('hallazgo')}"></svg><span>Registrar hallazgo</span></a>
+        <a th:if="${usuario.rol.name() == 'SEGURIDAD'}" th:href="@{/objetos-encontrados}" th:classappend="${active == 'encontrados'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('lista')}"></svg><span>Objetos encontrados</span></a>
+        <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/oficina/estados}" th:classappend="${active == 'estados'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('estados')}"></svg><span>Estados</span></a>
+        <a th:if="${usuario.rol.name() == 'OFICINA'}" th:href="@{/analisis-perdidas}" th:classappend="${active == 'analisis'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('analisis')}"></svg><span>Analisis de perdidas</span></a>
+        <a th:if="${usuario.rol.name() == 'ESTUDIANTE'}" th:href="@{/buscar}" th:classappend="${active == 'buscar'} ? ' active' : ''"><svg th:replace="~{fragments/iconos :: icono('buscar')}"></svg><span>Buscar</span></a>
     </nav>
 </aside>
     <div class="assistant-widget" th:attr="data-api=@{/ayuda/conversacion},data-auto-open=${active == 'ayuda'}">

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Estudiante | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}">
 </head>
 <body class="dashboard-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
@@ -29,24 +30,28 @@
     </section>
     <section class="actions-grid dashboard-actions">
         <a class="home-card" th:href="@{/objetos-perdidos/registrar}">
-            <span>+</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('reportar')}"></svg></span>
             <h2>Reportar objeto perdido</h2>
             <p>Registra informacion detallada del objeto extraviado.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
         <a class="home-card" th:href="@{/objetos-perdidos/mis-reportes}">
-            <span>#</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('lista')}"></svg></span>
             <h2>Mis objetos perdidos</h2>
             <p>Consulta los reportes que registraste.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
         <a class="home-card" th:href="@{/coincidencias}">
-            <span>%</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('coincidencias')}"></svg></span>
             <h2>Coincidencias</h2>
             <p>Revisa posibles objetos encontrados relacionados.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
         <a class="home-card" th:href="@{/notificaciones}">
-            <span>!</span>
+            <span class="card-icon"><svg th:replace="~{fragments/iconos :: icono('notificaciones')}"></svg></span>
             <h2>Notificaciones</h2>
             <p>Alertas generadas por coincidencias relevantes.</p>
+        <span class="card-arrow"><svg th:replace="~{fragments/iconos :: icono('flecha')}"></svg></span>
         </a>
     </section>
 

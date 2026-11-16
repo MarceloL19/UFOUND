@@ -62,6 +62,7 @@ public class ObjetoEncontradoController {
 
         try {
             ObjetoEncontrado objeto = objetoEncontradoService.registrar(form, imagen, usuario);
+            redirectAttributes.addFlashAttribute("registroCompletado", true);
             return "redirect:/objetos-encontrados/detalle/" + objeto.getIdObjeto();
         } catch (RegistroObjetoException exception) {
             redirectAttributes.addFlashAttribute("error", exception.getMessage());

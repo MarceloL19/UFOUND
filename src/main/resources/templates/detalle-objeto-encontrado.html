@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle objeto encontrado | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}">
 </head>
 <body class="dashboard-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
@@ -12,6 +13,12 @@
 <main class="dashboard-shell">
     <a class="back-link" th:href="@{/objetos-encontrados}">Volver a objetos</a>
 
+    <section class="registration-success" th:if="${registroCompletado}" role="status">
+        <svg th:replace="~{fragments/iconos :: icono('confirmado')}"></svg>
+        <div><strong>Objeto encontrado registrado</strong><p>El hallazgo se guardó correctamente. Revisa su fotografía y los datos del registro.</p>
+            <a class="back-link" th:href="@{/objetos-encontrados/registrar}">Registrar otro hallazgo</a>
+        </div>
+    </section>
     <section class="found-detail">
         <div class="found-media">
             <div class="found-main-image">

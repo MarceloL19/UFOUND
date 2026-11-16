@@ -6,6 +6,7 @@
     <title>Analisis de perdidas | U-Found</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/analisis-perdidas.css}">
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}">
 </head>
 <body class="dashboard-page analisis-page">
 <div th:replace="~{fragments/layout :: topbar(${usuario})}"></div>
@@ -88,7 +89,7 @@
             <h2>Tendencia en el periodo</h2>
             <p th:text="${analisis.periodo.descripcion}">Periodo</p>
             <p class="vacio" th:if="${analisis.sinDatos}">No hay objetos perdidos en el periodo seleccionado.</p>
-            <div class="tendencia" th:unless="${analisis.sinDatos}">
+            <div class="tendencia" tabindex="0" role="region" aria-label="Tendencia de pérdidas por periodo" th:unless="${analisis.sinDatos}">
                 <div class="tendencia-col" th:each="punto : ${analisis.tendencia}">
                     <strong th:text="${punto.total}">0</strong>
                     <span class="barra" th:style="'height:' + ${punto.altura} + 'px'" th:title="${punto.total + ' perdidas'}"></span>
@@ -102,7 +103,9 @@
         <h2>Frecuencia de perdida por ubicacion</h2>
         <p>Cada fila usa la ubicacion y la fecha registradas en el reporte de objeto perdido.</p>
         <p class="vacio" th:if="${analisis.ubicaciones.isEmpty()}">No hay perdidas por ubicacion en este periodo.</p>
-        <table th:unless="${analisis.ubicaciones.isEmpty()}">
+        <p class="table-scroll-hint" th:unless="${analisis.ubicaciones.isEmpty()}">Desliza la tabla para ver todas las columnas.</p>
+        <div class="visual-table-scroll" tabindex="0" role="region" aria-label="Frecuencia de pérdidas por ubicación" th:unless="${analisis.ubicaciones.isEmpty()}">
+        <table>
             <thead>
             <tr>
                 <th>Ubicacion</th>
@@ -129,6 +132,7 @@
             </tr>
             </tbody>
         </table>
+        </div>
     </section>
 </main>
 </body>

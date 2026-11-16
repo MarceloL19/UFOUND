@@ -1,0 +1,19 @@
+ESTUDIANTE: inicio con iconos locales y tarjetas, sin desbordamiento en escritorio
+ESTUDIANTE: inicio y menu adaptados a 390x844
+ESTUDIANTE: asistente compacto conserva envio, historial y cierre
+ESTUDIANTE: paneles IA coherentes; aplicar categoria y deshacer siguen operativos
+ESTUDIANTE: registro real y resumen con foto en escritorio/movil
+ESTUDIANTE: registro real y resumen sin foto en escritorio/movil
+ESTUDIANTE: todos los destinos del menu conservan acceso y se adaptan a escritorio/movil
+SEGURIDAD: inicio con iconos locales y tarjetas, sin desbordamiento en escritorio
+SEGURIDAD: inicio y menu adaptados a 390x844
+SEGURIDAD: asistente compacto conserva envio, historial y cierre
+SEGURIDAD: paneles IA coherentes; aplicar categoria y deshacer siguen operativos
+SEGURIDAD: registro real y resumen con foto en escritorio/movil
+SEGURIDAD: registro real y resumen sin foto en escritorio/movil
+SEGURIDAD: todos los destinos del menu conservan acceso y se adaptan a escritorio/movil
+OFICINA: inicio con iconos locales y tarjetas, sin desbordamiento en escritorio
+OFICINA: inicio y menu adaptados a 390x844
+OFICINA: asistente compacto conserva envio, historial y cierre
+OFICINA: analisis con datos, filtros y tarjetas en escritorio/movil
+OFICINA: todos los destinos del menu conservan acceso y se adaptan a escritorio/movil

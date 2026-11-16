@@ -171,4 +171,24 @@ class ObjetoPerdidoServiceTest {
         verify(repositorio)
                 .save(any(ObjetoPerdido.class));
     }
+
+    @Test
+    void resumenPermiteSoloElObjetoDelPropietario() {
+        Usuario propietario = new Usuario();
+        propietario.setIdUsuario(7L);
+        ObjetoPerdido objeto = new ObjetoPerdido();
+        objeto.setUsuario(propietario);
+        when(repositorio.findById(5L)).thenReturn(java.util.Optional.of(objeto));
+        assertSame(objeto, servicio.obtenerPropio(5L, propietario));
+        Usuario otro = new Usuario();
+        otro.setIdUsuario(8L);
+        assertThrows(RegistroObjetoException.class, () -> servicio.obtenerPropio(5L, otro));
+        assertThrows(RegistroObjetoException.class, () -> servicio.obtenerPropio(5L, null));
+    }
+
+    @Test
+    void resumenRechazaUnObjetoQueNoExiste() {
+        when(repositorio.findById(99L)).thenReturn(java.util.Optional.empty());
+        assertThrows(RegistroObjetoException.class, () -> servicio.obtenerPropio(99L, new Usuario()));
+    }
 }
