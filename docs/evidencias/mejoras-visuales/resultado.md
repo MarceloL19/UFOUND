@@ -42,3 +42,13 @@ Se inspeccionaron visualmente las tarjetas e iconos del estudiante, los paneles 
 [Resultado de los scripts de datos](datos-demo.txt). La carga y retirada se ejecutaron en una base nueva de trabajo. No se accedió al disco de Windows ni a la base local del usuario, y no se desplegó en Railway. La adopción de los datos de demostración en la exposición requiere ejecutar el script opcional en el esquema elegido.
 
 La revisión de otro integrante y la aceptación visual de Marcelo/equipo siguen pendientes. La tarea no se presenta como una nueva HU ni como aceptación del PO ya realizada.
+
+## Compatibilidad con HU-39
+
+En una worktree temporal, se combinó la propuesta visual con `origin/feature/HU-39-navegacion-ulises` (`2814eaf`) sin conflictos. Esa combinación de prueba no se incorporó a la rama visual ni se publicó como una PR adicional.
+
+- Suite conjunta: **145 pruebas Java, 0 fallos, 0 errores y 2 omitidas**; BUILD SUCCESS.
+- [Recorrido HU-39 sobre la combinación](integracion-hu39.txt): **26 comprobaciones de navegador correctas**, con los tres roles, navegación automática, conservación del chat, llegada única, protección de formularios y móvil.
+- Se inspeccionó el [mensaje de llegada en móvil](asistente-llegada-hu39-movil.png): acento diferenciado y entrada visible.
+
+Esto comprueba compatibilidad técnica con el estado revisado de #80, pero no fusiona esa PR ni sustituye su revisión.

@@ -25,7 +25,7 @@ En Seguridad, los dos indicadores que antes eran valores fijos acompañados de �
 
 ## Relacion con las PR pendientes
 
-La base inicial es `main` en `c4f0dbb`. Las PR #78 (cierre Scrum) y #80 (HU-39) estaban abiertas. Esta tarea no incorpora sus commits ni fusiona esas PR. El estilo de confirmación del chatbot reconoce el mensaje de llegada de HU-39 sin modificar su lógica de navegación.
+La base inicial es `main` en `c4f0dbb`. Las PR #78 (cierre Scrum) y #80 (HU-39) estaban abiertas. Esta tarea no incorpora sus commits ni fusiona esas PR. El estilo de confirmación del chatbot reconoce el mensaje de llegada de HU-39 sin modificar su lógica de navegación. Se comprobó su combinación sin conflictos en una worktree temporal: 145 pruebas Java (2 omitidas) y las 26 comprobaciones de navegador de HU-39, correctas. Esa combinación no se incorporó a esta rama.
 
 ## Verificacion
 
