@@ -1,33 +1,48 @@
-# Laboratorio 4 aplicado a UFOUND
+# Gestión Scrum de UFOUND — Ingeniería de Software II
 
-Se adapta el laboratorio al proyecto de objetos perdidos y encontrados UFOUND y al cronograma ya acordado. El caso de reservas de salas de la guía no sustituye el alcance del proyecto.
+Se aplica el laboratorio 4 al proyecto de objetos perdidos y encontrados UFOUND. El caso de reservas de salas de la guía no sustituye el alcance del producto.
 
-## Equipo y roles
+## Convención vigente de releases y sprints
 
-| Integrante | GitHub | Participación |
+La aplicación de **Ingeniería de Software I** constituye la **línea base heredada**. Sus funcionalidades no representan el Release 1 de Ingeniería de Software II.
+
+El curso actual comprende **dos releases con dos sprints cada uno**:
+
+- Release 1: Sprint 1 (R1-S1) y Sprint 2 (R1-S2).
+- Release 2: Sprint 3 (R2-S1) y Sprint 4 (R2-S2).
+
+La cuarta etapa antes llamada «Entrega final» corresponde al Sprint 4. Los documentos y comentarios históricos que llaman «R1» a la base anterior o «R2» a todo el curso deben interpretarse con esta aclaración; no se reescriben fechas ni hechos históricos para ajustarlos a la nueva nomenclatura.
+
+## Cronograma y objetivos
+
+| Release de Software II | Sprint global | Periodo de referencia | Hito de cierre registrado | Objetivo y alcance |
+|---|---|---|---|---|
+| Release 1 | Sprint 1 (R1-S1) | Inicio de referencia: 29/08/2026, por confirmar | 18/09/2026 | Revisar y estabilizar la aplicación heredada: autenticación, sesión y acceso por rol; pruebas iniciales. |
+| Release 1 | Sprint 2 (R1-S2) | 19/09–09/10/2026 | 09/10/2026 | Asistencia y ayuda contextual (HU-26–28) y estadísticas descriptivas (HU-36–38). |
+| Release 2 | Sprint 3 (R2-S1) | 10/10–30/10/2026 | 30/10/2026 | Registro asistido por imágenes: validación, detección, categoría y autocompletado editable (HU-29–32). |
+| Release 2 | Sprint 4 (R2-S2) | 31/10–13/11/2026 | 13/11/2026 | Coincidencias con atributos visuales, ordenamiento y sugerencias (HU-33–35), integración, pruebas y documentación. |
+
+Las fechas anteriores son los hitos del cronograma registrado. La entrega del informe final es el **16/11/2026** y la exposición el **17/11/2026**; estas fechas no sustituyen las fechas reales de commits, pruebas, aceptaciones ni publicaciones de evidencias. Las mejoras finales adicionales incluyen la navegación de Ulises (HU-39, issue #79) y los ajustes visuales de integración.
+
+Las HU-26–38 son las historias de evolución originalmente registradas para el curso. Las HU-01–25 son antecedentes: su importación o cierre administrativo no acredita implementación nueva ni velocidad. Si se trabaja sobre alguna de ellas, debe documentarse la tarea real de estabilización y su evidencia.
+
+## Equipo y responsabilidades registradas
+
+La siguiente asignación de roles corresponde al registro del Sprint 2; no acredita por sí sola que cada persona haya ejecutado todas las actividades propias del rol durante todo el proyecto.
+
+| Integrante | Cuenta identificada en la documentación original | Rol registrado en Sprint 2 |
 |---|---|---|
-| Gabriel Revoredo | Por registrar | Scrum Master |
-| Sergio Chaparro | Por registrar | Product Owner |
+| Gabriel Revoredo | Por registrar en la tabla original | Scrum Master |
+| Sergio Chaparro | Por registrar en la tabla original | Product Owner |
 | Marcelo Franco Loayza Taboada | MarceloL19 | Developer |
-| Rodrigo Figueroa | Por registrar | Developer |
+| Rodrigo Figueroa | Por registrar en la tabla original | Developer |
 | Daniel Joseph Sandoval Chavarria | danielsandtyler | Developer |
 
-Marcelo confirmó a los cinco integrantes y sus roles para el Sprint 2. Los nombres de usuario de Gabriel, Sergio y Rodrigo quedan por registrar en esta tabla; no se asignan cuentas de GitHub por inferencia. Daniel ya tiene Write en el Project y Marcelo conserva Admin como propietario.
+Las contribuciones y eventuales cambios de responsabilidad se sustentan mediante issues, PR y registros individuales. Las cuentas pendientes de la tabla original no implican ausencia de participación.
 
-## Cronograma y Sprint Goals
+## Evidencia histórica del Sprint 1
 
-| Entrega | Fecha límite | Periodo previsto | Alcance | Sprint Goal propuesto |
-|---|---|---|---|---|
-| Sprint 1 | 18/09/2026 | Inicio por confirmar | Estabilización de R1; revisión de HU-01 a HU-03 | Estabilizar y validar técnicamente la autenticación y revisar sesión y home por rol. |
-| Sprint 2 | 09/10/2026 | 19/09–09/10/2026 | HU-26, 27, 28, 36, 37, 38 | Ofrecer ayuda contextual y análisis de reportes de pérdidas. |
-| Sprint 3 | 30/10/2026 | 10/10–30/10/2026 | HU-29 a HU-32 | Registrar objetos con sugerencias editables obtenidas de una imagen. |
-| Entrega final | 13/11/2026 | 31/10–13/11/2026 | HU-33 a HU-35; integración, pruebas y documentación | Integrar coincidencias avanzadas y entregar una versión validada y documentada. |
-
-La entrega final no se denomina Sprint 4. Los periodos futuros se proponen a partir de los cierres del cronograma. La selección de alcance debe revisarse tras estimar la capacidad real.
-
-## Sprint 1: avance recibido
-
-Las 25 HU de R1 son una línea base heredada. El Sprint 1 tuvo ocho tareas de estabilización, con 13 puntos de tareas registrados en la primera entrega; esos valores no equivalen a Story Points de las 25 HU.
+El Sprint 1 de Software II revisa y estabiliza la base heredada. La primera entrega documentó ocho tareas y 13 puntos de tareas; no equivalen a Story Points de las 25 historias heredadas ni a capacidad de futuros sprints.
 
 | Tarea | Relación | Trabajo documentado | Puntos de tarea históricos |
 |---|---|---|---|
@@ -40,86 +55,59 @@ Las 25 HU de R1 son una línea base heredada. El Sprint 1 tuvo ocho tareas de es
 | T-07 | HU-01 | Ejecutar y registrar las pruebas | 1 |
 | T-08 | Transversal | Documentar hallazgos y alcance | 1 |
 
-Se incorpora el test existente y la evidencia recibida, sin modificar el código de producción. La salida de Maven conserva su fecha original: 20/09/2026, posterior a la fecha límite del cronograma. No acredita ejecución el 18/09 ni se presenta como una ejecución nueva de este PR.
+La evidencia original de AuthService registra cinco pruebas sin fallos ni errores el **20/09/2026**, después del hito del 18/09. No acredita una ejecución el 18/09, una ejecución nueva durante esta actualización documental ni la validación completa de sesiones, rutas y MySQL. Véase [el informe histórico de estabilización](sprint-1-estabilizacion.md).
 
-Resultado registrado en esa evidencia: cinco pruebas unitarias de AuthService, cero fallos y cero errores. No valida automáticamente logout, home por rol, integración con MySQL ni la aplicación completa. Las comprobaciones manuales siguen pendientes según [el informe de estabilización](sprint-1-estabilizacion.md).
+## Product Backlog, estimaciones y seguimiento
 
-## Planning Poker y capacidad
+- [Product Backlog](product-backlog.md).
+- [Project UFOUND - Gestión Scrum IS2](https://github.com/users/MarceloL19/projects/1).
+- Configuración del laboratorio: [#39](https://github.com/MarceloL19/UFOUND/issues/39) y [#56](https://github.com/MarceloL19/UFOUND/issues/56).
+- Plantillas, documentación inicial y evidencia recibida: [PR #57](https://github.com/MarceloL19/UFOUND/pull/57).
 
-Usar Fibonacci 1, 2, 3, 5, 8, 13. Registrar estimaciones individuales, diferencia discutida y acuerdo. No convertir los puntos en horas ni reutilizar como capacidad los 13 puntos de tareas históricas.
+La configuración inicial registrada incluyó estados Product Backlog, Sprint Backlog, In Progress, In Review y Done; prioridad MoSCoW; tipo de elemento; responsables; iteración Sprint; y Story Points numéricos. Las vistas son Product Backlog, Sprint Actual, Roadmap y Mis tareas.
 
-| Dato que debe acordar el equipo | Situación |
+Aquella configuración inicial tenía iteraciones Sprint 1–3 y un milestone «Entrega final». Es una descripción histórica de la herramienta, no la organización académica vigente: el cuarto incremento corresponde a **R2-S2 / Sprint 4**. Esta corrección de archivos no verifica ni modifica por sí misma los campos del Project, sus iteraciones o milestones.
+
+Para las métricas:
+
+1. Estimar historias con el equipo y registrar el acuerdo; la guía propone Fibonacci 1, 2, 3, 5, 8 y 13.
+2. Comparar el alcance seleccionado con la disponibilidad y capacidad acordadas.
+3. Sumar Story Points de historias, sin repetirlos en tareas, PR, reuniones o documentación.
+4. No convertir automáticamente puntos de tareas históricos en Story Points de historias.
+5. No deducir capacidad ni velocidad a partir de campos vacíos o cierres de historias importadas.
+6. Identificar cada gráfico con su fecha, filtro, unidad y alcance.
+
+El comentario de planificación del Sprint 2 contiene 29 SP y, a la vez, deja pendiente validar capacidad y estimaciones. Debe interpretarse en su contexto; no demuestra por sí solo una capacidad acordada. Los datos actuales requieren su evidencia específica.
+
+## Registros de eventos y mejora del proceso
+
+| Registro | Evidencia disponible y alcance |
 |---|---|
-| Disponibilidad por integrante y capacidad del Sprint 2 | Pendiente |
-| Story Points de cada HU nueva | Pendiente |
-| HU con mayor diferencia de estimación y motivos | Pendiente: no hubo una sesión registrada |
-| Responsables de tareas y compromiso del sprint | Pendiente |
+| [Daily y planificación #41](https://github.com/MarceloL19/UFOUND/issues/41) | Planificación por chat publicada el 07/10, referida al 06/10, con objetivo, historias y responsabilidades del Sprint 2. El comentario del 16/11 documenta retrospectivamente dos Daily confirmados, sin inventar fechas exactas ni intervenciones individuales. |
+| [Sprint Review #42](https://github.com/MarceloL19/UFOUND/issues/42) | Aceptación de HU-26 y HU-27 registrada el 11/10 y evidencia de ejecución de 28 pruebas el 12/10. Los resultados corresponden a esas fechas y versión; una suite satisfactoria no sustituye la verificación de todos los criterios funcionales. |
+| [Retrospectiva #43](https://github.com/MarceloL19/UFOUND/issues/43) | Balance individual publicado el 16/11 con Start, Stop, Continue y acción de mejora. Incluye actividades posteriores al Sprint 2; no se atribuye todo al mismo sprint ni representa el aporte de los demás integrantes. Su nomenclatura histórica se interpreta con la convención vigente. |
+| [Seguimiento #64](https://github.com/MarceloL19/UFOUND/issues/64) | Referencia de seguimiento para conciliación del cierre y actualización documental. |
+| [Caso didáctico #40](https://github.com/MarceloL19/UFOUND/issues/40) | Bug simulado del laboratorio; no se presenta como defecto real comprobado. |
 
-Comprobar que la suma de puntos de las HU seleccionadas no supere la capacidad acordada. Estimar las historias para las métricas; las tareas de descomposición no vuelven a sumar esos puntos.
+Los eventos y cierres de los demás sprints deben sustentarse con sus propios registros. La existencia de una plantilla o issue no demuestra que un evento haya ocurrido. Se conservan las fechas reales de publicación y se distingue el registro retrospectivo.
 
-## Configuración realizada de GitHub Projects
+## Incrementos y evidencias de implementación
 
-[UFOUND - Gestion Scrum IS2](https://github.com/users/MarceloL19/projects/1) está vinculado a UFOUND. Marcelo tiene Admin y Daniel (`danielsandtyler`) tiene Write. El Project es privado.
-
-| Campo | Tipo | Valores |
-|---|---|---|
-| Status | Single select | Product Backlog, Sprint Backlog, In Progress, In Review, Done, en ese orden |
-| Sprint | Iteration | Sprint 1, Sprint 2 y Sprint 3; entrega final mediante milestone |
-| Story Points | Number | Pendientes de estimación del equipo |
-| Prioridad | Single select | Must have, Should have, Could have, Won't have |
-| Tipo | Single select | Historia, Tarea, Bug, Spike; XL de la plantilla pendiente de eliminación definitiva autorizada |
-
-Sprint 2 y Sprint 3 usan los periodos acordados. Sprint 1 tiene inicio 29/08 como referencia de tres semanas, pendiente de confirmación; el cierre es 18/09. Los campos vacíos Start date y Target date de la plantilla también quedan pendientes de limpieza autorizada.
-
-Las etiquetas de la guía existen: `historia-usuario`, `tarea`, `bug`, `spike`, `frontend`, `backend`. Las 38 HU tienen historia-usuario y las 12 tareas del Sprint 2 tienen tarea.
-
-Se crearon los cuatro milestones con cierre 18/09, 09/10, 30/10 y 13/11/2026. Las 13 HU nuevas están asignadas según el plan; las 12 tareas y los registros de Daily, Review y Retrospectiva tienen milestone Sprint 2. Las 25 HU heredadas quedan fuera de los sprints y métricas de R2.
-
-Las seis HU del Sprint 2 y sus 12 tareas están en Sprint Backlog con Sprint 2; la selección sigue pendiente de validar estimaciones y capacidad. HU-29–32 conservan Product Backlog y Sprint 3. HU-33–35 conservan Product Backlog, Sprint vacío y el milestone Entrega final. Cada una de las seis HU del Sprint 2 tiene dos tareas vinculadas mediante sub-issues. No se asignaron responsables ni puntos ficticios.
-
-| Vista | Tipo | Configuración |
-|---|---|---|
-| Product Backlog | Table | Title, Status, Prioridad, Story Points, Sprint, Assignees, Labels y campos de trazabilidad; filtro `-status:Done`; Prioridad ascendente |
-| Sprint Actual | Board | Columnas por Status; filtro `sprint:@current`; Story Points, Assignees, Prioridad y Sub-issues progress; suma de Story Points por columna |
-| Roadmap | Roadmap | Fechas por Sprint y agrupación por Prioridad; entrega final representada por su milestone, sin crear Sprint 4 |
-| Mis tareas | Table | Filtro `assignee:@me -status:Done` |
-
-Workflows activos: alta → Product Backlog; cierre → Done; merge de PR → Done; reapertura → In Progress; auto-add de issues y PR abiertos de UFOUND; auto-add de sub-issues; PR vinculado → In Review. El cierre automático de issues al moverlos a Done está desactivado para exigir validación real antes del cierre. La prueba temporal #58 verificó auto-add a Product Backlog, cierre a Done y reapertura a In Progress; quedó cerrada, sin Sprint ni puntos, pendiente de borrado definitivo autorizado.
-
-En main está activa [la regla Lab04 - main con PR y aprobacion](https://github.com/MarceloL19/UFOUND/settings/rules/24406992), con PR obligatorio, una aprobación y sin bypass. El PR #57 fue aprobado por Daniel e integrado en main. Cada integrante todavía debe completar un ciclo real: tarea In Progress, rama, commit que referencia el issue, PR con Closes #N, revisión con comentario y aprobación de otro integrante, merge y comprobación de cierre/Done.
-
-## Registros de los eventos
-
-- Daily Scrum: [#41](https://github.com/MarceloL19/UFOUND/issues/41). Registrar al menos dos reuniones reales y las respuestas de cada integrante.
-- Sprint Review: [#42](https://github.com/MarceloL19/UFOUND/issues/42). El PO comprueba criterios, acepta las HU demostradas y devuelve lo incompleto al backlog.
-- Retrospectiva: [#43](https://github.com/MarceloL19/UFOUND/issues/43). Cada integrante aporta a Start, Stop y Continue; crear acciones como sub-issues para Sprint 3 con responsables.
-- Bug ficticio del laboratorio: [#40](https://github.com/MarceloL19/UFOUND/issues/40). Escenario didáctico identificado como simulación; el PO decide cómo tratarlo, sin presentarlo como un defecto comprobado.
-- Archivos del repositorio: [#39](https://github.com/MarceloL19/UFOUND/issues/39). Cerrar mediante el PR revisado.
-- Configuración del Project y ajustes: [#56](https://github.com/MarceloL19/UFOUND/issues/56). Cerrar después de comprobar su configuración.
-
-## Insights y evidencias
-
-| Gráfico guardado | Configuración | Dato disponible |
-|---|---|---|
-| [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4) | Stacked area; Time; Count of items; `is:issue sprint:"Sprint 2" -label:documentation` | 18 ítems abiertos: 6 HU y 12 tareas; cero completados |
-| [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2) | Stacked bar; Assignees; Group by Status; Sum of Story Points | Sin puntos estimados; cero no demuestra carga nula |
-| [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3) | Column; Sprint; Sum of Story Points; `status:Done` | Las HU históricas no tienen Sprint ni puntos; no acreditan velocidad de R2 |
-
-Las tres capturas se tomaron con los datos actuales. El historial comienza con la importación del 03/10/2026; no reproduce avance anterior. Burn up cuenta ítems, incluyendo descomposición, y no mide esfuerzo. Para medir velocidad futura, estimar solo las HU; dejar tareas, PR y seguimiento sin puntos para evitar doble conteo.
-
-La respuesta sobre el Sprint Goal y las acciones si no alcanza la capacidad están en README. No se puede pronosticar el cumplimiento sin disponibilidad, estimaciones y cierres reales. El PO debe priorizar Must, revisar Should, dividir historias grandes y devolver el exceso al backlog.
-
-## Estado verificable de la preparación
-
-| Requisito | Estado |
+| Etapa del curso | Referencias |
 |---|---|
-| 38 HU y distribución de entregas | Issues importados; 25 antecedentes R1, 13 HU nuevas con milestones |
-| Tareas de HU del Sprint 2 | 12 issues con Sprint 2, prioridad, Tipo Tarea y vínculos nativos 2 por HU |
-| Plantillas, documentación y pruebas recibidas | PR #57 aprobado e integrado; la ejecución nueva de pruebas sigue pendiente |
-| Project, vistas, campos, workflows, milestones y protección | Configurados; limpieza definitiva de elementos vacíos pendiente de autorización |
-| Acceso del equipo | Equipo de cinco confirmado por Marcelo; cuentas verificadas en esta tabla para Marcelo y Daniel |
-| Insights con capturas | Tres gráficos guardados y capturados; datos insuficientes para pronóstico |
-| Roles, estimaciones, Daily, Review y Retro | Roles confirmados; estimaciones en el Project y registros reales de ceremonias pendientes |
-| Ciclo individual por integrante | Pendiente de trabajo y revisión reales |
+| R1-S1 / Sprint 1 | Pruebas originales de AuthService y [documento de estabilización](sprint-1-estabilizacion.md). |
+| R1-S2 / Sprint 2 | HU-26–28 y HU-36–38; [Review #42](https://github.com/MarceloL19/UFOUND/issues/42), PR #60 y #61 y referencias de cada historia. |
+| R2-S1 / Sprint 3 | HU-29–32; PR #65, #67, #68 y [#69](https://github.com/MarceloL19/UFOUND/pull/69). |
+| R2-S2 / Sprint 4 y mejoras finales | HU-33–35; PR [#73](https://github.com/MarceloL19/UFOUND/pull/73), [#75](https://github.com/MarceloL19/UFOUND/pull/75) y #76. Mejoras finales adicionales: HU-39 (issue #79), PR #80 y #82. |
 
-La guía no pide implementar todo el Release 2 durante este laboratorio: pide demostrar la gestión y al menos un cambio mínimo por integrante mediante el flujo de PR.
+La evaluación de HU-33 con 30 pares obtuvo los mismos resultados de clasificación que el motor base en los umbrales 40 y 60. La incorporación visual está implementada, pero la muestra no demuestra una mejora de precisión. Las pruebas omitidas, pendientes o condicionadas a MySQL deben identificarse como tales según la ejecución concreta.
+
+## Insights y límites de interpretación
+
+- [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4).
+- [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2).
+- [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3).
+
+La captura inicial del Burn up mostraba 18 ítems (6 historias y 12 tareas) y cero cierres. Ese dato es histórico, no el estado actual. Contar historias y tareas juntas no equivale a medir esfuerzo. El historial comienza con la importación del 03/10 y no reproduce avance previo.
+
+Para el informe final se interpretan gráficos por sprint, release y proyecto con datos verificables. No se reconstruyen curvas diarias sin registros ni se presenta una configuración de gráfico como prueba de cumplimiento del Sprint Goal.
