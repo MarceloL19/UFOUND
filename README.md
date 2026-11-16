@@ -122,39 +122,44 @@ URL:
 http://localhost:8080/login
 ```
 
-## Gestión Scrum y laboratorio 4
+## Gestión Scrum y estado del Release 2
 
-El trabajo del curso se organiza en tres sprints y una entrega final, usando la línea base del Release 1.
+Corte de seguimiento: **16/11/2026**. Se mantienen tres sprints y una entrega final sobre la base heredada del Release 1. Las fechas siguientes son las previstas de entrega, no las fechas de integración ni de aceptación.
 
-| Entrega | Cierre | Objetivo y alcance |
-|---|---|---|
-| Sprint 1 | 18/09/2026 | Estabilizar la línea base; revisar autenticación, sesión y home por rol. La evidencia de cinco pruebas de AuthService está en docs y conserva su fecha original del 20/09/2026. |
-| Sprint 2 | 09/10/2026 | Ayuda contextual y estadísticas de pérdidas: HU-26, 27, 28, 36, 37 y 38. |
-| Sprint 3 | 30/10/2026 | Registro asistido por imágenes: HU-29 a HU-32. |
-| Entrega final | 13/11/2026 | Coincidencias avanzadas: HU-33 a HU-35; integración, pruebas y documentación. |
+| Entrega | Fecha prevista | Alcance | Estado al corte |
+|---|---|---|---|
+| Sprint 1 | 18/09/2026 | Estabilización de R1; autenticación, sesión y home por rol | Evidencia de cinco pruebas de AuthService del 20/09; milestone abierto sin issues asociados |
+| Sprint 2 | 09/10/2026 | HU-26, 27, 28, 36, 37 y 38 | Seis historias cerradas como Completed; Daily #41 y Review #42 cerrados; retrospectiva #43 abierta |
+| Sprint 3 | 30/10/2026 | HU-29 a HU-32: registro asistido por imágenes | Cuatro issues cerrados como Completed y milestone cerrado |
+| Entrega final | 13/11/2026 | HU-33 a HU-35: coincidencias con atributos visuales, orden y sugerencias | Tres issues cerrados como Completed y milestone cerrado |
 
-Equipo confirmado para el Sprint 2: Gabriel Revoredo (Scrum Master), Sergio Chaparro (Product Owner) y Marcelo Loayza, Rodrigo Figueroa y Daniel Sandoval (Developers). Las cuentas de GitHub confirmadas en la documentación son `MarceloL19` y `danielsandtyler`; las de Gabriel, Sergio y Rodrigo deben registrarse cuando se verifiquen.
+Las 25 HU de R1 son antecedentes y no cuentan como implementación nueva ni velocidad de R2. Las 13 HU nuevas están cerradas como Completed. El cierre de un issue no acredita por sí solo una fecha de entrega anterior ni una ejecución de pruebas.
 
-Capacidad y Story Points del Release 2: pendientes de Planning Poker. Diferencias de estimación y sus motivos: pendientes de registrar después de la sesión. No se declaran ceremonias ni aprobaciones que todavía no ocurrieron.
+El equipo acordado para Sprint 2 fue Gabriel Revoredo (Scrum Master), Sergio Chaparro (Product Owner), Marcelo Loayza, Rodrigo Figueroa y Daniel Sandoval (Developers). En la regularización del cierre, Marcelo registró que asumía la revisión y aceptación funcional. Las aceptaciones anteriores se conservan en el historial.
 
-- [Product Backlog con 38 HU y tareas](docs/product-backlog.md).
-- [Plan del laboratorio, roles, configuración y seguimiento](docs/gestion-scrum.md).
-- [Avance y alcance comprobado del Sprint 1](docs/sprint-1-estabilizacion.md).
-- Configuración del laboratorio: [#39](https://github.com/MarceloL19/UFOUND/issues/39).
+### Evidencias y límites
 
-Las 25 HU heredadas de R1 se identifican como antecedentes; no cuentan como implementación nueva ni como velocidad de los sprints de R2. Las fechas de cierre de sus issues corresponden a su importación en GitHub.
+- Sprint 1: cinco pruebas de AuthService, con evidencia fechada el 20/09/2026; no acredita por sí sola la validación de toda la aplicación.
+- Sprint 2: Daniel publicó en #42 una ejecución del 12/10/2026 con 28 pruebas, sin fallos, errores ni omisiones. Es posterior a la fecha prevista del sprint. Las validaciones de HU-28 y HU-36 están en sus issues.
+- Daily #41: cerrado como Completed con confirmación retrospectiva de Marcelo sobre dos reuniones realizadas. No se registraron fechas exactas ni intervenciones individuales; no se reconstruyen actas.
+- HU-33: integrada mediante PR #73. La evaluación de 30 pares etiquetados por Daniel compara ambos motores con iguales métricas. En los umbrales 40 y 60, las métricas permanecen iguales: no demuestra mejora general de precisión. Véase [la documentación de evaluación](docs/HU-33-IMPLEMENTACION.md).
+- HU-34 y HU-35: integradas mediante PR #75 y #76. La PR anterior #72 se cerró sin fusionar por sustitución. Las reglas, alcance y pruebas se describen en sus documentos de implementación.
+- El caso #40 se cerró como Not planned: era una simulación y la revisión de código mostró una fecha asignada por el servidor, sin entrada editable en el formulario. No se contabiliza como corrección implementada.
 
-## Tablero y seguimiento configurados
+### Tablero, estimaciones y pendientes
 
 - [Project UFOUND - Gestion Scrum IS2](https://github.com/users/MarceloL19/projects/1).
-- [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4).
-- [Carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2).
-- [Velocidad del equipo](https://github.com/users/MarceloL19/projects/1/insights/3).
+- [Product Backlog y trazabilidad](docs/product-backlog.md).
+- [Gestión Scrum e historial del laboratorio](docs/gestion-scrum.md).
+- [Estabilización del Sprint 1](docs/sprint-1-estabilizacion.md).
+- [Burn up - Sprint 2](https://github.com/users/MarceloL19/projects/1/insights/4), [carga por integrante](https://github.com/users/MarceloL19/projects/1/insights/2) y [velocidad](https://github.com/users/MarceloL19/projects/1/insights/3).
 
-El Project contiene las 38 HU, 12 tareas del Sprint 2 vinculadas como sub-issues y los registros de seguimiento. Las seis HU previstas para Sprint 2 y sus tareas están en Sprint Backlog; ese alcance sigue sujeto a validar capacidad con Planning Poker. Sprint 3 mantiene HU-29 a HU-32 y la entrega final HU-33 a HU-35. Los hitos cierran el 18/09, 09/10, 30/10 y 13/11/2026. La referencia de inicio del Sprint 1 en el calendario es 29/08; el equipo debe confirmarla.
+La consulta del Project mostró 29 SP en las seis HU del Sprint 2: 8, 5, 3, 5, 3 y 5 para HU-26, 27, 28, 36, 37 y 38, respectivamente. La coordinación del 06/10 también registra 29 SP y disponibilidad de tres horas diarias por integrante, pero deja pendiente validar capacidad con Planning Poker. No hay aquí un acta de estimaciones individuales que permita afirmar ese acuerdo. Sprint 3 y las HU de entrega final aparecían sin puntos; no se inventan estimaciones retrospectivas. Tareas, PR y seguimiento permanecen fuera del cómputo de SP de historias.
 
-Daniel Sandoval, colaborador existente del repositorio con la cuenta `danielsandtyler`, tiene Write en el Project. Los roles PO y SM ya están acordados por el equipo. En `main` está activa la regla de PR obligatorio con una aprobación; el PR #57 fue aprobado por Daniel e integrado.
+Los gráficos y sus capturas iniciales son antecedentes: sus ceros y conteos no representan el estado actual. El historial de importación de GitHub no reconstruye el desarrollo previo; el conteo de ítems tampoco equivale a esfuerzo. Las aceptaciones consolidadas acreditan el resultado funcional actual del Sprint 2, no el cumplimiento del plazo previsto.
 
-**¿Se cumplirá el Sprint Goal según el Burn up?** Todavía no se puede concluir. El gráfico registra 18 ítems abiertos (6 historias y 12 tareas), cero cierres del Sprint 2 y datos importados el 03/10/2026. El salto de esa fecha representa el alta en GitHub, no ejecución histórica. Faltan estimaciones, disponibilidad y evidencia de avance real. El conteo de ítems no equivale a esfuerzo.
+Quedan abiertas [la retrospectiva #43](https://github.com/MarceloL19/UFOUND/issues/43), a la espera de aportes del equipo y acuerdos, y [el seguimiento #64](https://github.com/MarceloL19/UFOUND/issues/64), que incluye integrar esta documentación y cerrar administrativamente el Sprint 2. Sprint 1 también conserva su milestone abierto. Esta actualización no cierra esos registros ni el Project.
 
-Si el pronóstico muestra que no alcanza la capacidad, el PO debe conservar primero las HU Must (26–28), revisar el alcance Should (36–38), dividir historias grandes y devolver lo que no quepa al Product Backlog. Registrar bloqueos en Daily y actualizar el pronóstico con los cierres reales. Carga y velocidad están configuradas con suma de Story Points, pero sus ceros actuales reflejan puntos sin asignar; las 25 HU heredadas no se computan como velocidad de R2.
+### Despliegue
+
+Se preparó Railway con MySQL y volúmenes persistentes y se comprobó la carga de la aplicación por su dominio público. Según el contexto de despliegue, los despliegues se detuvieron para conservar crédito; esa condición no se ha verificado en el panel durante esta revisión. La validación completa de login, persistencia y fotos en el entorno público sigue siendo una comprobación separada antes de la exposición.
