@@ -1,10 +1,10 @@
 # Product Backlog de UFOUND
 
-El backlog comprende 38 HU: 25 antecedentes implementados en Release 1 y 13 HU planificadas para Release 2. No se vuelve a contar la línea base como implementación nueva del curso.
+El backlog comprende 38 HU: 25 antecedentes implementados en Release 1 y 13 HU nuevas del Release 2, cuyos issues están cerrados como Completed al 16/11/2026. No se vuelve a contar la línea base como implementación nueva del curso.
 
 Los issues históricos se cierran al importar el antecedente. Su fecha de cierre en GitHub no demuestra una fecha de desarrollo o revisión del Release 1; deben excluirse de las métricas de R2. Los criterios de esos issues no se marcan sin nueva comprobación.
 
-Las prioridades con asterisco son propuestas. Los Story Points y responsables siguen sin asignar: el equipo debe acordarlos mediante Planning Poker y comprobar la capacidad antes de comprometer el Sprint Backlog.
+Las prioridades con asterisco conservan la propuesta del plan original. El Project registra 29 SP para las seis HU del Sprint 2; la documentación disponible no acredita una sesión completa de Planning Poker. No se agregan puntos retrospectivos a las historias sin estimación. Los cierres actuales no implican cumplimiento de las fechas previstas. Las aceptaciones de Sprint 2 y entrega final están en cada issue; HU-29 a HU-32 conservan su cierre previo, sin atribuir una nueva aceptación no revisada.
 
 | HU | Funcionalidad | Issue | Entrega prevista | Prioridad | Situación |
 |---|---|---|---|---|---|
@@ -33,19 +33,19 @@ Las prioridades con asterisco son propuestas. Los Story Points y responsables si
 | HU-23 | Historial de publicaciones | [#23](https://github.com/MarceloL19/UFOUND/issues/23) | Línea base R1 (sin sprint R2) | Referencia | Antecedente R1 |
 | HU-24 | Objetos recientes | [#24](https://github.com/MarceloL19/UFOUND/issues/24) | Línea base R1 (sin sprint R2) | Referencia | Antecedente R1 |
 | HU-25 | Dashboard administrativo de Oficina | [#25](https://github.com/MarceloL19/UFOUND/issues/25) | Línea base R1 (sin sprint R2) | Referencia | Antecedente R1 |
-| HU-26 | Interactuar con chatbot de ayuda | [#26](https://github.com/MarceloL19/UFOUND/issues/26) | Sprint 2 | Must* | Pendiente |
-| HU-27 | Consultar dudas sobre uso del sistema | [#27](https://github.com/MarceloL19/UFOUND/issues/27) | Sprint 2 | Must* | Pendiente |
-| HU-28 | Recibir guía automática en el registro de objetos | [#28](https://github.com/MarceloL19/UFOUND/issues/28) | Sprint 2 | Must* | Pendiente |
-| HU-29 | Subir imagen para análisis automático del objeto | [#29](https://github.com/MarceloL19/UFOUND/issues/29) | Sprint 3 | Must* | Pendiente |
-| HU-30 | Detectar características del objeto mediante IA | [#30](https://github.com/MarceloL19/UFOUND/issues/30) | Sprint 3 | Must* | Pendiente |
-| HU-31 | Sugerir categoría automática del objeto | [#31](https://github.com/MarceloL19/UFOUND/issues/31) | Sprint 3 | Must* | Pendiente |
-| HU-32 | Autocompletar formulario de registro de objeto | [#32](https://github.com/MarceloL19/UFOUND/issues/32) | Sprint 3 | Must* | Pendiente |
-| HU-33 | Mejorar precisión de coincidencias con análisis inteligente | [#33](https://github.com/MarceloL19/UFOUND/issues/33) | Entrega final | Must* | Pendiente |
-| HU-34 | Priorizar coincidencias por nivel de similitud | [#34](https://github.com/MarceloL19/UFOUND/issues/34) | Entrega final | Must* | Pendiente |
-| HU-35 | Sugerir posibles coincidencias automáticamente al usuario | [#35](https://github.com/MarceloL19/UFOUND/issues/35) | Entrega final | Must* | Pendiente |
-| HU-36 | Visualizar estadísticas inteligentes de objetos perdidos | [#36](https://github.com/MarceloL19/UFOUND/issues/36) | Sprint 2 | Should* | Pendiente |
-| HU-37 | Identificar categorías más frecuentes mediante análisis | [#37](https://github.com/MarceloL19/UFOUND/issues/37) | Sprint 2 | Should* | Pendiente |
-| HU-38 | Mostrar tendencias de pérdida por ubicación | [#38](https://github.com/MarceloL19/UFOUND/issues/38) | Sprint 2 | Should* | Pendiente |
+| HU-26 | Interactuar con chatbot de ayuda | [#26](https://github.com/MarceloL19/UFOUND/issues/26) | Sprint 2 | Must* | Cerrada como Completed |
+| HU-27 | Consultar dudas sobre uso del sistema | [#27](https://github.com/MarceloL19/UFOUND/issues/27) | Sprint 2 | Must* | Cerrada como Completed |
+| HU-28 | Recibir guía automática en el registro de objetos | [#28](https://github.com/MarceloL19/UFOUND/issues/28) | Sprint 2 | Must* | Cerrada como Completed |
+| HU-29 | Subir imagen para análisis automático del objeto | [#29](https://github.com/MarceloL19/UFOUND/issues/29) | Sprint 3 | Must* | Cerrada como Completed |
+| HU-30 | Detectar características del objeto mediante IA | [#30](https://github.com/MarceloL19/UFOUND/issues/30) | Sprint 3 | Must* | Cerrada como Completed |
+| HU-31 | Sugerir categoría automática del objeto | [#31](https://github.com/MarceloL19/UFOUND/issues/31) | Sprint 3 | Must* | Cerrada como Completed |
+| HU-32 | Autocompletar formulario de registro de objeto | [#32](https://github.com/MarceloL19/UFOUND/issues/32) | Sprint 3 | Must* | Cerrada como Completed |
+| HU-33 | Mejorar precisión de coincidencias con análisis inteligente | [#33](https://github.com/MarceloL19/UFOUND/issues/33) | Entrega final | Must* | Cerrada como Completed |
+| HU-34 | Priorizar coincidencias por nivel de similitud | [#34](https://github.com/MarceloL19/UFOUND/issues/34) | Entrega final | Must* | Cerrada como Completed |
+| HU-35 | Sugerir posibles coincidencias automáticamente al usuario | [#35](https://github.com/MarceloL19/UFOUND/issues/35) | Entrega final | Must* | Cerrada como Completed |
+| HU-36 | Visualizar estadísticas inteligentes de objetos perdidos | [#36](https://github.com/MarceloL19/UFOUND/issues/36) | Sprint 2 | Should* | Cerrada como Completed |
+| HU-37 | Identificar categorías más frecuentes mediante análisis | [#37](https://github.com/MarceloL19/UFOUND/issues/37) | Sprint 2 | Should* | Cerrada como Completed |
+| HU-38 | Mostrar tendencias de pérdida por ubicación | [#38](https://github.com/MarceloL19/UFOUND/issues/38) | Sprint 2 | Should* | Cerrada como Completed |
 
 ## Dependencias del Release 2
 
@@ -58,7 +58,7 @@ Si una HU alcanza 13 puntos o más, dividirla en unidades verificables, registra
 
 ## Descomposición preparada para Sprint 2
 
-Las siguientes tareas existen como issues, pero su relación nativa de sub-issue está pendiente. La referencia textual al padre no crea una barra de progreso.
+Las 12 tareas están cerradas. En la consulta del Project, cada una de las seis HU mostró dos sub-issues completadas (2/2). Se conserva la trazabilidad de implementación y validación:
 
 | HU padre | Tarea de implementación | Tarea de validación |
 |---|---|---|
@@ -69,6 +69,14 @@ Las siguientes tareas existen como issues, pero su relación nativa de sub-issue
 | [#37](https://github.com/MarceloL19/UFOUND/issues/37) | [#52](https://github.com/MarceloL19/UFOUND/issues/52) | [#53](https://github.com/MarceloL19/UFOUND/issues/53) |
 | [#38](https://github.com/MarceloL19/UFOUND/issues/38) | [#54](https://github.com/MarceloL19/UFOUND/issues/54) | [#55](https://github.com/MarceloL19/UFOUND/issues/55) |
 
-Al vincularlas, asignar el mismo Sprint de su HU y acordar un responsable. No duplicar los Story Points de una historia en sus tareas.
+No duplicar los Story Points de una historia en sus tareas. El seguimiento administrativo y las ceremonias no suman SP.
 
-Para Sprint 3 preparar las tareas de carga y validación de imagen, extracción de atributos, sugerencia de categoría, autocompletado editable, manejo de errores y pruebas. Para la entrega final preparar reglas de similitud, evaluación comparativa, ordenamiento, sugerencias, integración, regresión y documentación. Crear esas sub-issues tras el refinamiento, sin anticipar responsables ni puntos.
+## Integración y cierre
+
+- HU-33: PR #73; evaluación comparativa y limitaciones en [HU-33-IMPLEMENTACION.md](HU-33-IMPLEMENTACION.md). No se demostró mejora de precisión en el conjunto de 30 pares evaluado.
+- HU-34: PR #75; orden descendente por puntaje, fecha e ID. La PR anterior #72 quedó cerrada sin fusionar.
+- HU-35: PR #76; consulta de sugerencias para reportes propios, sin confirmar propiedad ni entrega.
+- Milestones Sprint 1, Sprint 3 y Entrega final cerrados; Sprint 2 abierto al corte. El cierre de Sprint 1 es administrativo y conserva sus límites de evidencia.
+- Seguimiento pendiente: retrospectiva #43 y documentación/cierre administrativo #64.
+
+HU-33 a HU-35 se mantienen como entrega final en este plan. Se verificó su asignación corregida en el Project: campo Sprint vacío, Status Done y milestone Entrega final - Release 2. HU-29 a HU-32 conservan Sprint 3. No se crea Sprint 4 ni se añaden estimaciones retrospectivas.
