@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap");
+
+/*
+  Estilos exclusivos de inicio de sesión.
+  Cuando Daniel elija la fotografía, cambiar:
+  --login-background-image: none;
+  por:
+  --login-background-image: url('../fotos/nombre-de-la-imagen.jpg');
+*/
+.login-page-modern {
+  --login-navy: #061b3a;
+  --login-orange: #ff6b00;
+  --login-orange-dark: #e85f00;
+  --login-muted: #53657e;
+  --login-line: #d9e2ee;
+  --login-background-image: url("../fotos/ulima_background.jpeg");
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 248, 241, 0.80),
+      rgba(246, 249, 253, 0.76) 52%,
+      rgba(237, 244, 255, 0.80)
+    ),
+    var(--login-background-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--login-navy);
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+.login-page-modern,
+.login-page-modern input,
+.login-page-modern button {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.login-modern-shell {
+  align-items: center;
+  display: grid;
+  gap: clamp(36px, 6vw, 88px);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 48px;
+  position: relative;
+  width: min(1180px, 100%);
+  z-index: 1;
+}
+
+/* Columna izquierda: logo y textos sobre un mismo eje central. */
+.login-hero-panel {
+  display: grid;
+  gap: 28px;
+  justify-items: center;
+  text-align: center;
+}
+
+.login-logo-card {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  box-shadow: 0 22px 60px rgba(6, 27, 58, 0.14);
+  display: flex;
+  justify-content: center;
+  max-width: 360px;
+  padding: 12px;
+  width: 100%;
+}
+
+.login-logo {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.login-hero-copy {
+  display: grid;
+  justify-items: center;
+  max-width: 620px;
+  text-align: center;
+}
+
+.login-hero-copy .eyebrow {
+  color: var(--login-orange);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin: 0 0 13px;
+  text-align: center;
+}
+
+.login-hero-copy h1 {
+  color: var(--login-navy);
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  margin: 0;
+  text-align: center;
+}
+
+.login-hero-copy .login-description {
+  color: var(--login-muted);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+  margin: 20px auto 0;
+  max-width: 560px;
+  text-align: center;
+}
+
+/* Tarjeta de autenticación. */
+.login-modern-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--login-line);
+  border-radius: 24px;
+  box-shadow: 0 18px 46px rgba(6, 27, 58, 0.1);
+  justify-self: end;
+  max-width: 440px;
+  padding: 40px;
+  width: 100%;
+}
+
+.login-form {
+  display: grid;
+  gap: 12px;
+}
+
+.login-form h2 {
+  color: var(--login-navy);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.login-form .form-subtitle {
+  color: var(--login-muted);
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.login-form label {
+  color: var(--login-navy);
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.login-form input {
+  background: #f5f8fd;
+  border: 1px solid #c9d6e8;
+  border-radius: 11px;
+  color: var(--login-navy);
+  font-size: 16px;
+  outline: none;
+  padding: 15px 16px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.login-form input::placeholder {
+  color: #8190a7;
+}
+
+.login-form input:focus {
+  border-color: var(--login-orange);
+  box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.14);
+}
+
+.login-form button {
+  background: var(--login-orange);
+  border: 0;
+  border-radius: 11px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 800;
+  margin-top: 12px;
+  padding: 15px 18px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  width: 100%;
+}
+
+.login-form button:hover {
+  background: var(--login-orange-dark);
+  transform: translateY(-1px);
+}
+
+.login-form button:focus-visible {
+  outline: 3px solid rgba(6, 27, 58, 0.35);
+  outline-offset: 3px;
+}
+
+.login-form .alert {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  color: #a61b39;
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0 0 8px;
+  padding: 12px 14px;
+}
+
+@media (max-width: 900px) {
+  .login-modern-shell {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    padding: 40px 28px;
+  }
+
+  .login-modern-card {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .login-modern-shell {
+    gap: 34px;
+    padding: 28px 18px;
+  }
+
+  .login-logo-card {
+    border-radius: 22px;
+    max-width: 280px;
+  }
+
+  .login-hero-copy h1 {
+    font-size: 38px;
+  }
+
+  .login-hero-copy .login-description {
+    font-size: 16px;
+  }
+
+  .login-modern-card {
+    border-radius: 20px;
+    padding: 28px 22px;
+  }
+
+  .login-form h2 {
+    font-size: 27px;
+  }
+}
