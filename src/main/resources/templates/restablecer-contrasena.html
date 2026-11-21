@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restablecer contraseña | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+  </head>
+  <body class="login-page login-page-modern">
+    <main class="login-modern-shell">
+      <section class="login-hero-panel">
+        <div class="login-logo-card">
+          <img
+            class="login-logo"
+            th:src="@{/img/logo-ufound.png}"
+            alt="Logo de U-Found"
+          />
+        </div>
+
+        <div class="login-hero-copy">
+          <p class="eyebrow">UNIVERSIDAD DE LIMA</p>
+          <h1>Gestión de objetos perdidos</h1>
+          <p class="login-description">
+            Define una nueva contraseña para tu cuenta U-Found.
+          </p>
+        </div>
+      </section>
+
+      <section class="login-card login-modern-card">
+        <form
+          class="login-form"
+          th:if="${tokenValido}"
+          th:action="@{/restablecer-contrasena}"
+          method="post"
+        >
+          <h2>Nueva contraseña</h2>
+          <p class="form-subtitle">
+            Crea una contraseña de al menos 8 caracteres.
+          </p>
+
+          <input type="hidden" name="token" th:value="${token}" />
+
+          <div class="alert" th:if="${error}" th:text="${error}"></div>
+
+          <label for="nuevaContrasena">Nueva contraseña</label>
+          <input
+            id="nuevaContrasena"
+            name="nuevaContrasena"
+            type="password"
+            minlength="8"
+            required
+            autofocus
+          />
+
+          <label for="confirmacionContrasena">Confirmar contraseña</label>
+          <input
+            id="confirmacionContrasena"
+            name="confirmacionContrasena"
+            type="password"
+            minlength="8"
+            required
+          />
+
+          <button type="submit">Actualizar contraseña</button>
+        </form>
+
+        <div class="login-form" th:unless="${tokenValido}">
+          <h2>Enlace no disponible</h2>
+          <div class="alert" th:text="${error}"></div>
+
+          <a class="login-secondary-link" th:href="@{/recuperar-contrasena}">
+            Solicitar un nuevo enlace
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

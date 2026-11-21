@@ -38,6 +38,11 @@
         <form class="login-form" th:action="@{/login}" method="post">
           <h2>Iniciar sesión</h2>
           <p class="form-subtitle">Ingresa con tu correo institucional.</p>
+          <div
+            class="alert alert-success"
+            th:if="${mensaje}"
+            th:text="${mensaje}"
+          ></div>
 
           <div class="alert" th:if="${error}" th:text="${error}">
             No se pudo iniciar sesión.
@@ -64,6 +69,9 @@
           />
 
           <button type="submit">Ingresar</button>
+          <a class="forgot-password-link" th:href="@{/recuperar-contrasena}">
+            ¿Olvidaste tu contraseña?
+          </a>
         </form>
       </section>
     </main>

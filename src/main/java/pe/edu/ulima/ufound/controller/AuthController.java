@@ -21,19 +21,35 @@ public class AuthController {
 
     @GetMapping("/")
     public String index(HttpSession session) {
-        return session.getAttribute("usuarioAutenticado") == null ? "redirect:/login" : "redirect:/home";
+        return session.getAttribute("usuarioAutenticado") == null
+                ? "redirect:/login"
+                : "redirect:/home";
     }
 
     @GetMapping("/login")
-    public String login(HttpSession session) {
-        return session.getAttribute("usuarioAutenticado") == null ? "login" : "redirect:/home";
+    public String login(
+            HttpSession session,
+            @RequestParam(required = false) String passwordChanged,
+            Model model) {
+        if (session.getAttribute("usuarioAutenticado") != null) {
+            return "redirect:/home";
+        }
+
+        if (passwordChanged != null) {
+            model.addAttribute(
+                    "mensaje",
+                    "Tu contraseña fue actualizada. Ya puedes iniciar sesión.");
+        }
+
+        return "login";
     }
 
     @PostMapping("/login")
-    public String procesarLogin(@RequestParam String correo,
-                                @RequestParam String password,
-                                HttpSession session,
-                                Model model) {
+    public String procesarLogin(
+            @RequestParam String correo,
+            @RequestParam String password,
+            HttpSession session,
+            Model model) {
         try {
             Usuario usuario = authService.autenticar(correo, password);
             session.setAttribute("usuarioAutenticado", usuario);
@@ -51,4 +67,3 @@ public class AuthController {
         return "redirect:/login?logout";
     }
 }
-

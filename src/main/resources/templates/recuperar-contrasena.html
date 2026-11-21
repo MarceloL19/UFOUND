@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar contraseña | U-Found</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/refinamiento-visual.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+  </head>
+  <body class="login-page login-page-modern">
+    <main class="login-modern-shell">
+      <section class="login-hero-panel">
+        <div class="login-logo-card">
+          <img
+            class="login-logo"
+            th:src="@{/img/logo-ufound.png}"
+            alt="Logo de U-Found"
+          />
+        </div>
+
+        <div class="login-hero-copy">
+          <p class="eyebrow">UNIVERSIDAD DE LIMA</p>
+          <h1>Gestión de objetos perdidos</h1>
+          <p class="login-description">
+            Recupera el acceso a tu cuenta U-Found de forma segura.
+          </p>
+        </div>
+      </section>
+
+      <section class="login-card login-modern-card">
+        <form
+          class="login-form"
+          th:action="@{/recuperar-contrasena}"
+          method="post"
+        >
+          <h2>Recupera tu contraseña</h2>
+          <p class="form-subtitle">
+            Ingresa tu correo registrado y te enviaremos un enlace temporal.
+          </p>
+
+          <div
+            class="alert alert-success"
+            th:if="${mensaje}"
+            th:text="${mensaje}"
+          ></div>
+
+          <label for="correo">Correo electrónico</label>
+          <input
+            id="correo"
+            name="correo"
+            type="email"
+            placeholder="20235694@aloe.ulima.edu.pe"
+            required
+            autofocus
+          />
+
+          <button type="submit">Enviar enlace</button>
+
+          <a class="login-secondary-link" th:href="@{/login}">
+            Volver al inicio de sesión
+          </a>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

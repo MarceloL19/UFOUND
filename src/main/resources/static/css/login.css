@@ -18,9 +18,9 @@
   background:
     linear-gradient(
       135deg,
-      rgba(255, 248, 241, 0.80),
+      rgba(255, 248, 241, 0.8),
       rgba(246, 249, 253, 0.76) 52%,
-      rgba(237, 244, 255, 0.80)
+      rgba(237, 244, 255, 0.8)
     ),
     var(--login-background-image);
   background-position: center;
@@ -254,4 +254,27 @@
   .login-form h2 {
     font-size: 27px;
   }
+}
+
+.alert-success {
+  color: #176b3a;
+  background: #e9f8ee;
+  border: 1px solid #9ed7ae;
+}
+
+.forgot-password-link,
+.login-secondary-link {
+  display: block;
+  width: fit-content;
+  margin: 18px auto 0;
+  color: var(--login-navy);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover,
+.login-secondary-link:hover {
+  color: var(--login-orange);
+  text-decoration: underline;
 }
